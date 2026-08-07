@@ -17,6 +17,7 @@ import com.jongchan.androidarchi.common.domain.navigation.NavRoute
 import com.jongchan.androidarchi.common.domain.navigation.NavSignal
 import com.jongchan.androidarchi.common.presentation.helper.LocalNavigationHelper
 import com.jongchan.androidarchi.common.presentation.jank.JankPageEffect
+import com.jongchan.androidarchi.intro.domain.IntroPage
 import com.jongchan.androidarchi.search.domain.SearchPage
 
 @Composable
@@ -32,6 +33,7 @@ fun AppNavHost(
                 is NavSignal.GoToDestPage -> handleNavRoute(signal.route, backStack)
                 is NavSignal.DeepLink -> handleDeepLink(signal.route, backStack)
                 NavSignal.Back -> backStack.removeLastOrNull()
+                NavSignal.BackToInitialPage -> navigateToInitialStack(backStack)
             }
         }
     }
@@ -126,6 +128,18 @@ fun handleDeepLink(route: NavRoute, backStack: NavBackStack<NavKey>) {
 private fun NavBackStack<NavKey>.bringToFront(key: NavKey) {
     removeAll { it == key }
     add(key)
+}
+
+/**
+ * 세션 만료 처리.
+ *
+ * 스택을 비우고 Intro 단독으로 교체한다. 인증이 필요한 화면들이
+ * 백스택에 남아 있으면 뒤로가기 했을 때 만료된 세션 상태로 다시 노출되기 때문이다.
+ */
+private fun navigateToInitialStack(backStack: NavBackStack<NavKey>) {
+    backStack.clear()
+    backStack.add(GenericNavKey(IntroPage.PATH))
+    Log.d(TAG, "backToInitial: reset stack to Intro")
 }
 
 private fun navigateToSearchStack(backStack: NavBackStack<NavKey>) {
