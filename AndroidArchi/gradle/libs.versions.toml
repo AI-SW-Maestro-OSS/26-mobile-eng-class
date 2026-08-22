@@ -4,7 +4,7 @@ targetSdk = "37"
 minSdk = "24"
 # Macrobenchmark / Baseline Profile 수집은 API 28+ 단말에서만 동작하므로 별도 관리.
 minSdkBaselineProfile = "28"
-agp = "9.2.1"
+agp = "9.3.1"
 kotlin = "2.3.21"
 coreKtx = "1.18.0"
 junit = "4.13.2"
