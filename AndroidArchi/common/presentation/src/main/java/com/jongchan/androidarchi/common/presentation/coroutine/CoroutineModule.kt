@@ -6,6 +6,7 @@ import com.jongchan.androidarchi.common.domain.coroutine.IoDispatcher
 import com.jongchan.androidarchi.common.domain.coroutine.IoScope
 import com.jongchan.androidarchi.common.domain.coroutine.MainDispatcher
 import com.jongchan.androidarchi.common.domain.coroutine.MainScope
+import com.jongchan.androidarchi.common.domain.coroutine.TtiDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,6 +58,12 @@ object CoroutineModule {
     @Singleton
     @DefaultDispatcher
     fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+
+    @Provides
+    @Singleton
+    @TtiDispatcher
+    fun provideTtiDispatcher(): CoroutineDispatcher =
+        Dispatchers.IO.limitedParallelism(1)
 
     @Provides
     @Singleton

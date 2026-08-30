@@ -2,7 +2,7 @@ package com.jongchan.androidarchi.common.presentation
 
 import android.content.Context
 import androidx.compose.runtime.compositionLocalOf
-import com.jongchan.androidarchi.common.domain.coroutine.IoDispatcher
+import com.jongchan.androidarchi.common.domain.coroutine.TtiDispatcher
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.helper.ResourceHelper
@@ -56,11 +56,11 @@ object CommonPresentationModule {
     fun provideTTIHelper(
         reporter: TTIReporter,
         logger: TTILogger,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher,
+        @TtiDispatcher ttiDispatcher: CoroutineDispatcher,
     ): TTIHelper = TTIHelperImpl(
         reporter = reporter,
         logger = logger,
-        dispatcher = ioDispatcher,
+        dispatcher = ttiDispatcher,
     )
 }
 

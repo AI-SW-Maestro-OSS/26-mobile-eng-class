@@ -3,7 +3,6 @@ package com.jongchan.androidarchi.tti
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -11,7 +10,9 @@ import kotlinx.coroutines.launch
 class TTIHelperImpl(
     private val reporter: TTIReporter = NoOpTTIReporter,
     private val logger: TTILogger,
-    dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    // TtiDispatcher : tti event 순서대로 처리되도록 Dispatcher.limitedParallelism(1)로
+    // 제한된 디스패처를 주입받는다. 동시에 살아있는 코루틴은 1개만 존재하도록 제한한다.
+    dispatcher: CoroutineDispatcher,
 ) : TTIHelper {
     private var pageTTIMap = mutableMapOf<String, TTIInfo>()
     private val scope = CoroutineScope(
@@ -26,8 +27,8 @@ class TTIHelperImpl(
 
     override fun startTTITracking(page: TTIPage) {
         val ttiInfo = TTIInfo(page)
-        pageTTIMap[page.pageName] = ttiInfo
         scope.launch {
+            pageTTIMap[page.pageName] = ttiInfo
             reporter.startView(ttiInfo.ttiKey, page.pageName, emptyMap())
             ttiInfo.recordStartTime(TimelineCategory.TTI_TIME)
             logger.d(
@@ -100,6 +101,9 @@ class TTIHelperImpl(
     }
 
     override fun addTTIMetaData(page: TTIPage, metadata: TTIMetaData, value: Any?) {
-        pageTTIMap[page.pageName]?.addTTIMetaData(metadata, value)
+        // scope 바깥에서 Map 접근 시 동시성 문제 발생 가능성이 있어 scope 내부에서 처리하도록 변경
+        scope.launch {
+            pageTTIMap[page.pageName]?.addTTIMetaData(metadata, value)
+        }
     }
 }
