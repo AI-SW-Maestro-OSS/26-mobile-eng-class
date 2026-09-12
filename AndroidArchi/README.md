@@ -14,6 +14,8 @@
 
 > **🎨 Figma/디자인 스펙으로 화면 만들기:** [docs/DESIGN_TO_CODE_GUIDE.md](docs/DESIGN_TO_CODE_GUIDE.md) — Figma MCP 연결, `design-token-sync`, `design-to-feature` 스킬 사용법.
 
+> **📊 Metric 로깅을 Google SpreadSheet 로 쌓기:** [docs/METRIC_LOGGING_GUIDE.md](docs/METRIC_LOGGING_GUIDE.md) — 시트/Apps Script 세팅, `local.properties` 설정, 새 이벤트 추가 방법.
+
 ---
 
 ## 기술 스택

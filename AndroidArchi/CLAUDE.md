@@ -36,6 +36,7 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"  
 - [docs/architecture/design-system.md](docs/architecture/design-system.md) — 토큰 구조, Figma 매핑 명세
 - [docs/architecture/performance.md](docs/architecture/performance.md) — TTI, JankStats, Baseline Profile
 - [docs/DESIGN_TO_CODE_GUIDE.md](docs/DESIGN_TO_CODE_GUIDE.md) — 디자인 스펙 → 코드 사용자 가이드
+- [docs/METRIC_LOGGING_GUIDE.md](docs/METRIC_LOGGING_GUIDE.md) — Metric 로깅 → Google SpreadSheet(Apps Script) 세팅/사용 가이드
 
 ## 스킬 인덱스
 
