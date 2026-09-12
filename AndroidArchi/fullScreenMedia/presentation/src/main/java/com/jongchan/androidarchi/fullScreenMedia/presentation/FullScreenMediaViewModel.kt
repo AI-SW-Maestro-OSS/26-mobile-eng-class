@@ -8,6 +8,7 @@ import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.helper.ResourceHelper
 import com.jongchan.androidarchi.common.domain.helper.StringResource
+import com.jongchan.androidarchi.common.domain.navigation.Page
 import com.jongchan.androidarchi.common.entity.favorite.FavoriteItemVO
 import com.jongchan.androidarchi.common.entity.media.MediaItemVO
 import com.jongchan.androidarchi.common.entity.media.MediaType
@@ -15,6 +16,7 @@ import com.jongchan.androidarchi.common.presentation.mvi.MviViewModel
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaOrigin
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaPage
 import com.jongchan.androidarchi.fullScreenMedia.domain.tti.FullScreenMediaTTIPage
+import com.jongchan.androidarchi.search.domain.SearchPage
 import com.jongchan.androidarchi.tti.TTIHelper
 import com.jongchan.androidarchi.tti.TimelineCategory
 import dagger.assisted.Assisted

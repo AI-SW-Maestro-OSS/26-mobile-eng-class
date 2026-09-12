@@ -30,6 +30,14 @@ class NavigationHelperImpl : NavigationHelper {
         emit(NavSignal.Back)
     }
 
+    override fun navigateBackTo(page: Page) {
+        navigateBackToRoute(page.toRoute())
+    }
+
+    override fun navigateBackToRoute(route: NavRoute) {
+        emit(NavSignal.BackTo(route))
+    }
+
     override fun navigateToInitial() {
         emit(NavSignal.BackToInitialPage)
     }

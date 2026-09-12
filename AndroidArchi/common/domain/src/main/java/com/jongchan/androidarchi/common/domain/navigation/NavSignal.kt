@@ -7,11 +7,15 @@ package com.jongchan.androidarchi.common.domain.navigation
  * - [DeepLink]: 앱 실행 중(웜 스타트) 도착한 deep-link. 기존 스택은 보존하고 대상만 최전면으로(bring-to-front).
  *   콜드 스타트의 synthetic 부모 체인과 달리 사용자의 현재 맥락을 유지하는 것이 의도된 동작이다.
  * - [Back]: 시스템/하드웨어 백 키와 동일하게 한 단계 뒤로 이동.
+ * - [BackTo]: 백스택에 이미 존재하는 특정 페이지가 최전면에 나타날 때까지 그 위를 덮고 있는 엔트리를
+ *   모두 pop 한다(Back Navigation). 대상은 [NavRoute.path] 로 찾으며, 같은 path 가 여러 개면 가장 위의(최근) 것까지만
+ *   되돌아간다. 스택에 없으면 아무것도 하지 않는다(push 하지 않음).
  * - [BackToInitialPage]: 세션 만료(401).스택을 비우가 Intro 단독으로 교체한다.
  */
 sealed interface NavSignal {
     data class GoToDestPage(val route: NavRoute) : NavSignal
     data class DeepLink(val route: NavRoute) : NavSignal
     data object Back : NavSignal
+    data class BackTo(val route: NavRoute) : NavSignal
     data object BackToInitialPage : NavSignal
 }

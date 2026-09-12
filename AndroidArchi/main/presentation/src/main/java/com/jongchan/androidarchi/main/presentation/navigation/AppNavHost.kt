@@ -32,8 +32,9 @@ fun AppNavHost(
             when (signal) {
                 is NavSignal.GoToDestPage -> handleNavRoute(signal.route, backStack)
                 is NavSignal.DeepLink -> handleDeepLink(signal.route, backStack)
-                NavSignal.Back -> backStack.removeLastOrNull()
-                NavSignal.BackToInitialPage -> navigateToInitialStack(backStack)
+                is NavSignal.Back -> backStack.removeLastOrNull()
+                is NavSignal.BackTo -> popBackTo(signal.route, backStack)
+                is NavSignal.BackToInitialPage -> navigateToInitialStack(backStack)
             }
         }
     }
@@ -140,6 +141,29 @@ private fun navigateToInitialStack(backStack: NavBackStack<NavKey>) {
     backStack.clear()
     backStack.add(GenericNavKey(IntroPage.PATH))
     Log.d(TAG, "backToInitial: reset stack to Intro")
+}
+
+/**
+ * 백스택에 이미 있는 특정 페이지까지 되돌아간다(Back Navigation).
+ *
+ * 대상 path 가 최전면에 올 때까지 그 위를 덮고 있는 엔트리를 모두 pop 한다. 매칭은 **path 기준**이다 —
+ * 같은 path 가 args 만 다르게 여러 개 쌓여 있으면 가장 위의(가장 최근) 것까지만 되돌아간다.
+ * 대상이 스택에 없으면 스택을 건드리지 않고 경고만 남긴다(전진 이동은 [handleNavRoute] 의 역할).
+ * 이미 최전면이면 no-op.
+ *
+ * 예) `[Search, A, B, C]` 에서 `BackTo(A)` → `[Search, A]`
+ */
+private fun popBackTo(route: NavRoute, backStack: NavBackStack<NavKey>) {
+    val targetIndex = backStack.indexOfLast { it is GenericNavKey && it.path == route.path }
+    if (targetIndex == INDEX_NOT_FOUND) {
+        Log.w(TAG, "backTo: ${route.path} not in back stack — ignored")
+        return
+    }
+    val popped = backStack.size - (targetIndex + 1)
+    while (backStack.size > targetIndex + 1) {
+        backStack.removeAt(backStack.lastIndex)
+    }
+    Log.d(TAG, "backTo: ${route.path} (popped $popped)")
 }
 
 private fun navigateToSearchStack(backStack: NavBackStack<NavKey>) {

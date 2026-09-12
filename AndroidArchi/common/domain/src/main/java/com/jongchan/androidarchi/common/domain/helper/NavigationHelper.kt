@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.Flow
  * - [navigateTo] — 각 feature 가 정의한 [Page] 객체를 그대로 전달 (권장).
  * - [navigateDeepLink] — 앱 실행 중 도착한 deep-link 를 호스트로 전달(웜 스타트 bring-to-front 정책).
  * - [navigateToBack] — 하드웨어 백 키와 동일하게 한 단계 뒤로 이동.
+ * - [navigateBackTo] / [navigateBackToRoute] — 백스택에 이미 있는 특정 [Page] 까지 되돌아간다.
+ *   그 페이지를 덮고 있는 상위 엔트리를 모두 pop 하며, 스택에 없으면 no-op (push 하지 않음).
  * - [navigateToInitial] — 세션 만료 등으로 인한 초기화면 이동 Signal을 전달한다.
  */
 interface NavigationHelper {
@@ -21,5 +23,7 @@ interface NavigationHelper {
     fun navigateTo(page: Page)
     fun navigateDeepLink(route: NavRoute)
     fun navigateToBack()
+    fun navigateBackTo(page: Page)
+    fun navigateBackToRoute(route: NavRoute)
     fun navigateToInitial()
 }

@@ -12,15 +12,20 @@
 ```kotlin
 data class NavRoute(val path: String, val args: Map<String, String> = emptyMap())
 interface Page { fun toRoute(): NavRoute }            // feature/domain이 구현
-sealed interface NavSignal { GoToDestPage(route) / DeepLink(route) / Back }
+sealed interface NavSignal { GoToDestPage(route) / DeepLink(route) / Back / BackTo(route) / BackToInitialPage }
 interface NavigationHelper {
     val navigationFlow: Flow<NavSignal>
     fun navigateTo(page: Page)            // 권장 진입점 (앱 내 push)
     fun navigateByRoute(route: NavRoute)  // NavRoute 직접 구성해서 push
     fun navigateDeepLink(route: NavRoute) // 웜 딥링크 — bring-to-front (탭 대상은 탭 루트 시맨틱)
     fun navigateToBack()
+    fun navigateBackTo(page: Page)         // 스택에 이미 있는 Page 까지 pop (덮고 있는 엔트리 전부 제거, 없으면 no-op)
+    fun navigateBackToRoute(route: NavRoute)
+    fun navigateToInitial()               // 세션 만료 — 스택 비우고 Intro 단독
 }
 ```
+
+- **`navigateBackTo(page)`** (`NavSignal.BackTo` → `popBackTo`): 대상 `path` 가 최전면에 올 때까지 위쪽 엔트리를 모두 pop 한다. 매칭은 path 기준이라 같은 path 가 args 만 다르게 여러 개면 가장 최근 것까지만 되돌아간다. 스택에 없으면 push 하지 않고 경고 로그만 남긴다(전진은 `navigateTo`). 예) `[Search, A, B, C]` + `navigateBackTo(A)` → `[Search, A]`.
 
 - args는 전부 String — 복잡 타입은 `NavRouteJson`으로 JSON 직렬화 (typed Args 골든 예제: [FullScreenMediaPage.kt](../../fullScreenMedia/domain/src/main/java/com/jongchan/androidarchi/fullScreenMedia/domain/FullScreenMediaPage.kt))
 - Page 객체는 **feature/domain** 모듈에 둔다: `object SearchPage : Page { const val PATH = "/search" }`

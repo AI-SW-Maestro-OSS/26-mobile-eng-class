@@ -15,8 +15,8 @@ Canonical deep dive: [docs/architecture/navigation.md](docs/architecture/navigat
 |---|---|---|
 | domain (pure JVM) | `NavRoute(path, args: Map<String,String>)` | The single navigation unit. `args` are **all String**. |
 | domain | `interface Page { fun toRoute(): NavRoute }` | Each screen's typed entry point (in `<feature>/domain`). |
-| domain | `sealed interface NavSignal { GoToDestPage / DeepLink / Back }` | What flows through the nav channel. |
-| domain | `interface NavigationHelper` | `navigateTo(Page)` (recommended) / `navigateByRoute` / `navigateDeepLink` / `navigateToBack`. The only thing domain knows. |
+| domain | `sealed interface NavSignal { GoToDestPage / DeepLink / Back / BackTo / BackToInitialPage }` | What flows through the nav channel. |
+| domain | `interface NavigationHelper` | `navigateTo(Page)` (recommended) / `navigateByRoute` / `navigateDeepLink` / `navigateToBack` / `navigateBackTo(Page)` (pop everything above an existing page; path-matched, no-op if absent) / `navigateToInitial`. The only thing domain knows. |
 | **main/domain** (pure JVM) | `deeplink/RoutePattern.kt`, `deeplink/RouteMatcher.kt` (`matchRoute`) | Pure route matching — template `{param}` extraction + exact/template resolution. **Unit-tested here** (project convention: tests live in `domain`). |
 | host | `GenericNavKey(@Serializable path, args)` : `NavKey` | **The one and only back-stack entry type.** Every destination is this; the screen is chosen by `path`. |
 | host | `AppRoute(path, isBottomTab, syntheticStack, render)` | Per-route host metadata. |
@@ -39,6 +39,7 @@ A screen's identity is its **`path`**. The same path drives in-app navigation, t
 ## In-app navigation vs deep links — two separate signals
 
 - **In-app** (tab click, list-item click): `navigateTo(Page)` → `NavSignal.GoToDestPage` → `handleNavRoute` → **push** (with `bringToFront` dedup). Navigating to `Search` (the home tab) resets to a single `Search` root (`navigateToSearchStack`).
+- **Back to a specific page**: `navigateBackTo(Page)` → `NavSignal.BackTo` → `popBackTo` → pops every entry above the **topmost** entry whose `path` matches, so that page is on top again (`[Search, A, B, C]` + `BackTo(A)` → `[Search, A]`). Match is by `path` only (args ignored). If the page is not in the stack it is a **no-op with a warning** — it never pushes; use `navigateTo` for forward moves.
 - **Deep link, cold start** (`MainActivity.onCreate`): `resolveStartStack(intent.data)` → matched route's `syntheticStack` lays the **full parent chain**; unmatched → Intro fallback. Built before `rememberNavBackStack`.
 - **Deep link, warm start** (`MainActivity.onNewIntent`, `singleTop`): `resolveNewIntentRoute` → `navigateDeepLink` → `NavSignal.DeepLink` → `handleDeepLink`:
   - **leaf screen** → **bring-to-front**: keep the user's current stack, surface only the target key. (Preserving context is intended.)
