@@ -71,4 +71,12 @@ dependencies {
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
+
+    // Firebase Remote Config — RemoteConfigRepositoryV2Impl (common/data/remoteConfig)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.config)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }

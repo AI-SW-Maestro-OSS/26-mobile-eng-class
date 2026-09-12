@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.androidx.baselineprofile) apply false
+    alias(libs.plugins.google.services) apply false
 }

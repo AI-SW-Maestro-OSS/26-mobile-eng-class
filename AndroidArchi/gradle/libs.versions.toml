@@ -4,7 +4,7 @@ targetSdk = "37"
 minSdk = "24"
 # Macrobenchmark / Baseline Profile 수집은 API 28+ 단말에서만 동작하므로 별도 관리.
 minSdkBaselineProfile = "28"
-agp = "9.3.1"
+agp = "9.4.0"
 kotlin = "2.3.21"
 coreKtx = "1.18.0"
 junit = "4.13.2"
@@ -34,6 +34,9 @@ kotlinxCollectionsImmutable = "0.4.0"
 fragment = "1.7.1"
 viewpager2 = "1.0.0"
 constraintlayout = "2.2.0"
+# Firebase Remote Config (RemoteConfigRepositoryV2). google-services 플러그인은 app/google-services.json 존재 시에만 적용된다.
+googleServices = "4.4.4"
+firebaseBom = "34.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -92,6 +95,10 @@ androidx-metrics-performance = { group = "androidx.metrics", name = "metrics-per
 
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 
+# Firebase — BOM 으로 버전을 맞추고 Remote Config 만 사용한다.
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-config = { group = "com.google.firebase", name = "firebase-config" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
@@ -102,3 +109,4 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "benchmark" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }

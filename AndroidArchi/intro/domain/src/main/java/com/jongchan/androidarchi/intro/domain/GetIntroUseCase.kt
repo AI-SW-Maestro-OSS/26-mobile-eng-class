@@ -7,6 +7,8 @@ import com.jongchan.androidarchi.common.domain.error.isCommonErrorHandling
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.helper.ResourceHelper
+import com.jongchan.androidarchi.common.domain.remoteConfig.RemoteConfigKey
+import com.jongchan.androidarchi.common.domain.remoteConfig.RemoteConfigRepository
 import com.jongchan.androidarchi.intro.entity.IntroVO
 import com.jongchan.androidarchi.search.domain.SearchPage
 import com.jongchan.androidarchi.tti.TTIHelper
@@ -16,12 +18,16 @@ class GetIntroUseCase @Inject constructor(
     resourceHelper: ResourceHelper,
     messageHelper: MessageHelper,
     navigationHelper: NavigationHelper,
+    val remoteConfigRepository: RemoteConfigRepository,
     ttiHelper: TTIHelper,
 ) : BaseUseCase(resourceHelper, messageHelper, navigationHelper, ttiHelper) {
 
     operator fun invoke(): Result<IntroVO> {
         return try {
 //            val result = introRepository.getIntro()
+            val isShowFeatureA = remoteConfigRepository.get(RemoteConfigKey.IsShowFeatureA)
+            val marketingUrl = remoteConfigRepository.get(RemoteConfigKey.MarketingPromotionUrl)
+
             navigationHelper.navigateTo(SearchPage)
             Result.success(IntroVO.empty)
         } catch (e: HttpResponseException) {

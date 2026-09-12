@@ -8,6 +8,15 @@ plugins {
     alias(libs.plugins.androidx.baselineprofile)
 }
 
+// FIREBASE-CONFIG-INJECTION-POINT: Firebase(Remote Config) 는 app/google-services.json 이 있을 때만 활성화된다.
+// 파일이 없으면 google-services 플러그인을 건너뛰어 빌드는 통과하고, RemoteConfigRepositoryV2 는
+// 항상 RemoteConfigKey.defaultValue 를 돌려준다. Firebase 콘솔에서 받은 json 을 app/ 에 넣으면 그대로 동작한다.
+if (file("google-services.json").exists()) {
+    apply(plugin = libs.plugins.google.services.get().pluginId)
+} else {
+    logger.warn("[AndroidArchi] app/google-services.json 이 없어 google-services 플러그인을 적용하지 않습니다. Remote Config 는 기본값으로 동작합니다.")
+}
+
 android {
     namespace = "com.jongchan.androidarchi"
     compileSdk {
