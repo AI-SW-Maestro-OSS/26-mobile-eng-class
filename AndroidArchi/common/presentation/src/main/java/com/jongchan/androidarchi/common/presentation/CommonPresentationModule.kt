@@ -2,7 +2,10 @@ package com.jongchan.androidarchi.common.presentation
 
 import android.content.Context
 import androidx.compose.runtime.compositionLocalOf
+import com.jongchan.androidarchi.common.domain.analytics.metric.MetricLoggingConfig
+import com.jongchan.androidarchi.common.domain.analytics.metric.MetricLoggingRepository
 import com.jongchan.androidarchi.common.domain.coroutine.IoDispatcher
+import com.jongchan.androidarchi.common.domain.coroutine.IoScope
 import com.jongchan.androidarchi.common.domain.helper.LoggingHelper
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
@@ -24,6 +27,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Singleton
 
 @Module
@@ -36,7 +40,16 @@ object CommonPresentationModule {
 
     @Provides
     @Singleton
-    fun provideLoggingHelper(): LoggingHelper = LoggingHelperImpl()
+    fun provideLoggingHelper(
+        metricLoggingRepository: MetricLoggingRepository,
+        @IoScope ioScope: CoroutineScope,
+        metricLoggingConfig: MetricLoggingConfig,
+    ): LoggingHelper = LoggingHelperImpl(
+        repository = metricLoggingRepository,
+        scope = ioScope,
+        isEnabled = metricLoggingConfig.isEnabled,
+        isDebug = BuildConfig.DEBUG,
+    )
 
     @Provides
     @Singleton

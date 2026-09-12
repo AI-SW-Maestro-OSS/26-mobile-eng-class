@@ -27,6 +27,15 @@ android {
         val apiBaseUrl = localProps.getProperty("API_BASE_URL") ?: "https://dapi.kakao.com/"
         buildConfigField("String", "API_KEY", "\"$apiKey\"")
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
+
+        // METRIC-LOG-INJECTION-POINT: Metric Logging(Google Apps Script Web App) 엔드포인트/토큰.
+        //   METRIC_LOG_URL=https://script.google.com/macros/s/.../exec
+        //   METRIC_LOG_TOKEN=<Apps Script 스크립트 속성 TOKEN 과 동일한 값>
+        // 비어 있으면 LoggingHelperImpl 이 전송을 건너뛴다(로컬 빌드는 깨지지 않음).
+        val metricLogUrl = localProps.getProperty("METRIC_LOG_URL") ?: ""
+        val metricLogToken = localProps.getProperty("METRIC_LOG_TOKEN") ?: ""
+        buildConfigField("String", "METRIC_LOG_URL", "\"$metricLogUrl\"")
+        buildConfigField("String", "METRIC_LOG_TOKEN", "\"$metricLogToken\"")
     }
 
     buildTypes {

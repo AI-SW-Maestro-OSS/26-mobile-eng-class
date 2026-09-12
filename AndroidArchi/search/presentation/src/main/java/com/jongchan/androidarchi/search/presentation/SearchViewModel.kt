@@ -1,9 +1,12 @@
 package com.jongchan.androidarchi.search.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.jongchan.androidarchi.common.domain.analytics.metric.MetricLogging
+import com.jongchan.androidarchi.common.domain.analytics.metric.MetricLoggingParam
 import com.jongchan.androidarchi.common.domain.favorite.GetFavoriteItemsUseCase
 import com.jongchan.androidarchi.common.domain.favorite.RegisterFavoriteItemUseCase
 import com.jongchan.androidarchi.common.domain.favorite.RemoveFavoriteItemUseCase
+import com.jongchan.androidarchi.common.domain.helper.LoggingHelper
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.entity.favorite.FavoriteItemVO
@@ -16,6 +19,7 @@ import com.jongchan.androidarchi.search.domain.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -31,6 +35,7 @@ class SearchViewModel @Inject constructor(
     private val removeFavoriteItemUseCase: RemoveFavoriteItemUseCase,
     private val messageHelper: MessageHelper,
     private val navigationHelper: NavigationHelper,
+    private val loggingHelper: LoggingHelper,
 ) : MviViewModel<SearchIntent, SearchUIState, SearchReducerEvent>(SearchUIState.empty) {
     private var searchJob: Job? = null
     private var searchedQuery: String = ""
@@ -58,7 +63,13 @@ class SearchViewModel @Inject constructor(
             is SearchReducerEvent.Cleared -> SearchUIState.empty.copy(favoriteUrls = state.favoriteUrls)
             is SearchReducerEvent.SearchStarted -> state.copy(isLoading = true, hasSearched = true)
             is SearchReducerEvent.SearchFailed -> state.copy(isLoading = false)
-            is SearchReducerEvent.SearchResultLoaded -> SearchUIState.fromSearchResult(state.sduiViewItems, state.query, event.result, state.favoriteUrls)
+            is SearchReducerEvent.SearchResultLoaded -> SearchUIState.fromSearchResult(
+                state.sduiViewItems,
+                state.query,
+                event.result,
+                state.favoriteUrls
+            )
+
             is SearchReducerEvent.LoadMoreStarted -> state.copy(isLoadingMore = true)
             is SearchReducerEvent.MorePageLoaded -> state.appendPage(event.result, event.page)
             is SearchReducerEvent.LoadMoreFailed -> state.copy(isLoadingMore = false)
@@ -147,7 +158,18 @@ class SearchViewModel @Inject constructor(
                 contentsImageUrl = item.contentsImageUrl,
                 dateTime = item.dateTime,
             )
-            registerFavoriteItemUseCase(favoriteItem)
+            registerFavoriteItemUseCase(favoriteItem).onSuccess {
+                // 등록 직후 favoriteUrls 상태는 Flow 갱신 전일 수 있으므로 저장소에서 현재 즐겨찾기 수를 직접 읽는다.
+                val allFavoriteItemCount = getFavoriteItemsUseCase().first().size
+                loggingHelper.shotMetricLogging(
+                    event = MetricLogging.ClickFavoriteToggleSearchPage,
+                    params = mapOf(
+                        MetricLoggingParam.AllFavoriteItemCount to allFavoriteItemCount,
+                        MetricLoggingParam.ItemImgUrl to item.thumbnailImageUrl,
+                        MetricLoggingParam.SearchKeyword to currentState.query,
+                    ),
+                )
+            }
         }
     }
 
