@@ -3,9 +3,11 @@ package com.jongchan.androidarchi.common.presentation
 import android.content.Context
 import androidx.compose.runtime.compositionLocalOf
 import com.jongchan.androidarchi.common.domain.coroutine.IoDispatcher
+import com.jongchan.androidarchi.common.domain.helper.LoggingHelper
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.helper.ResourceHelper
+import com.jongchan.androidarchi.common.presentation.helper.LoggingHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.MessageHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.NavigationHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.ResourceHelperImpl
@@ -31,6 +33,10 @@ object CommonPresentationModule {
     @Singleton
     fun provideMessageHelper(@ApplicationContext context: Context): MessageHelper =
         MessageHelperImpl(context)
+
+    @Provides
+    @Singleton
+    fun provideLoggingHelper(): LoggingHelper = LoggingHelperImpl()
 
     @Provides
     @Singleton
