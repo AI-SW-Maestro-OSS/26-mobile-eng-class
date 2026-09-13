@@ -76,49 +76,10 @@ fun RootComposable(
             onShowOneButtonDialog = onShowOneButtonDialog,
         )
 
-        oneButtonDialogEffect?.let { dialog ->
-            AlertDialog(
-                onDismissRequest = {
-                    if (!dialog.cantIgnore) oneButtonDialogEffect = null
-                },
-                title = dialog.titleText?.let { titleText ->
-                    {
-                        ArchiText(
-                            text = titleText,
-                            style = DesignSystemThemeImpl.typeScale.titleStrongL,
-                            color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel1,
-                            maxLines = Int.MAX_VALUE,
-                        )
-                    }
-                },
-                text = {
-                    ArchiText(
-                        text = dialog.descText,
-                        style = DesignSystemThemeImpl.typeScale.textRegularL,
-                        color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel2,
-                        maxLines = Int.MAX_VALUE,
-                    )
-                },
-                confirmButton = {
-                    TextButton(
-                        onClick = {
-                            dialog.onClickButton?.invoke()
-                            oneButtonDialogEffect = null
-                        }
-                    ) {
-                        ArchiText(
-                            text = dialog.buttonText,
-                            style = DesignSystemThemeImpl.typeScale.textStrongL,
-                            color = DesignSystemThemeImpl.designSystemColor.contentAccent,
-                        )
-                    }
-                },
-                properties = DialogProperties(
-                    dismissOnBackPress = !dialog.cantIgnore,
-                    dismissOnClickOutside = !dialog.cantIgnore,
-                ),
-            )
-        }
+        OneButtonDialogEffect(
+            dialog = oneButtonDialogEffect,
+            onDismiss = { oneButtonDialogEffect = null },
+        )
 
         Scaffold(
             modifier = modifier
@@ -221,6 +182,56 @@ private fun MessageEffect(
             }
         }
     }
+}
+
+@Composable
+private fun OneButtonDialogEffect(
+    dialog: MessageEffect.ShowOneButtonDialog?,
+    onDismiss: () -> Unit,
+) {
+    if (dialog == null) return
+
+    AlertDialog(
+        onDismissRequest = {
+            if (!dialog.cantIgnore) onDismiss()
+        },
+        title = dialog.titleText?.let { titleText ->
+            {
+                ArchiText(
+                    text = titleText,
+                    style = DesignSystemThemeImpl.typeScale.titleStrongL,
+                    color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel1,
+                    maxLines = Int.MAX_VALUE,
+                )
+            }
+        },
+        text = {
+            ArchiText(
+                text = dialog.descText,
+                style = DesignSystemThemeImpl.typeScale.textRegularL,
+                color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel2,
+                maxLines = Int.MAX_VALUE,
+            )
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    dialog.onClickButton?.invoke()
+                    onDismiss()
+                }
+            ) {
+                ArchiText(
+                    text = dialog.buttonText,
+                    style = DesignSystemThemeImpl.typeScale.textStrongL,
+                    color = DesignSystemThemeImpl.designSystemColor.contentAccent,
+                )
+            }
+        },
+        properties = DialogProperties(
+            dismissOnBackPress = !dialog.cantIgnore,
+            dismissOnClickOutside = !dialog.cantIgnore,
+        ),
+    )
 }
 
 private data class TopNavTab(
