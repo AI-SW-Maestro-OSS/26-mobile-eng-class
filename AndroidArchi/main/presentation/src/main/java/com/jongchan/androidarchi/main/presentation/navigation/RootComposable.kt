@@ -40,6 +40,7 @@ import com.jongchan.androidarchi.common.presentation.helper.LocalMessageHelper
 import com.jongchan.androidarchi.common.presentation.helper.LocalNavigationHelper
 import com.jongchan.androidarchi.common.presentation.ui.theme.DesignSystemTheme
 import com.jongchan.androidarchi.common.presentation.ui.theme.DesignSystemThemeImpl
+import com.jongchan.androidarchi.etc.domain.EtcPage
 import com.jongchan.androidarchi.favorite.domain.FavoritePage
 import com.jongchan.androidarchi.intro.domain.IntroPage
 import com.jongchan.androidarchi.search.domain.SearchPage
@@ -63,6 +64,7 @@ fun RootComposable(
         val tabs = listOf(
             TopNavTab(stringResource(R.string.nav_tab_search), SearchPage),
             TopNavTab(stringResource(R.string.nav_tab_favorite), FavoritePage),
+            TopNavTab(stringResource(R.string.nav_tab_etc), EtcPage),
         )
         val currentKey = backStack.lastOrNull() as? GenericNavKey
         val currentRoute = currentKey?.let { appRouteByPath[it.path] }

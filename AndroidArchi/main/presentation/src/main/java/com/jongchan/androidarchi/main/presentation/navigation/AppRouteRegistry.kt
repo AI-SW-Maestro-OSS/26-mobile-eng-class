@@ -6,6 +6,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.jongchan.androidarchi.main.domain.deeplink.RoutePattern
+import com.jongchan.androidarchi.etc.domain.EtcPage
+import com.jongchan.androidarchi.etc.presentation.EtcPage
+import com.jongchan.androidarchi.etc.presentation.EtcViewModel
 import com.jongchan.androidarchi.favorite.domain.FavoritePage
 import com.jongchan.androidarchi.favorite.presentation.FavoritePage
 import com.jongchan.androidarchi.favorite.presentation.FavoriteViewModel
@@ -42,6 +45,17 @@ val appRoutes: List<AppRoute> = listOf(
             )
         },
         render = { FavoritePage(viewModel = hiltViewModel<FavoriteViewModel>()) },
+    ),
+    AppRoute(
+        path = EtcPage.PATH,
+        isBottomTab = true,
+        syntheticStack = { args ->
+            listOf(
+                GenericNavKey(SearchPage.PATH),
+                GenericNavKey(EtcPage.PATH, args),
+            )
+        },
+        render = { EtcPage(viewModel = hiltViewModel<EtcViewModel>()) },
     ),
     AppRoute(
         path = FullScreenMediaPage.PATH,

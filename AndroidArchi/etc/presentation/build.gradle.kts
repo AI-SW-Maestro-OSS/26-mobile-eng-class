@@ -5,11 +5,10 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
-    namespace = "com.jongchan.androidarchi.main.presentation"
+    namespace = "com.jongchan.androidarchi.etc.presentation"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -54,31 +53,8 @@ composeCompiler {
 }
 
 dependencies {
-    implementation(project(":main:domain"))
-    implementation(project(":main:entity"))
-    implementation(project(":common:presentation"))
-
-    // Feature dependencies (Assuming Main navigates to these)
-    implementation(project(":intro:presentation"))
-    implementation(project(":search:presentation"))
-    implementation(project(":favorite:presentation"))
-    implementation(project(":fullScreenMedia:presentation"))
-    implementation(project(":etc:presentation"))
-
-    // 각 feature 의 *Page (path/Args 정의) 를 호스트 측 라우터에서 직접 참조한다.
-    implementation(project(":intro:domain"))
-    implementation(project(":search:domain"))
-    implementation(project(":favorite:domain"))
-    implementation(project(":fullScreenMedia:domain"))
     implementation(project(":etc:domain"))
-
-    implementation(libs.androidx.activity.compose)
-    // 상세화면 Fragment 호스팅(FragmentActivity, FragmentContainerView).
-    implementation(libs.androidx.fragment.ktx)
-    api(libs.androidx.navigation3.runtime)
-    implementation(libs.androidx.navigation3.ui)
-    implementation(libs.androidx.lifecycle.viewmodel.navigation3)
-    implementation(libs.kotlinx.serialization.json)
+    implementation(project(":common:presentation"))
 
     // Hilt
     implementation(libs.hilt.android)

@@ -6,6 +6,7 @@
     <string name="media_default_title">Title</string>
     <string name="nav_tab_search">Search</string>
     <string name="nav_tab_favorite">Favorites</string>
+    <string name="nav_tab_etc">Etc.</string>
     <string name="nav_back_button">Back to previous</string>
     <string name="favorite_register_failed">Failed to register favorite.</string>
     <string name="favorite_remove_failed">Failed to remove favorite.</string>

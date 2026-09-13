@@ -114,6 +114,11 @@ dependencies {
     implementation(project(":fullScreenMedia:data"))
     implementation(project(":fullScreenMedia:entity"))
 
+    implementation(project(":etc:presentation"))
+    implementation(project(":etc:domain"))
+    implementation(project(":etc:data"))
+    implementation(project(":etc:entity"))
+
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

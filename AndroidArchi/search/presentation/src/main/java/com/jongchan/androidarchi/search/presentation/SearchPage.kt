@@ -51,15 +51,6 @@ private fun SearchPageContent(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp),
         )
 
-        if (uiState.sduiViewItems.isNullOrEmpty().not()) {
-            SDUIRootView(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                items = uiState.sduiViewItems,
-            )
-        }
-
         Box(modifier = Modifier.fillMaxSize()) {
             when {
                 uiState.isLoading && uiState.searchItemList.isEmpty() -> {

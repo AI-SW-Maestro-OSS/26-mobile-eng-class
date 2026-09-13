@@ -55,6 +55,11 @@ include(":fullScreenMedia:domain")
 include(":fullScreenMedia:data")
 include(":fullScreenMedia:entity")
 
+include(":etc:presentation")
+include(":etc:domain")
+include(":etc:data")
+include(":etc:entity")
+
 include(":tti")
 
 include(":baselineprofile")
