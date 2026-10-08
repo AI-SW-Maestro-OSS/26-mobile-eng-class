@@ -13,6 +13,7 @@ enum class TimelineCategory(val categoryName: String) {
 
 enum class TTIMetaData(val metadataName: String) {
     PAGE_NAME("page_name"),
+    INSTANCE_NO("instance_no"),
     IS_BOUNCED("is_bounced"),
     IS_TIMEOUT("is_timeout"),
     TTI_LOG_VERSION(

@@ -19,7 +19,7 @@ object FullScreenMediaPage {
      *
      * 무거운 미디어 리스트를 직렬화해 넘기지 않고, 진입 경로([origin])와 식별에 필요한 최소 정보만 전달한다.
      * 실제 노출할 [com.jongchan.androidarchi.common.entity.media.MediaItemVO] 리스트는
-     * FullScreenMediaViewModel 이 [origin] 에 맞춰 구성한다.
+     * [GetFullScreenMediaItemsUseCase] 가 [origin] 에 맞춰 구성한다.
      * - [FullScreenMediaOrigin.FAVORITE] : [url] 로 즐겨찾기 목록에서 시작 위치를 찾고 좌우 스와이프 페이징.
      * - [FullScreenMediaOrigin.SEARCH]   : [url]/[title]/[thumbnailImageUrl]/[contentsImageUrl]/[type] 로 단일 항목만 노출.
      * - [FullScreenMediaOrigin.DEEP_LINK]: [url]/[title] 로 단일 항목 노출(타입 미지정 시 UNKNOWN).

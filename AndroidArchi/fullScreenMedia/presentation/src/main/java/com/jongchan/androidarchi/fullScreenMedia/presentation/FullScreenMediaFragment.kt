@@ -15,14 +15,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewpager2.widget.ViewPager2
 import com.jongchan.androidarchi.common.entity.media.MediaItemVO
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaPage
-import com.jongchan.androidarchi.fullScreenMedia.domain.tti.FullScreenMediaTTIPage
 import com.jongchan.androidarchi.fullScreenMedia.presentation.databinding.FragmentFullScreenMediaBinding
-import com.jongchan.androidarchi.tti.TTIHelper
 import com.jongchan.androidarchi.tti.TimelineCategory
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import com.jongchan.androidarchi.common.presentation.R as CommonR
 
 /**
@@ -39,9 +36,6 @@ import com.jongchan.androidarchi.common.presentation.R as CommonR
  */
 @AndroidEntryPoint
 class FullScreenMediaFragment : Fragment() {
-
-    @Inject
-    lateinit var ttiHelper: TTIHelper
 
     private var _binding: FragmentFullScreenMediaBinding? = null
     private val binding get() = _binding!!
@@ -76,8 +70,9 @@ class FullScreenMediaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        ttiHelper.startTTITracking(FullScreenMediaTTIPage)
-        ttiHelper.startTTITimeline(FullScreenMediaTTIPage, TimelineCategory.VIEW_CREATION_TIME)
+        // 트래킹 시작은 ViewModel 생성 시점(init)에 일어난다.
+        // 이 첫 접근이 ViewModel 생성을 트리거하므로 "트래킹 시작 → view 마크" 순서가 보장된다.
+        viewModel.ttiHelper.startTTITimeline(TimelineCategory.VIEW_CREATION_TIME)
         _binding = FragmentFullScreenMediaBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -87,16 +82,16 @@ class FullScreenMediaFragment : Fragment() {
         setupPager()
         setupOverlay()
         observeState()
-        ttiHelper.endTTITimeline(FullScreenMediaTTIPage, TimelineCategory.VIEW_CREATION_TIME)
-        ttiHelper.startTTITimeline(FullScreenMediaTTIPage, TimelineCategory.VIEW_BINDING_TIME)
+        viewModel.ttiHelper.endTTITimeline(TimelineCategory.VIEW_CREATION_TIME)
+        viewModel.ttiHelper.startTTITimeline(TimelineCategory.VIEW_BINDING_TIME)
     }
 
     private fun setupPager() {
         pagerAdapter = FullScreenMediaPagerAdapter(onImageLoadStarted = {
-            ttiHelper.startTTITimeline(FullScreenMediaTTIPage, TimelineCategory.IMAGE_LOADED_TIME)
+            viewModel.ttiHelper.startTTITimeline(TimelineCategory.IMAGE_LOADED_TIME)
         }, onImageLoadCompleted = {
-            ttiHelper.endTTITimeline(FullScreenMediaTTIPage, TimelineCategory.IMAGE_LOADED_TIME)
-            ttiHelper.endTTITracking(FullScreenMediaTTIPage)
+            viewModel.ttiHelper.endTTITimeline(TimelineCategory.IMAGE_LOADED_TIME)
+            viewModel.ttiHelper.endTTITracking()
         })
         binding.mediaPager.apply {
             adapter = pagerAdapter
@@ -145,7 +140,7 @@ class FullScreenMediaFragment : Fragment() {
             binding.mediaPager.setCurrentItem(state.currentIndex, false)
         }
         bindOverlay(state, state.currentIndex)
-        ttiHelper.endTTITimeline(FullScreenMediaTTIPage, TimelineCategory.VIEW_BINDING_TIME)
+        viewModel.ttiHelper.endTTITimeline(TimelineCategory.VIEW_BINDING_TIME)
     }
 
     /** 현재 페이지의 타이틀/하트 상태를 오버레이에 반영한다. */
@@ -193,7 +188,7 @@ class FullScreenMediaFragment : Fragment() {
         binding.mediaPager.unregisterOnPageChangeCallback(pageChangeCallback)
         binding.mediaPager.adapter = null
         _binding = null
-        ttiHelper.shotTTILogging(page = FullScreenMediaTTIPage)
+        viewModel.ttiHelper.shotTTILogging()
         super.onDestroyView()
     }
 }

@@ -6,6 +6,7 @@ import com.jongchan.androidarchi.common.domain.coroutine.IoDispatcher
 import com.jongchan.androidarchi.common.domain.coroutine.IoScope
 import com.jongchan.androidarchi.common.domain.coroutine.MainDispatcher
 import com.jongchan.androidarchi.common.domain.coroutine.MainScope
+import com.jongchan.androidarchi.common.domain.coroutine.TtiDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,6 +48,13 @@ object CoroutineModule {
     @IoDispatcher
     fun provideIoDispatcher(): CoroutineDispatcher =
         Dispatchers.IO.limitedParallelism(MAX_IO_PARALLELISM)
+
+    @Provides
+    @Singleton
+    @TtiDispatcher
+    fun provideTtiDispatcher(
+        @IoDispatcher dispatcher: CoroutineDispatcher,
+    ): CoroutineDispatcher = dispatcher.limitedParallelism(1)
 
     @Provides
     @Singleton

@@ -10,7 +10,7 @@ open class BaseUseCase(
     protected open val resourceHelper: ResourceHelper,
     protected open val messageHelper: MessageHelper,
     protected open val navigationHelper: NavigationHelper,
-    protected open val ttiHelper: TTIHelper,
+    protected open val ttiHelper: TTIHelper,    // ViewModel 과 공유하는 인스턴스(@ViewModelScoped)
 ) {
 
     fun executeCommonErrorHanding(e: HttpResponseException) {

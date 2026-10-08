@@ -4,6 +4,8 @@ import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.error.HttpResponseException
 import com.jongchan.androidarchi.common.domain.error.HttpResponseStatus
+import com.jongchan.androidarchi.common.domain.remoteConfig.RemoteConfigKey
+import com.jongchan.androidarchi.common.domain.remoteConfig.RemoteConfigRepository
 import com.jongchan.androidarchi.search.domain.SearchPage
 import com.jongchan.androidarchi.intro.entity.IntroVO
 import io.mockk.every
@@ -20,16 +22,23 @@ class GetIntroUseCaseTest {
 
     private lateinit var messageHelper: MessageHelper
     private lateinit var navigationHelper: NavigationHelper
+    private lateinit var remoteConfigRepository: RemoteConfigRepository
     private lateinit var useCase: GetIntroUseCase
 
     @Before
     fun setUp() {
         messageHelper = mockk(relaxed = true)
         navigationHelper = mockk(relaxed = true)
+        // get() 은 제네릭 반환이라 relaxed 기본값이 캐스팅에 실패하므로 키별로 스텁한다.
+        remoteConfigRepository = mockk {
+            every { get(RemoteConfigKey.IsShowFeatureA) } returns false
+            every { get(RemoteConfigKey.MarketingPromotionUrl) } returns ""
+        }
         useCase = GetIntroUseCase(
             mockk(relaxed = true),
             messageHelper,
             navigationHelper,
+            remoteConfigRepository,
             mockk(relaxed = true),
         )
     }
