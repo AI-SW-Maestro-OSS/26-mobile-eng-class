@@ -36,6 +36,17 @@ android {
         val metricLogToken = localProps.getProperty("METRIC_LOG_TOKEN") ?: ""
         buildConfigField("String", "METRIC_LOG_URL", "\"$metricLogUrl\"")
         buildConfigField("String", "METRIC_LOG_TOKEN", "\"$metricLogToken\"")
+
+        // TTI-LOG-INJECTION-POINT: TTI Logging(Google Apps Script Web App) 엔드포인트/토큰.
+        // Metric 로깅과 설정 키를 분리해 둔다 — 같은 시트를 쓰려면 METRIC_LOG_* 와 같은 값을 넣고
+        // 시트에 `tti_report` 탭만 추가하면 된다. TTI 만 다른 시트로 옮길 때는 다른 URL/토큰 지정.
+        //   TTI_LOG_URL=https://script.google.com/macros/s/.../exec
+        //   TTI_LOG_TOKEN=<Apps Script 스크립트 속성 TOKEN 과 동일한 값>
+        // 비어 있으면 SpreadsheetTTIReporter 가 전송을 건너뛴다(로컬 빌드는 깨지지 않음).
+        val ttiLogUrl = localProps.getProperty("TTI_LOG_URL") ?: ""
+        val ttiLogToken = localProps.getProperty("TTI_LOG_TOKEN") ?: ""
+        buildConfigField("String", "TTI_LOG_URL", "\"$ttiLogUrl\"")
+        buildConfigField("String", "TTI_LOG_TOKEN", "\"$ttiLogToken\"")
     }
 
     buildTypes {

@@ -3,6 +3,8 @@ package com.jongchan.androidarchi.common.presentation
 import android.content.Context
 import com.jongchan.androidarchi.common.domain.analytics.metric.MetricLoggingConfig
 import com.jongchan.androidarchi.common.domain.analytics.metric.MetricLoggingRepository
+import com.jongchan.androidarchi.common.domain.analytics.tti.TtiLoggingConfig
+import com.jongchan.androidarchi.common.domain.analytics.tti.TtiLoggingRepository
 import com.jongchan.androidarchi.common.domain.coroutine.IoScope
 import com.jongchan.androidarchi.common.domain.coroutine.TtiDispatcher
 import com.jongchan.androidarchi.common.domain.helper.LoggingHelper
@@ -13,8 +15,8 @@ import com.jongchan.androidarchi.common.presentation.helper.LoggingHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.MessageHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.NavigationHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.ResourceHelperImpl
+import com.jongchan.androidarchi.common.presentation.tti.SpreadsheetTTIReporter
 import com.jongchan.androidarchi.tti.DebugTTILogger
-import com.jongchan.androidarchi.tti.NoOpTTIReporter
 import com.jongchan.androidarchi.tti.RemoteTTILogger
 import com.jongchan.androidarchi.tti.TTIHelper
 import com.jongchan.androidarchi.tti.TTIHelperImpl
@@ -69,7 +71,15 @@ object CommonPresentationModule {
 
     @Provides
     @Singleton
-    fun provideTTIReporter(): TTIReporter = NoOpTTIReporter
+    fun provideTTIReporter(
+        ttiLoggingRepository: TtiLoggingRepository,
+        @IoScope ioScope: CoroutineScope,
+        ttiLoggingConfig: TtiLoggingConfig,
+    ): TTIReporter = SpreadsheetTTIReporter(
+        repository = ttiLoggingRepository,
+        scope = ioScope,
+        isEnabled = ttiLoggingConfig.isEnabled,
+    )
 }
 
 /**
