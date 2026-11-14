@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
  * 유저 Like / Dislike 피드백 기반 취향 매칭 점수 계산을 제공하는 도메인 헬퍼 인터페이스.
  *
  * - 도메인/프리젠테이션 레이어는 MediaPipe SDK 에 직접 의존하지 않고 이 인터페이스를 DI 로 주입받아 사용한다.
- * - 구현체([com.jongchan.androidarchi.common.presentation.helper.AIBasedFeatureHelperImpl])는
- *   MediaPipe `TextEmbedder` 추론과 Rocchio 취향 벡터($V_{user} = \alpha V_{like} - \beta V_{dislike}$) 계산,
+ * - 구현체([com.jongchan.androidarchi.common.presentation.helper.SearchResultScoringHelperImpl])는
+ *   범용 AI 브릿지([AIBasedFeatureHelper])를 통해 임베딩 추론을 수행하고 Rocchio 취향 벡터($V_{user} = \alpha V_{like} - \beta V_{dislike}$) 계산,
  *   그리고 유저 피드백 히스토리 관리를 담당한다.
  */
 interface SearchResultScoringHelper {

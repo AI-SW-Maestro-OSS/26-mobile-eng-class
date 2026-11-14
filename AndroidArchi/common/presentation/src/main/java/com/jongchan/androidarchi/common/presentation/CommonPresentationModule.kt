@@ -7,6 +7,7 @@ import com.jongchan.androidarchi.common.domain.analytics.tti.TtiLoggingConfig
 import com.jongchan.androidarchi.common.domain.analytics.tti.TtiLoggingRepository
 import com.jongchan.androidarchi.common.domain.coroutine.IoScope
 import com.jongchan.androidarchi.common.domain.coroutine.TtiDispatcher
+import com.jongchan.androidarchi.common.domain.helper.AIBasedFeatureHelper
 import com.jongchan.androidarchi.common.domain.helper.SearchResultScoringHelper
 import com.jongchan.androidarchi.common.domain.helper.LoggingHelper
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
@@ -14,6 +15,7 @@ import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.helper.ResourceHelper
 import com.jongchan.androidarchi.common.domain.store.ActionStateMapper
 import com.jongchan.androidarchi.common.domain.store.GlobalStore
+import com.jongchan.androidarchi.common.presentation.helper.AIBasedFeatureHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.SearchResultScoringHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.LoggingHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.MessageHelperImpl
@@ -70,8 +72,19 @@ object CommonPresentationModule {
 
     @Provides
     @Singleton
-    fun provideAIBasedFeatureHelper(@ApplicationContext context: Context): SearchResultScoringHelper =
-        SearchResultScoringHelperImpl(context)
+    fun provideSearchResultScoringHelper(
+        @ApplicationContext context: Context,
+        aiBasedFeatureHelper: AIBasedFeatureHelper,
+    ): SearchResultScoringHelper =
+        SearchResultScoringHelperImpl(
+            context = context,
+            aiBasedFeatureHelper = aiBasedFeatureHelper,
+        )
+
+    @Provides
+    @Singleton
+    fun provideAIBasedFeatureHelper(@ApplicationContext context: Context): AIBasedFeatureHelper =
+        AIBasedFeatureHelperImpl(context)
 
     @Provides
     @Singleton

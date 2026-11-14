@@ -4,6 +4,7 @@ import com.jongchan.androidarchi.common.entity.ai.MediaFeedbackType
 import com.jongchan.androidarchi.common.entity.media.MediaSearchResultVO
 import com.jongchan.androidarchi.common.presentation.mvi.ReducerEvent
 import com.jongchan.androidarchi.search.domain.SearchPageVO
+import com.jongchan.androidarchi.search.domain.SearchQuerySuggestionVO
 import kotlinx.collections.immutable.ImmutableMap
 
 sealed interface SearchReducerEvent : ReducerEvent {
@@ -31,4 +32,6 @@ sealed interface SearchReducerEvent : ReducerEvent {
         val dislikedCount: Int,
     ) : SearchReducerEvent
     data object AiSortToggled : SearchReducerEvent
+    data object QuerySuggestionLoadingStarted : SearchReducerEvent
+    data class QuerySuggestionLoaded(val suggestion: SearchQuerySuggestionVO) : SearchReducerEvent
 }

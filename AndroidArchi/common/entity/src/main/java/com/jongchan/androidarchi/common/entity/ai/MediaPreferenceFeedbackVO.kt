@@ -1,5 +1,6 @@
 package com.jongchan.androidarchi.common.entity.ai
 
+import com.jongchan.androidarchi.common.entity.favorite.FavoriteItemVO
 import com.jongchan.androidarchi.common.entity.media.MediaItemVO
 import com.jongchan.androidarchi.common.entity.media.MediaType
 
@@ -46,13 +47,23 @@ data class MediaPreferenceFeedbackVO(
 }
 
 /**
- * [MediaItemVO] 에서 MediaPipe 임베딩 추론에 사용할 대표 시맨틱 텍스트를 생성한다.
+ * [MediaItemVO] 에서 임베딩 추론에 사용할 대표 시맨틱 텍스트를 생성한다.
  */
 fun MediaItemVO.toSemanticText(): String = buildSemanticText(
     mediaType = type,
     collection = collection,
     title = title,
     description = pageLinkUrl,
+)
+
+/**
+ * [FavoriteItemVO] 에서 시맨틱 텍스트를 생성한다.
+ */
+fun FavoriteItemVO.toSemanticText(): String = buildSemanticText(
+    mediaType = type,
+    collection = "",
+    title = title,
+    description = urlKey,
 )
 
 internal fun buildSemanticText(

@@ -1,12 +1,14 @@
 package com.jongchan.androidarchi.search.presentation
 
 import com.jongchan.androidarchi.common.domain.sdui.SDUIViewTypeVO
+import com.jongchan.androidarchi.common.entity.ai.AIEngineType
 import com.jongchan.androidarchi.common.entity.ai.MediaFeedbackType
 import com.jongchan.androidarchi.common.entity.media.MediaItemVO
 import com.jongchan.androidarchi.common.entity.media.MediaSearchResultVO
 import com.jongchan.androidarchi.common.presentation.mvi.UiState
 import com.jongchan.androidarchi.common.presentation.searchList.MediaItemUiState
 import com.jongchan.androidarchi.common.presentation.searchList.formatKakaoDateTime
+import com.jongchan.androidarchi.search.domain.SearchQuerySuggestionVO
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.ImmutableSet
@@ -33,6 +35,10 @@ data class SearchUIState(
     val likedCount: Int = 0,
     val dislikedCount: Int = 0,
     val isAiSortEnabled: Boolean = false,
+    val isGeneratingSuggestion: Boolean = false,
+    val querySuggestionSummary: String = "",
+    val suggestedKeywords: ImmutableList<String> = persistentListOf(),
+    val suggestionEngineType: AIEngineType = AIEngineType.LOCAL_FALLBACK,
 ) : UiState {
 
     val hasFeedbackHistory: Boolean
@@ -44,11 +50,6 @@ data class SearchUIState(
 
     fun rawItemByUrl(url: String): MediaItemVO? = rawMediaItems.firstOrNull { it.urlKey == url }
 
-    /**
-     * 다음 페이지 결과를 기존 리스트 뒤에 이어 붙인다.
-     * 이미 노출 중인 url 은 LazyColumn key 충돌을 막기 위해 제외한다.
-     * 응답의 [MediaSearchResultVO.isEnd] 가 true 거나 빈 페이지면 마지막 페이지로 표시해 추가 로드를 멈춘다.
-     */
     fun appendPage(
         result: MediaSearchResultVO,
         page: Int,
@@ -75,7 +76,6 @@ data class SearchUIState(
         )
     }
 
-    /** 즐겨찾기 url 집합 변경을 노출 중인 아이템들에 접어 반영한다(상태가 분기를 끝내고 Compose 는 반영만). */
     fun withFavorites(urls: ImmutableSet<String>): SearchUIState = copy(
         favoriteUrls = urls,
         searchItemList = searchItemList
@@ -83,9 +83,6 @@ data class SearchUIState(
             .toImmutableList(),
     )
 
-    /**
-     * 유저의 Like/Dislike 피드백 및 온디바이스 AI 매칭 점수 변경을 반영한다.
-     */
     fun withPreferences(
         newFeedbackMap: ImmutableMap<String, MediaFeedbackType>,
         newPreferenceScores: ImmutableMap<String, Int>,
@@ -110,9 +107,13 @@ data class SearchUIState(
         )
     }
 
-    /**
-     * AI 취향순 정렬 ON / OFF 토글을 반영해 리스트를 재구성한다.
-     */
+    fun withQuerySuggestion(suggestion: SearchQuerySuggestionVO): SearchUIState = copy(
+        isGeneratingSuggestion = false,
+        querySuggestionSummary = suggestion.comment,
+        suggestedKeywords = suggestion.suggestedKeywords.toImmutableList(),
+        suggestionEngineType = suggestion.engineType,
+    )
+
     fun toggleAiSort(): SearchUIState {
         val nextSortState = !isAiSortEnabled
         return copy(
@@ -146,6 +147,10 @@ data class SearchUIState(
             likedCount = 0,
             dislikedCount = 0,
             isAiSortEnabled = false,
+            isGeneratingSuggestion = false,
+            querySuggestionSummary = "",
+            suggestedKeywords = persistentListOf(),
+            suggestionEngineType = AIEngineType.LOCAL_FALLBACK,
         )
 
         fun fromSearchResult(

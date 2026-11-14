@@ -118,6 +118,11 @@ dependencies {
     // JankStats — frame-level performance tracking
     api(libs.androidx.metrics.performance)
 
-    // On-Device AI — Google MediaPipe Tasks Text (TextEmbedder)
+    // On-Device AI — Google MediaPipe Tasks Text (TextEmbedder) & AICore (Gemini Nano)
     implementation(libs.mediapipe.tasks.text)
+    implementation(libs.google.ai.edge.aicore)
+
+    // Cloud AI Fallback — Firebase AI Logic
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.ai)
 }

@@ -39,6 +39,7 @@ constraintlayout = "2.2.2"
 googleServices = "4.5.0"
 firebaseBom = "34.19.0"
 mediapipeTasksText = "0.10.21"
+aicore = "0.0.1-exp02"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -97,12 +98,14 @@ androidx-metrics-performance = { group = "androidx.metrics", name = "metrics-per
 
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 
-# Firebase — BOM 으로 버전을 맞추고 Remote Config 만 사용한다.
+# Firebase — BOM 으로 버전을 맞추고 Remote Config 및 Firebase AI Logic 을 사용한다.
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-config = { group = "com.google.firebase", name = "firebase-config" }
+firebase-ai = { group = "com.google.firebase", name = "firebase-ai" }
 
-# On-Device AI — Google MediaPipe Tasks Text (TextEmbedder)
+# On-Device AI — Google MediaPipe Tasks Text (TextEmbedder) & AICore (Gemini Nano)
 mediapipe-tasks-text = { group = "com.google.mediapipe", name = "tasks-text", version.ref = "mediapipeTasksText" }
+google-ai-edge-aicore = { group = "com.google.ai.edge.aicore", name = "aicore", version.ref = "aicore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

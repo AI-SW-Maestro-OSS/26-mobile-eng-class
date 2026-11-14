@@ -14,4 +14,24 @@
     <string name="search_failed">검색에 실패했습니다.</string>
     <string name="search_prompt">검색어를 입력해 보세요.</string>
     <string name="list_end_marker">마지막</string>
+    <string name="ai_preference_guide">👍/👎 평가로 온디바이스 AI에게 취향을 학습시켜 보세요</string>
+    <string name="ai_preference_learned">AI 취향 학습 · 👍 %1$d  👎 %2$d</string>
+    <string name="ai_preference_reset">초기화</string>
+    <string name="ai_sort_toggle_on">AI 추천순 ON</string>
+    <string name="ai_sort_toggle_off">AI 추천순 OFF</string>
+    <string name="ai_match_badge">AI %1$d%%</string>
+    <string name="ai_like_label">👍 좋아요</string>
+    <string name="ai_dislike_label">👎 싫어요</string>
+    <string name="ai_feedback_need_rating">아이템에 👍 또는 👎 평가를 1개 이상 남기면 AI 추천순 정렬이 활성화됩니다.</string>
+    <string name="ai_feedback_cleared">AI 취향 피드백 기록이 초기화되었습니다.</string>
+    <string name="ai_engine_aicore">⚡ Gemini Nano (AICore)</string>
+    <string name="ai_engine_firebase">☁️ Firebase AI Logic</string>
+    <string name="ai_engine_mediapipe">🧠 MediaPipe 온디바이스</string>
+    <string name="ai_engine_local_fallback">🧠 온디바이스 스마트 엔진</string>
+    <string name="ai_query_suggestion_title">✨ AI 스마트 추천 검색어</string>
+    <string name="ai_query_suggestion_loading">취향을 분석해 추천 검색어를 생성하고 있어요…</string>
+    <string name="ai_favorite_report_title">✨ AI 보관함 취향 리포트</string>
+    <string name="ai_favorite_report_refresh">새로고침</string>
+    <string name="ai_favorite_report_loading">AI가 보관함 컬렉션 취향을 분석하고 있어요…</string>
+    <string name="ai_keyword_chip_format">#%1$s</string>
 </resources>

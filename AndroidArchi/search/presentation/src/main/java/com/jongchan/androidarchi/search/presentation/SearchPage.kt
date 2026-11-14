@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,9 +12,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
@@ -27,11 +30,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.jongchan.androidarchi.common.entity.ai.AIEngineType
 import com.jongchan.androidarchi.common.presentation.R
 import com.jongchan.androidarchi.common.presentation.component.ArchiText
 import com.jongchan.androidarchi.common.presentation.searchList.ContentsList
 import com.jongchan.androidarchi.common.presentation.searchList.MediaSearchBar
 import com.jongchan.androidarchi.common.presentation.ui.theme.DesignSystemThemeImpl
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun SearchPage(viewModel: SearchViewModel) {
@@ -59,6 +64,17 @@ private fun SearchPageContent(
         )
 
         if (uiState.hasSearched && uiState.searchItemList.isNotEmpty()) {
+            AISmartQuerySuggestionBanner(
+                isLoading = uiState.isGeneratingSuggestion,
+                comment = uiState.querySuggestionSummary,
+                suggestedKeywords = uiState.suggestedKeywords,
+                engineType = uiState.suggestionEngineType,
+                onKeywordClick = { keyword -> onIntent(SearchIntent.Search(keyword)) },
+            )
+            HorizontalDivider(
+                thickness = 1.dp,
+                color = DesignSystemThemeImpl.designSystemColor.borderDefaultLevel2,
+            )
             AIPreferenceControlBar(
                 hasFeedbackHistory = uiState.hasFeedbackHistory,
                 likedCount = uiState.likedCount,
@@ -129,6 +145,118 @@ private fun SearchPageContent(
                             onIntent(SearchIntent.ToggleFeedback(item.contentsUrl, targetType))
                         },
                     )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun AISmartQuerySuggestionBanner(
+    isLoading: Boolean,
+    comment: String,
+    suggestedKeywords: ImmutableList<String>,
+    engineType: AIEngineType,
+    onKeywordClick: (String) -> Unit,
+) {
+    if (!isLoading && comment.isBlank() && suggestedKeywords.isEmpty()) return
+
+    val badgeShape = RoundedCornerShape(6.dp)
+    val chipShape = RoundedCornerShape(14.dp)
+    val engineLabel = when (engineType) {
+        AIEngineType.ON_DEVICE_AICORE -> stringResource(R.string.ai_engine_aicore)
+        AIEngineType.CLOUD_FIREBASE_AI -> stringResource(R.string.ai_engine_firebase)
+        AIEngineType.ON_DEVICE_MEDIAPIPE -> stringResource(R.string.ai_engine_mediapipe)
+        AIEngineType.LOCAL_FALLBACK -> stringResource(R.string.ai_engine_local_fallback)
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(DesignSystemThemeImpl.designSystemColor.bgDefaultLevel0)
+            .padding(horizontal = 20.dp, vertical = 10.dp),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            ArchiText(
+                text = stringResource(R.string.ai_query_suggestion_title),
+                style = DesignSystemThemeImpl.typeScale.textStrongM,
+                color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel1,
+                maxLines = 1,
+            )
+            Box(
+                modifier = Modifier
+                    .clip(badgeShape)
+                    .background(DesignSystemThemeImpl.designSystemColor.bgDefaultLevel1)
+                    .border(
+                        width = 1.dp,
+                        color = DesignSystemThemeImpl.designSystemColor.borderDefaultLevel1,
+                        shape = badgeShape,
+                    )
+                    .padding(horizontal = 6.dp, vertical = 2.dp),
+            ) {
+                ArchiText(
+                    text = engineLabel,
+                    style = DesignSystemThemeImpl.typeScale.textRegularXS,
+                    color = DesignSystemThemeImpl.designSystemColor.contentAccent,
+                    maxLines = 1,
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        if (isLoading && suggestedKeywords.isEmpty()) {
+            ArchiText(
+                text = stringResource(R.string.ai_query_suggestion_loading),
+                style = DesignSystemThemeImpl.typeScale.textRegularXS,
+                color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel3,
+                maxLines = 1,
+            )
+        } else {
+            if (comment.isNotBlank()) {
+                ArchiText(
+                    text = comment,
+                    style = DesignSystemThemeImpl.typeScale.textRegularXS,
+                    color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel2,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            }
+            if (suggestedKeywords.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(6.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    suggestedKeywords.forEach { keyword ->
+                        Box(
+                            modifier = Modifier
+                                .clip(chipShape)
+                                .background(DesignSystemThemeImpl.designSystemColor.bgDefaultLevel1)
+                                .border(
+                                    width = 1.dp,
+                                    color = DesignSystemThemeImpl.designSystemColor.contentAccent,
+                                    shape = chipShape,
+                                )
+                                .clickable { onKeywordClick(keyword) }
+                                .padding(horizontal = 10.dp, vertical = 4.dp),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            ArchiText(
+                                text = stringResource(R.string.ai_keyword_chip_format, keyword),
+                                style = DesignSystemThemeImpl.typeScale.textRegularXS,
+                                color = DesignSystemThemeImpl.designSystemColor.contentAccent,
+                                maxLines = 1,
+                            )
+                        }
+                    }
                 }
             }
         }

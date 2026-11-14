@@ -12,13 +12,16 @@ import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.store.GlobalStore
 import com.jongchan.androidarchi.common.domain.store.SampleAction
 import com.jongchan.androidarchi.common.entity.ai.MediaFeedbackType
+import com.jongchan.androidarchi.common.entity.ai.MediaPreferenceFeedbackVO
 import com.jongchan.androidarchi.common.entity.favorite.FavoriteItemVO
+import com.jongchan.androidarchi.common.entity.media.MediaItemVO
 import com.jongchan.androidarchi.common.presentation.R
 import com.jongchan.androidarchi.common.presentation.mvi.MviViewModel
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaOrigin
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaPage
 import com.jongchan.androidarchi.search.domain.SearchPageUseCase
 import com.jongchan.androidarchi.search.domain.SearchPreferenceUseCase
+import com.jongchan.androidarchi.search.domain.SearchQuerySuggestionUseCase
 import com.jongchan.androidarchi.search.domain.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableMap
@@ -37,6 +40,7 @@ class SearchViewModel @Inject constructor(
     private val searchPageUseCase: SearchPageUseCase,
     private val searchUseCase: SearchUseCase,
     private val searchPreferenceUseCase: SearchPreferenceUseCase,
+    private val searchQuerySuggestionUseCase: SearchQuerySuggestionUseCase,
     private val getFavoriteItemsUseCase: GetFavoriteItemsUseCase,
     private val registerFavoriteItemUseCase: RegisterFavoriteItemUseCase,
     private val removeFavoriteItemUseCase: RemoveFavoriteItemUseCase,
@@ -48,6 +52,7 @@ class SearchViewModel @Inject constructor(
     globalStore
 ) {
     private var searchJob: Job? = null
+    private var suggestionJob: Job? = null
     private var searchedQuery: String = ""
 
     init {
@@ -107,6 +112,11 @@ class SearchViewModel @Inject constructor(
             )
 
             is SearchReducerEvent.AiSortToggled -> state.toggleAiSort()
+            is SearchReducerEvent.QuerySuggestionLoadingStarted -> state.copy(
+                isGeneratingSuggestion = true,
+            )
+
+            is SearchReducerEvent.QuerySuggestionLoaded -> state.withQuerySuggestion(event.suggestion)
         }
 
     private fun observeFavorites() {
@@ -140,6 +150,9 @@ class SearchViewModel @Inject constructor(
                         dislikedCount = dislikedCount,
                     )
                 )
+                if (searchedQuery.isNotEmpty() && rawItems.isNotEmpty()) {
+                    refreshQuerySuggestions(searchedQuery, rawItems, feedbacks)
+                }
             }
             .launchIn(viewModelScope)
     }
@@ -158,6 +171,7 @@ class SearchViewModel @Inject constructor(
                 .onSuccess { result ->
                     val scores = searchPreferenceUseCase.evaluateScores(result.items).toImmutableMap()
                     dispatch(SearchReducerEvent.SearchResultLoaded(result, scores))
+                    refreshQuerySuggestions(trimmed, result.items)
                 }
                 .onFailure {
                     dispatch(SearchReducerEvent.SearchFailed)
@@ -166,21 +180,30 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    /**
-     * 클리어 버튼: 진행 중인 검색을 취소하고 검색어·결과·페이징 상태를 초기값으로 되돌린다.
-     * 즐겨찾기 캐시([SearchUIState.favoriteUrls])와 AI 피드백 상태는 유지한다.
-     */
+    private fun refreshQuerySuggestions(
+        query: String,
+        items: List<MediaItemVO>,
+        feedbacksOverride: List<MediaPreferenceFeedbackVO>? = null,
+    ) {
+        suggestionJob?.cancel()
+        dispatch(SearchReducerEvent.QuerySuggestionLoadingStarted)
+        suggestionJob = viewModelScope.launch {
+            val suggestion = searchQuerySuggestionUseCase(
+                query = query,
+                items = items,
+                feedbacksOverride = feedbacksOverride,
+            )
+            dispatch(SearchReducerEvent.QuerySuggestionLoaded(suggestion))
+        }
+    }
+
     private fun clear() {
         searchJob?.cancel()
+        suggestionJob?.cancel()
         searchedQuery = ""
         dispatch(SearchReducerEvent.Cleared)
     }
 
-    /**
-     * 리스트 하단 도달 시 다음 페이지를 불러와 기존 리스트 뒤에 이어 붙인다.
-     * 현재 페이지는 [SearchUIState.currentPage] 로 관리하며, 직전 검색어로만 재조회한다.
-     * 이미 로딩 중이거나 마지막 페이지면 무시한다.
-     */
     private fun loadNextPage() {
         val state = currentState
         if (!state.hasSearched || state.isLoading || state.isLoadingMore || state.isLastPage) return
@@ -248,7 +271,6 @@ class SearchViewModel @Inject constructor(
                 dateTime = item.dateTime,
             )
             registerFavoriteItemUseCase(favoriteItem).onSuccess {
-                // 등록 직후 favoriteUrls 상태는 Flow 갱신 전일 수 있으므로 저장소에서 현재 즐겨찾기 수를 직접 읽는다.
                 val allFavoriteItemCount = getFavoriteItemsUseCase().first().size
                 loggingHelper.shotMetricLogging(
                     event = MetricLogging.ClickFavoriteToggleSearchPage,
