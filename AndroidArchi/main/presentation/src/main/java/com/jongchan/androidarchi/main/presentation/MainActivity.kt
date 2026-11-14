@@ -11,7 +11,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.metrics.performance.JankStats
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
-import com.jongchan.androidarchi.common.presentation.LocalTTIHelper
 import com.jongchan.androidarchi.common.presentation.helper.LocalMessageHelper
 import com.jongchan.androidarchi.common.presentation.helper.LocalNavigationHelper
 import com.jongchan.androidarchi.common.presentation.jank.JankReporter
@@ -19,7 +18,6 @@ import com.jongchan.androidarchi.common.presentation.jank.LocalJankReporter
 import com.jongchan.androidarchi.main.presentation.deeplink.resolveNewIntentRoute
 import com.jongchan.androidarchi.main.presentation.deeplink.resolveStartStack
 import com.jongchan.androidarchi.main.presentation.navigation.RootComposable
-import com.jongchan.androidarchi.tti.TTIHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,9 +32,6 @@ class MainActivity : FragmentActivity() {
 
     @Inject
     lateinit var jankReporter: JankReporter
-
-    @Inject
-    lateinit var ttiHelper: TTIHelper
 
     private var jankStats: JankStats? = null
 
@@ -75,7 +70,6 @@ class MainActivity : FragmentActivity() {
                 LocalNavigationHelper provides navigationHelper,
                 LocalMessageHelper provides messageHelper,
                 LocalJankReporter provides jankReporter,
-                LocalTTIHelper provides ttiHelper,
                 ) {
                 RootComposable(startStack = startStack)
             }

@@ -29,6 +29,14 @@ annotation class MainDispatcher
 annotation class DefaultDispatcher
 
 /**
+ * TTI 계측 이벤트 전용 직렬 디스패처. [IoDispatcher] 를 `limitedParallelism(1)` 로 감싸
+ * 제출 순서대로(FIFO) 하나씩 실행된다
+ */
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class TtiDispatcher
+
+/**
  * IO 디스패처 위에 만든 앱 전역 [kotlinx.coroutines.CoroutineScope].
  * `SupervisorJob` + `CoroutineExceptionHandler` 가 포함되어 한 자식 코루틴의 실패가
  * 스코프 전체를 죽이지 않는다. 앱 프로세스 수명과 함께 살아 있으므로 별도 cancel 은 불필요.

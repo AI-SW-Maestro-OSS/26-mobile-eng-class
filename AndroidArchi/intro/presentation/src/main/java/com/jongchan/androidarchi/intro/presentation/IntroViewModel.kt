@@ -6,6 +6,7 @@ import com.jongchan.androidarchi.common.domain.error.handlingErrorOnUseCase
 import com.jongchan.androidarchi.common.domain.error.HttpResponseException
 import com.jongchan.androidarchi.intro.domain.GetIntroUseCase
 import com.jongchan.androidarchi.intro.domain.IntroErrorType
+import com.jongchan.androidarchi.tti.TTIHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

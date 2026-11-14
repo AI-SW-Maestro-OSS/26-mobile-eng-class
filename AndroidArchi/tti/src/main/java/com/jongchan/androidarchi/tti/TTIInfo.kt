@@ -5,12 +5,15 @@ const val TTI_PREFIX = "tti."
 
 class TTIInfo(
     private val page: TTIPage,
+    val instanceNo: Long = 1L,
 ) {
     private val ttiTimelineMap = mutableMapOf<String, Timeline?>()
     var timeoutFlag = true
     var allTTIRecordedFlag = false
     var isSent = false
-    val ttiKey: String = "${page.pageName}_${System.currentTimeMillis()}"
+
+    // 같은 페이지에 대한 넘버링을 추가하여 구분할 수 있도록 한다.
+    val ttiKey: String = "${page.pageName}#${instanceNo}_${System.currentTimeMillis()}"
     private val additionalMetaData = mutableMapOf<String, Any?>()
 
     fun recordStartTime(ttiTime: TimelineCategory) {
@@ -51,6 +54,7 @@ class TTIInfo(
 
     private fun initTTIData(ttiInfo: MutableMap<String, Any?>) {
         ttiInfo[TTI_PREFIX + TTIMetaData.PAGE_NAME.metadataName] = page.pageName
+        ttiInfo[TTI_PREFIX + TTIMetaData.INSTANCE_NO.metadataName] = instanceNo
         ttiInfo[TTI_PREFIX + TTIMetaData.IS_BOUNCED.metadataName] = false
         ttiInfo[TTI_PREFIX + TTIMetaData.TTI_LOG_VERSION.metadataName] = TTI_LOG_VERSION
         ttiInfo[TTI_PREFIX + TimelineCategory.TTI_TIME.categoryName] = -1

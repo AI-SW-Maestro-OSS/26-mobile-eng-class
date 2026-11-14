@@ -10,19 +10,17 @@ import com.jongchan.androidarchi.common.domain.helper.ResourceHelper
 import com.jongchan.androidarchi.common.domain.helper.StringResource
 import com.jongchan.androidarchi.common.entity.favorite.FavoriteItemVO
 import com.jongchan.androidarchi.common.entity.media.MediaItemVO
-import com.jongchan.androidarchi.common.entity.media.MediaType
 import com.jongchan.androidarchi.common.presentation.mvi.MviViewModel
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaOrigin
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaPage
+import com.jongchan.androidarchi.fullScreenMedia.domain.GetFullScreenMediaItemsUseCase
 import com.jongchan.androidarchi.fullScreenMedia.domain.tti.FullScreenMediaTTIPage
 import com.jongchan.androidarchi.tti.TTIHelper
-import com.jongchan.androidarchi.tti.TimelineCategory
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -31,18 +29,22 @@ import kotlinx.coroutines.launch
 @HiltViewModel(assistedFactory = FullScreenMediaViewModel.Factory::class)
 class FullScreenMediaViewModel @AssistedInject constructor(
     @Assisted private val args: FullScreenMediaPage.Args,
+    private val getFullScreenMediaItemsUseCase: GetFullScreenMediaItemsUseCase,
     private val getFavoriteItemsUseCase: GetFavoriteItemsUseCase,
     private val registerFavoriteItemUseCase: RegisterFavoriteItemUseCase,
     private val removeFavoriteItemUseCase: RemoveFavoriteItemUseCase,
     private val messageHelper: MessageHelper,
     private val navigationHelper: NavigationHelper,
-    private val ttiHelper: TTIHelper,
+    // 화면 인스턴스와 수명이 같은 TTIHelper(@ViewModelScoped). View 는 viewModel.ttiHelper 로 마크를 찍고,
+    // 이 ViewModel 에 주입된 UseCase 들도 같은 인스턴스를 본다.
+    val ttiHelper: TTIHelper,
     private val resourceHelper: ResourceHelper,
 ) : MviViewModel<FullScreenMediaIntent, FullScreenMediaUIState, FullScreenMediaReducerEvent>(
     FullScreenMediaUIState.empty
 ) {
 
     init {
+        ttiHelper.startTTITracking(FullScreenMediaTTIPage)
         bootstrap()
     }
 
@@ -74,50 +76,24 @@ class FullScreenMediaViewModel @AssistedInject constructor(
     }
 
     private fun bootstrap() {
-        ttiHelper.startTTITimeline(FullScreenMediaTTIPage, TimelineCategory.API_REQUEST_READY_TIME)
-        ttiHelper.endTTITimeline(FullScreenMediaTTIPage, TimelineCategory.API_REQUEST_READY_TIME)
-        ttiHelper.startTTITimeline(FullScreenMediaTTIPage, TimelineCategory.API_RESPONSE_TIME)
-        when (args.origin) {
-            FullScreenMediaOrigin.FAVORITE -> bootstrapFromFavorites()
-            FullScreenMediaOrigin.SEARCH,
-            FullScreenMediaOrigin.DEEP_LINK -> bootstrapSingleItem()
-        }
-        ttiHelper.endTTITimeline(FullScreenMediaTTIPage, TimelineCategory.API_RESPONSE_TIME)
-    }
-
-    private fun bootstrapFromFavorites() {
         viewModelScope.launch {
-            val mediaItems = getFavoriteItemsUseCase().first().map { it.toMediaItemVO() }
+            // API 구간(API_REQUEST_READY_TIME / API_RESPONSE_TIME)은 UseCase 안에서 찍힌다.
+            val mediaItems = getFullScreenMediaItemsUseCase(args)
             if (mediaItems.isEmpty()) {
                 resolveEmpty()
                 return@launch
             }
-            val initialIndex = mediaItems.indexOfFirst { it.urlKey == args.url }.coerceAtLeast(0)
+            // 즐겨찾기 진입은 목록에서 시작 위치를 찾고 좌우 스와이프 페이징, 그 외 진입은 단일 항목만 노출한다.
+            val isFromFavorite = args.origin == FullScreenMediaOrigin.FAVORITE
             dispatch(
                 FullScreenMediaReducerEvent.Initialized(
                     mediaItems = mediaItems,
-                    initialIndex = initialIndex,
-                    swipeEnabled = true,
+                    initialIndex = mediaItems.indexOfFirst { it.urlKey == args.url }.coerceAtLeast(0),
+                    swipeEnabled = isFromFavorite,
                 )
             )
             observeFavoriteUrls()
         }
-    }
-
-    private fun bootstrapSingleItem() {
-        val mediaItems = buildSingleItem(args)
-        if (mediaItems.isEmpty()) {
-            resolveEmpty()
-            return
-        }
-        dispatch(
-            FullScreenMediaReducerEvent.Initialized(
-                mediaItems = mediaItems,
-                initialIndex = 0,
-                swipeEnabled = false,
-            )
-        )
-        observeFavoriteUrls()
     }
 
     private fun observeFavoriteUrls() {
@@ -162,31 +138,8 @@ class FullScreenMediaViewModel @AssistedInject constructor(
         navigationHelper.navigateToBack()
     }
 
-    private fun buildSingleItem(args: FullScreenMediaPage.Args): List<MediaItemVO> {
-        if (args.url.isBlank()) return emptyList()
-        return listOf(
-            MediaItemVO(
-                type = args.type,
-                title = args.title,
-                urlKey = args.url,
-                thumbnailImageUrl = args.thumbnailImageUrl,
-                contentsImageUrl = args.contentsImageUrl.ifBlank { args.url },
-            )
-        )
-    }
-
     @AssistedFactory
     interface Factory {
         fun create(args: FullScreenMediaPage.Args): FullScreenMediaViewModel
     }
 }
-
-private fun FavoriteItemVO.toMediaItemVO(): MediaItemVO = MediaItemVO(
-    type = type,
-    title = title,
-    urlKey = urlKey,
-    thumbnailImageUrl = thumbnailUrl,
-    // 저장된 contentsImageUrl 을 우선 사용. 구버전 저장본(빈 값)은 이미지=원본(urlKey), 동영상=썸네일로 폴백.
-    contentsImageUrl = contentsImageUrl.ifBlank { if (type == MediaType.VIDEO) thumbnailUrl else urlKey },
-    dateTime = dateTime,
-)
