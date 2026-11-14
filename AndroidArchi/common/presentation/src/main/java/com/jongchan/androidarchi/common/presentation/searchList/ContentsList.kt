@@ -275,18 +275,21 @@ private fun ContentsListItem(
                         style = DesignSystemThemeImpl.typeScale.textRegularXS,
                         color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel3,
                         maxLines = 1,
+                        softWrap = false,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false),
                     )
                     item.preferenceScore?.let { score ->
-                        Spacer(modifier = Modifier.width(6.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
                         AIMatchScoreBadge(score = score)
                     }
                 }
 
                 if (onFeedbackClick != null) {
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
                         FeedbackChipButton(
                             label = stringResource(R.string.ai_like_label),
@@ -327,7 +330,7 @@ private fun AIMatchScoreBadge(score: Int) {
             .clip(badgeShape)
             .background(DesignSystemThemeImpl.designSystemColor.bgDefaultLevel0)
             .border(width = 1.dp, color = borderColor, shape = badgeShape)
-            .padding(horizontal = 6.dp, vertical = 2.dp),
+            .padding(horizontal = 5.dp, vertical = 2.dp),
         contentAlignment = Alignment.Center,
     ) {
         ArchiText(
@@ -335,6 +338,7 @@ private fun AIMatchScoreBadge(score: Int) {
             style = DesignSystemThemeImpl.typeScale.textRegularXS,
             color = textColor,
             maxLines = 1,
+            softWrap = false,
         )
     }
 }
@@ -374,7 +378,7 @@ private fun FeedbackChipButton(
             .background(backgroundColor)
             .border(width = 1.dp, color = borderColor, shape = chipShape)
             .clickable(onClick = onClick)
-            .padding(horizontal = 8.dp, vertical = 3.dp),
+            .padding(horizontal = 6.dp, vertical = 3.dp),
         contentAlignment = Alignment.Center,
     ) {
         ArchiText(
@@ -382,6 +386,7 @@ private fun FeedbackChipButton(
             style = DesignSystemThemeImpl.typeScale.textRegularXS,
             color = contentColor,
             maxLines = 1,
+            softWrap = false,
         )
     }
 }

@@ -38,7 +38,7 @@ constraintlayout = "2.2.2"
 # Firebase Remote Config (RemoteConfigRepositoryV2). google-services 플러그인은 app/google-services.json 존재 시에만 적용된다.
 googleServices = "4.5.0"
 firebaseBom = "34.19.0"
-mediapipeTasksText = "0.10.21"
+mediapipeTasksText = "0.10.32"
 aicore = "0.0.1-exp02"
 
 [libraries]
