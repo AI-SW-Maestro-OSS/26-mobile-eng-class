@@ -8,6 +8,7 @@ import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.helper.ResourceHelper
 import com.jongchan.androidarchi.common.domain.helper.StringResource
+import com.jongchan.androidarchi.common.domain.store.GlobalStore
 import com.jongchan.androidarchi.common.entity.favorite.FavoriteItemVO
 import com.jongchan.androidarchi.common.entity.media.MediaItemVO
 import com.jongchan.androidarchi.common.presentation.mvi.MviViewModel
@@ -28,6 +29,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel(assistedFactory = FullScreenMediaViewModel.Factory::class)
 class FullScreenMediaViewModel @AssistedInject constructor(
+    globalStore: GlobalStore,
     @Assisted private val args: FullScreenMediaPage.Args,
     private val getFullScreenMediaItemsUseCase: GetFullScreenMediaItemsUseCase,
     private val getFavoriteItemsUseCase: GetFavoriteItemsUseCase,
@@ -40,7 +42,7 @@ class FullScreenMediaViewModel @AssistedInject constructor(
     val ttiHelper: TTIHelper,
     private val resourceHelper: ResourceHelper,
 ) : MviViewModel<FullScreenMediaIntent, FullScreenMediaUIState, FullScreenMediaReducerEvent>(
-    FullScreenMediaUIState.empty
+    FullScreenMediaUIState.empty, globalStore
 ) {
 
     init {
@@ -53,8 +55,11 @@ class FullScreenMediaViewModel @AssistedInject constructor(
             is FullScreenMediaIntent.AddFavorite -> addFavorite(intent.item)
             is FullScreenMediaIntent.DeleteFavorite -> deleteFavorite(intent.url)
             is FullScreenMediaIntent.ClickBackButton -> clickBackNavigation()
-            is FullScreenMediaIntent.SelectPage ->
-                dispatch(FullScreenMediaReducerEvent.PageSelected(intent.index))
+            is FullScreenMediaIntent.SelectPage -> dispatch(
+                FullScreenMediaReducerEvent.PageSelected(
+                    intent.index
+                )
+            )
         }
     }
 
@@ -62,17 +67,17 @@ class FullScreenMediaViewModel @AssistedInject constructor(
         state: FullScreenMediaUIState,
         event: FullScreenMediaReducerEvent,
     ): FullScreenMediaUIState = when (event) {
-        is FullScreenMediaReducerEvent.Initialized ->
-            FullScreenMediaUIState.ready(event.mediaItems, event.initialIndex, event.swipeEnabled)
+        is FullScreenMediaReducerEvent.Initialized -> FullScreenMediaUIState.ready(
+            event.mediaItems,
+            event.initialIndex,
+            event.swipeEnabled
+        )
 
-        FullScreenMediaReducerEvent.EmptyMediaResolved ->
-            state.copy(isLoading = false)
+        FullScreenMediaReducerEvent.EmptyMediaResolved -> state.copy(isLoading = false)
 
-        is FullScreenMediaReducerEvent.FavoritesChanged ->
-            state.copy(favoriteUrls = event.urls.asImmutableUrls())
+        is FullScreenMediaReducerEvent.FavoritesChanged -> state.copy(favoriteUrls = event.urls.asImmutableUrls())
 
-        is FullScreenMediaReducerEvent.PageSelected ->
-            state.copy(currentIndex = event.index)
+        is FullScreenMediaReducerEvent.PageSelected -> state.copy(currentIndex = event.index)
     }
 
     private fun bootstrap() {
@@ -88,7 +93,8 @@ class FullScreenMediaViewModel @AssistedInject constructor(
             dispatch(
                 FullScreenMediaReducerEvent.Initialized(
                     mediaItems = mediaItems,
-                    initialIndex = mediaItems.indexOfFirst { it.urlKey == args.url }.coerceAtLeast(0),
+                    initialIndex = mediaItems.indexOfFirst { it.urlKey == args.url }
+                        .coerceAtLeast(0),
                     swipeEnabled = isFromFavorite,
                 )
             )
@@ -97,8 +103,7 @@ class FullScreenMediaViewModel @AssistedInject constructor(
     }
 
     private fun observeFavoriteUrls() {
-        getFavoriteItemsUseCase()
-            .map { items -> items.mapTo(HashSet(items.size)) { it.urlKey } }
+        getFavoriteItemsUseCase().map { items -> items.mapTo(HashSet(items.size)) { it.urlKey } }
             .distinctUntilChanged()
             .onEach { urls -> dispatch(FullScreenMediaReducerEvent.FavoritesChanged(urls)) }
             .launchIn(viewModelScope)

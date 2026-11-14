@@ -1,11 +1,14 @@
 package com.jongchan.androidarchi.etc.presentation
 
+import com.jongchan.androidarchi.common.domain.store.GlobalStore
 import com.jongchan.androidarchi.common.presentation.mvi.MviViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class EtcViewModel @Inject constructor() : MviViewModel<EtcIntent, EtcUIState, EtcReducerEvent>(EtcUIState.empty) {
+class EtcViewModel @Inject constructor(
+    globalStore: GlobalStore,
+) : MviViewModel<EtcIntent, EtcUIState, EtcReducerEvent>(EtcUIState.empty, globalStore) {
 
     init {
         onIntent(EtcIntent.Load)

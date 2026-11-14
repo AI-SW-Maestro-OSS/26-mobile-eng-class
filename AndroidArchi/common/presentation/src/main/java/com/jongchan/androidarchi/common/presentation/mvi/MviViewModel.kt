@@ -2,9 +2,19 @@ package com.jongchan.androidarchi.common.presentation.mvi
 
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.jongchan.androidarchi.common.domain.store.GlobalState
+import com.jongchan.androidarchi.common.domain.store.GlobalStore
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.onSubscription
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
+import kotlin.reflect.KClass
 
 /**
  * 사용자 입력(클릭, 스크롤 등)을 표현하는 마커 인터페이스.
@@ -35,6 +45,8 @@ interface ReducerEvent
  */
 abstract class MviViewModel<I : MviIntent, S : UiState, E : ReducerEvent>(
     initialState: S,
+    protected val globalStore: GlobalStore,
+    observedStateTypes: Set<KClass<out GlobalState>> = emptySet()
 ) : ViewModel() {
 
     val uiState: StateFlow<S>
@@ -42,6 +54,24 @@ abstract class MviViewModel<I : MviIntent, S : UiState, E : ReducerEvent>(
 
     protected val currentState: S
         get() = uiState.value
+
+    init {
+        observedStateTypes.forEach { state ->
+            viewModelScope.launch(Dispatchers.Main, start = CoroutineStart.UNDISPATCHED) {
+                globalStore.observeStates(state)
+                    .onSubscription { yield() }
+                    .distinctUntilChanged()
+                    .collect(::observeGlobalState)
+            }
+        }
+    }
+
+    /**
+     * Main 쓰레드에서 호출하며 같은 타입 내 발행 순서를 유지한다.
+     * 필요한 결과를 when으로 처리한다.
+     * 화면 상태 변경은 [dispatch]를 거치고, 비동기 작업은 viewModelScope에서 실행한다.
+     */
+    protected open fun observeGlobalState(state: GlobalState) = Unit
 
     abstract fun onIntent(intent: I)
 
