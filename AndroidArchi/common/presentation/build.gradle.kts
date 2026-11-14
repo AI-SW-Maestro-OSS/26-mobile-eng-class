@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.net.URI
 
 plugins {
     alias(libs.plugins.android.library)
@@ -32,6 +33,34 @@ android {
         buildConfig = true
         compose = true
     }
+    androidResources {
+        noCompress += "tflite"
+    }
+}
+
+val downloadMediaPipeModel = tasks.register("downloadMediaPipeModel") {
+    val modelUrl =
+        "https://storage.googleapis.com/mediapipe-models/text_embedder/universal_sentence_encoder/float32/1/universal_sentence_encoder.tflite"
+    val outputFile = layout.projectDirectory.file("src/main/assets/universal_sentence_encoder.tflite")
+    outputs.file(outputFile)
+    onlyIf { !outputFile.asFile.exists() }
+    doLast {
+        val target = outputFile.asFile
+        target.parentFile.mkdirs()
+        runCatching {
+            URI(modelUrl).toURL().openStream().use { input ->
+                target.outputStream().use { output ->
+                    input.copyTo(output)
+                }
+            }
+        }.onFailure { e ->
+            logger.warn("Failed to download MediaPipe model asset (${e.message}). Hybrid fallback will be used.")
+        }
+    }
+}
+
+tasks.named("preBuild") {
+    dependsOn(downloadMediaPipeModel)
 }
 
 kotlin {
@@ -88,4 +117,7 @@ dependencies {
 
     // JankStats — frame-level performance tracking
     api(libs.androidx.metrics.performance)
+
+    // On-Device AI — Google MediaPipe Tasks Text (TextEmbedder)
+    implementation(libs.mediapipe.tasks.text)
 }

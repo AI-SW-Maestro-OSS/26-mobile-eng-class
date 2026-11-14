@@ -15,4 +15,14 @@
     <string name="search_failed">Failed search.</string>
     <string name="search_prompt">Please input search words.</string>
     <string name="list_end_marker">Last</string>
+    <string name="ai_preference_guide">Rate 👍/👎 so On-Device AI learns your taste</string>
+    <string name="ai_preference_learned">AI Learned · 👍 %1$d  👎 %2$d</string>
+    <string name="ai_preference_reset">Reset</string>
+    <string name="ai_sort_toggle_on">AI Sort ON</string>
+    <string name="ai_sort_toggle_off">AI Sort OFF</string>
+    <string name="ai_match_badge">AI %1$d%%</string>
+    <string name="ai_like_label">👍 Like</string>
+    <string name="ai_dislike_label">👎 Dislike</string>
+    <string name="ai_feedback_need_rating">Rate at least one item with 👍 or 👎 to personalize AI sorting.</string>
+    <string name="ai_feedback_cleared">AI preference history has been reset.</string>
 </resources>

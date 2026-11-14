@@ -48,6 +48,7 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.jongchan.androidarchi.common.entity.ai.MediaFeedbackType
 import com.jongchan.androidarchi.common.presentation.R
 import com.jongchan.androidarchi.common.presentation.component.ArchiText
 import com.jongchan.androidarchi.common.presentation.imageUtil.rememberImageLoader
@@ -86,11 +87,17 @@ fun ContentsList(
     modifier: Modifier = Modifier,
     isLoadingMore: Boolean = false,
     isLastPage: Boolean = true,
+    isAiSortEnabled: Boolean = false,
     onLoadMore: () -> Unit = {},
+    onFeedbackClick: ((MediaItemUiState, MediaFeedbackType) -> Unit)? = null,
 ) {
-    // 이미 페이지 순서대로 정렬되어 들어오므로, 페이지별로 그룹핑해 경계 구분자를 그린다.
-    val pageGroups = remember(items) {
-        items.groupBy { it.page }.entries.sortedBy { it.key }.map { it.key to it.value }
+    // 기본 정렬에서는 페이지별로 그룹핑해 경계 구분자를 그리고, AI 취향순 정렬에서는 전체를 점수 순으로 그린다.
+    val pageGroups = remember(items, isAiSortEnabled) {
+        if (isAiSortEnabled) {
+            emptyList()
+        } else {
+            items.groupBy { it.page }.entries.sortedBy { it.key }.map { it.key to it.value }
+        }
     }
     val listState = rememberLazyListState()
 
@@ -121,16 +128,28 @@ fun ContentsList(
             .semantics { testTagsAsResourceId = true },
         contentPadding = PaddingValues(vertical = 8.dp),
     ) {
-        pageGroups.forEachIndexed { groupIndex, (page, groupItems) ->
-            items(items = groupItems, key = { it.contentsUrl }) { item ->
+        if (isAiSortEnabled) {
+            items(items = items, key = { it.contentsUrl }) { item ->
                 ContentsListItem(
                     item = item,
                     onItemClick = onItemClick,
                     onFavoriteClick = onFavoriteClick,
+                    onFeedbackClick = onFeedbackClick,
                 )
             }
-            if (groupIndex < pageGroups.lastIndex) {
-                item(key = "page_divider_$page") { PageNumberSeparator(page) }
+        } else {
+            pageGroups.forEachIndexed { groupIndex, (page, groupItems) ->
+                items(items = groupItems, key = { it.contentsUrl }) { item ->
+                    ContentsListItem(
+                        item = item,
+                        onItemClick = onItemClick,
+                        onFavoriteClick = onFavoriteClick,
+                        onFeedbackClick = onFeedbackClick,
+                    )
+                }
+                if (groupIndex < pageGroups.lastIndex) {
+                    item(key = "page_divider_$page") { PageNumberSeparator(page) }
+                }
             }
         }
         item(key = "list_footer") {
@@ -147,6 +166,7 @@ private fun ContentsListItem(
     item: MediaItemUiState,
     onItemClick: (MediaItemUiState) -> Unit,
     onFavoriteClick: (MediaItemUiState, Boolean) -> Unit,
+    onFeedbackClick: ((MediaItemUiState, MediaFeedbackType) -> Unit)? = null,
 ) {
     val imageLoader = rememberImageLoader()
 
@@ -240,14 +260,129 @@ private fun ContentsListItem(
                 color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel3,
                 maxLines = 2,
             )
-            Spacer(modifier = Modifier.height(4.dp))
-            ArchiText(
-                text = item.dateTimeText,
-                style = DesignSystemThemeImpl.typeScale.textRegularXS,
-                color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel3,
-                maxLines = 1,
-            )
+            Spacer(modifier = Modifier.height(6.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.weight(1f, fill = false),
+                ) {
+                    ArchiText(
+                        text = item.dateTimeText,
+                        style = DesignSystemThemeImpl.typeScale.textRegularXS,
+                        color = DesignSystemThemeImpl.designSystemColor.contentDefaultLevel3,
+                        maxLines = 1,
+                    )
+                    item.preferenceScore?.let { score ->
+                        Spacer(modifier = Modifier.width(6.dp))
+                        AIMatchScoreBadge(score = score)
+                    }
+                }
+
+                if (onFeedbackClick != null) {
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        FeedbackChipButton(
+                            label = stringResource(R.string.ai_like_label),
+                            isSelected = item.feedbackType == MediaFeedbackType.LIKE,
+                            isPositive = true,
+                            onClick = { onFeedbackClick(item, MediaFeedbackType.LIKE) },
+                        )
+                        FeedbackChipButton(
+                            label = stringResource(R.string.ai_dislike_label),
+                            isSelected = item.feedbackType == MediaFeedbackType.DISLIKE,
+                            isPositive = false,
+                            onClick = { onFeedbackClick(item, MediaFeedbackType.DISLIKE) },
+                        )
+                    }
+                }
+            }
         }
+    }
+}
+
+@Composable
+private fun AIMatchScoreBadge(score: Int) {
+    val badgeShape = RoundedCornerShape(6.dp)
+    val isHighMatch = score >= 60
+    val borderColor = if (isHighMatch) {
+        DesignSystemThemeImpl.designSystemColor.contentAccent
+    } else {
+        DesignSystemThemeImpl.designSystemColor.borderDefaultLevel1
+    }
+    val textColor = if (isHighMatch) {
+        DesignSystemThemeImpl.designSystemColor.contentAccent
+    } else {
+        DesignSystemThemeImpl.designSystemColor.contentDefaultLevel2
+    }
+
+    Box(
+        modifier = Modifier
+            .clip(badgeShape)
+            .background(DesignSystemThemeImpl.designSystemColor.bgDefaultLevel0)
+            .border(width = 1.dp, color = borderColor, shape = badgeShape)
+            .padding(horizontal = 6.dp, vertical = 2.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        ArchiText(
+            text = stringResource(R.string.ai_match_badge, score),
+            style = DesignSystemThemeImpl.typeScale.textRegularXS,
+            color = textColor,
+            maxLines = 1,
+        )
+    }
+}
+
+@Composable
+private fun FeedbackChipButton(
+    label: String,
+    isSelected: Boolean,
+    isPositive: Boolean,
+    onClick: () -> Unit,
+) {
+    val chipShape = RoundedCornerShape(8.dp)
+    val activeColor = if (isPositive) {
+        DesignSystemThemeImpl.designSystemColor.contentAccent
+    } else {
+        DesignSystemThemeImpl.designSystemColor.contentFavorite
+    }
+    val borderColor = if (isSelected) {
+        activeColor
+    } else {
+        DesignSystemThemeImpl.designSystemColor.borderDefaultLevel1
+    }
+    val backgroundColor = if (isSelected) {
+        DesignSystemThemeImpl.designSystemColor.bgDefaultLevel0
+    } else {
+        DesignSystemThemeImpl.designSystemColor.bgDefaultLevel1
+    }
+    val contentColor = if (isSelected) {
+        activeColor
+    } else {
+        DesignSystemThemeImpl.designSystemColor.contentDefaultLevel2
+    }
+
+    Box(
+        modifier = Modifier
+            .clip(chipShape)
+            .background(backgroundColor)
+            .border(width = 1.dp, color = borderColor, shape = chipShape)
+            .clickable(onClick = onClick)
+            .padding(horizontal = 8.dp, vertical = 3.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        ArchiText(
+            text = label,
+            style = DesignSystemThemeImpl.typeScale.textRegularXS,
+            color = contentColor,
+            maxLines = 1,
+        )
     }
 }
 

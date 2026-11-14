@@ -11,14 +11,17 @@ import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.store.GlobalStore
 import com.jongchan.androidarchi.common.domain.store.SampleAction
+import com.jongchan.androidarchi.common.entity.ai.MediaFeedbackType
 import com.jongchan.androidarchi.common.entity.favorite.FavoriteItemVO
 import com.jongchan.androidarchi.common.presentation.R
 import com.jongchan.androidarchi.common.presentation.mvi.MviViewModel
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaOrigin
 import com.jongchan.androidarchi.fullScreenMedia.domain.FullScreenMediaPage
 import com.jongchan.androidarchi.search.domain.SearchPageUseCase
+import com.jongchan.androidarchi.search.domain.SearchPreferenceUseCase
 import com.jongchan.androidarchi.search.domain.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
@@ -33,6 +36,7 @@ class SearchViewModel @Inject constructor(
     globalStore: GlobalStore,
     private val searchPageUseCase: SearchPageUseCase,
     private val searchUseCase: SearchUseCase,
+    private val searchPreferenceUseCase: SearchPreferenceUseCase,
     private val getFavoriteItemsUseCase: GetFavoriteItemsUseCase,
     private val registerFavoriteItemUseCase: RegisterFavoriteItemUseCase,
     private val removeFavoriteItemUseCase: RemoveFavoriteItemUseCase,
@@ -48,6 +52,7 @@ class SearchViewModel @Inject constructor(
 
     init {
         observeFavorites()
+        observePreferenceFeedbacks()
     }
 
     override fun onIntent(intent: SearchIntent) {
@@ -59,6 +64,9 @@ class SearchViewModel @Inject constructor(
             is SearchIntent.AddFavorite -> addFavorite(intent.url)
             is SearchIntent.DeleteFavorite -> deleteFavorite(intent.url)
             is SearchIntent.OpenFullScreen -> openFullScreen(intent.url)
+            is SearchIntent.ToggleFeedback -> toggleFeedback(intent.url, intent.targetType)
+            is SearchIntent.ToggleAiSort -> toggleAiSort()
+            is SearchIntent.ClearFeedbacks -> clearFeedbacks()
         }
     }
 
@@ -66,20 +74,39 @@ class SearchViewModel @Inject constructor(
         when (event) {
             is SearchReducerEvent.PageInitLoaded -> state.setSDUIViews(event.result.sduiComponents)
             is SearchReducerEvent.QueryChanged -> state.copy(query = event.query)
-            is SearchReducerEvent.Cleared -> SearchUIState.empty.copy(favoriteUrls = state.favoriteUrls)
+            is SearchReducerEvent.Cleared -> SearchUIState.empty.copy(
+                favoriteUrls = state.favoriteUrls,
+                feedbackMap = state.feedbackMap,
+                likedCount = state.likedCount,
+                dislikedCount = state.dislikedCount,
+                isAiSortEnabled = state.isAiSortEnabled,
+            )
+
             is SearchReducerEvent.SearchStarted -> state.copy(isLoading = true, hasSearched = true)
             is SearchReducerEvent.SearchFailed -> state.copy(isLoading = false)
             is SearchReducerEvent.SearchResultLoaded -> SearchUIState.fromSearchResult(
-                state.sduiViewItems,
-                state.query,
-                event.result,
-                state.favoriteUrls
+                previousState = state,
+                result = event.result,
+                preferenceScores = event.preferenceScores,
             )
 
             is SearchReducerEvent.LoadMoreStarted -> state.copy(isLoadingMore = true)
-            is SearchReducerEvent.MorePageLoaded -> state.appendPage(event.result, event.page)
+            is SearchReducerEvent.MorePageLoaded -> state.appendPage(
+                result = event.result,
+                page = event.page,
+                newPreferenceScores = event.preferenceScores,
+            )
+
             is SearchReducerEvent.LoadMoreFailed -> state.copy(isLoadingMore = false)
             is SearchReducerEvent.FavoritesChanged -> state.withFavorites(event.urls.asImmutable())
+            is SearchReducerEvent.PreferenceUpdated -> state.withPreferences(
+                newFeedbackMap = event.feedbackMap,
+                newPreferenceScores = event.preferenceScores,
+                newLikedCount = event.likedCount,
+                newDislikedCount = event.dislikedCount,
+            )
+
+            is SearchReducerEvent.AiSortToggled -> state.toggleAiSort()
         }
 
     private fun observeFavorites() {
@@ -87,6 +114,33 @@ class SearchViewModel @Inject constructor(
             .map { items -> items.mapTo(HashSet(items.size)) { it.urlKey } }
             .distinctUntilChanged()
             .onEach { urls -> dispatch(SearchReducerEvent.FavoritesChanged(urls)) }
+            .launchIn(viewModelScope)
+    }
+
+    private fun observePreferenceFeedbacks() {
+        searchPreferenceUseCase.observeFeedbacks()
+            .distinctUntilChanged()
+            .onEach { feedbacks ->
+                val feedbackMap = feedbacks
+                    .associate { it.urlKey to it.feedbackType }
+                    .toImmutableMap()
+                val likedCount = feedbacks.count { it.feedbackType == MediaFeedbackType.LIKE }
+                val dislikedCount = feedbacks.count { it.feedbackType == MediaFeedbackType.DISLIKE }
+                val rawItems = currentState.rawMediaItems
+                val scores = if (rawItems.isNotEmpty() && feedbacks.isNotEmpty()) {
+                    searchPreferenceUseCase.evaluateScores(rawItems).toImmutableMap()
+                } else {
+                    emptyMap<String, Int>().toImmutableMap()
+                }
+                dispatch(
+                    SearchReducerEvent.PreferenceUpdated(
+                        feedbackMap = feedbackMap,
+                        preferenceScores = scores,
+                        likedCount = likedCount,
+                        dislikedCount = dislikedCount,
+                    )
+                )
+            }
             .launchIn(viewModelScope)
     }
 
@@ -102,7 +156,8 @@ class SearchViewModel @Inject constructor(
             globalStore.dispatch(SampleAction("Recent query words : $query"))
             runCatching { searchUseCase(trimmed, SearchUIState.FIRST_PAGE) }
                 .onSuccess { result ->
-                    dispatch(SearchReducerEvent.SearchResultLoaded(result))
+                    val scores = searchPreferenceUseCase.evaluateScores(result.items).toImmutableMap()
+                    dispatch(SearchReducerEvent.SearchResultLoaded(result, scores))
                 }
                 .onFailure {
                     dispatch(SearchReducerEvent.SearchFailed)
@@ -113,7 +168,7 @@ class SearchViewModel @Inject constructor(
 
     /**
      * 클리어 버튼: 진행 중인 검색을 취소하고 검색어·결과·페이징 상태를 초기값으로 되돌린다.
-     * 즐겨찾기 캐시([SearchUIState.favoriteUrls])는 유지해 재검색 시 즐겨찾기 표시가 어긋나지 않게 한다.
+     * 즐겨찾기 캐시([SearchUIState.favoriteUrls])와 AI 피드백 상태는 유지한다.
      */
     private fun clear() {
         searchJob?.cancel()
@@ -136,10 +191,12 @@ class SearchViewModel @Inject constructor(
         searchJob = viewModelScope.launch {
             runCatching { searchUseCase(searchedQuery, nextPage) }
                 .onSuccess { result ->
+                    val scores = searchPreferenceUseCase.evaluateScores(result.items).toImmutableMap()
                     dispatch(
                         SearchReducerEvent.MorePageLoaded(
-                            result,
-                            nextPage
+                            result = result,
+                            page = nextPage,
+                            preferenceScores = scores,
                         )
                     )
                 }
@@ -147,6 +204,31 @@ class SearchViewModel @Inject constructor(
                     dispatch(SearchReducerEvent.LoadMoreFailed)
                     messageHelper.showSnackBar(messageRes = R.string.search_failed)
                 }
+        }
+    }
+
+    private fun toggleFeedback(url: String, targetType: MediaFeedbackType) {
+        val item = currentState.rawItemByUrl(url) ?: return
+        val currentType = currentState.feedbackMap[url] ?: MediaFeedbackType.NONE
+        val nextType = if (currentType == targetType) MediaFeedbackType.NONE else targetType
+        viewModelScope.launch {
+            searchPreferenceUseCase.recordFeedback(item, nextType)
+        }
+    }
+
+    private fun toggleAiSort() {
+        val state = currentState
+        if (!state.hasFeedbackHistory && !state.isAiSortEnabled) {
+            messageHelper.showSnackBar(messageRes = R.string.ai_feedback_need_rating)
+            return
+        }
+        dispatch(SearchReducerEvent.AiSortToggled)
+    }
+
+    private fun clearFeedbacks() {
+        viewModelScope.launch {
+            searchPreferenceUseCase.clearFeedbacks()
+            messageHelper.showSnackBar(messageRes = R.string.ai_feedback_cleared)
         }
     }
 
