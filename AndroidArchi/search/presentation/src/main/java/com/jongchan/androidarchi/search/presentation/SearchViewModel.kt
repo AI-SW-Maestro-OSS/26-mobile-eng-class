@@ -9,6 +9,8 @@ import com.jongchan.androidarchi.common.domain.favorite.RemoveFavoriteItemUseCas
 import com.jongchan.androidarchi.common.domain.helper.LoggingHelper
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
+import com.jongchan.androidarchi.common.domain.store.GlobalStore
+import com.jongchan.androidarchi.common.domain.store.SampleAction
 import com.jongchan.androidarchi.common.entity.favorite.FavoriteItemVO
 import com.jongchan.androidarchi.common.presentation.R
 import com.jongchan.androidarchi.common.presentation.mvi.MviViewModel
@@ -28,6 +30,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
+    globalStore: GlobalStore,
     private val searchPageUseCase: SearchPageUseCase,
     private val searchUseCase: SearchUseCase,
     private val getFavoriteItemsUseCase: GetFavoriteItemsUseCase,
@@ -36,7 +39,10 @@ class SearchViewModel @Inject constructor(
     private val messageHelper: MessageHelper,
     private val navigationHelper: NavigationHelper,
     private val loggingHelper: LoggingHelper,
-) : MviViewModel<SearchIntent, SearchUIState, SearchReducerEvent>(SearchUIState.empty) {
+) : MviViewModel<SearchIntent, SearchUIState, SearchReducerEvent>(
+    SearchUIState.empty,
+    globalStore
+) {
     private var searchJob: Job? = null
     private var searchedQuery: String = ""
 
@@ -93,6 +99,7 @@ class SearchViewModel @Inject constructor(
         searchJob?.cancel()
         dispatch(SearchReducerEvent.SearchStarted)
         searchJob = viewModelScope.launch {
+            globalStore.dispatch(SampleAction("Recent query words : $query"))
             runCatching { searchUseCase(trimmed, SearchUIState.FIRST_PAGE) }
                 .onSuccess { result ->
                     dispatch(SearchReducerEvent.SearchResultLoaded(result))

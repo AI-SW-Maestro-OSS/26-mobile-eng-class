@@ -11,10 +11,13 @@ import com.jongchan.androidarchi.common.domain.helper.LoggingHelper
 import com.jongchan.androidarchi.common.domain.helper.MessageHelper
 import com.jongchan.androidarchi.common.domain.helper.NavigationHelper
 import com.jongchan.androidarchi.common.domain.helper.ResourceHelper
+import com.jongchan.androidarchi.common.domain.store.ActionStateMapper
+import com.jongchan.androidarchi.common.domain.store.GlobalStore
 import com.jongchan.androidarchi.common.presentation.helper.LoggingHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.MessageHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.NavigationHelperImpl
 import com.jongchan.androidarchi.common.presentation.helper.ResourceHelperImpl
+import com.jongchan.androidarchi.common.domain.store.DefaultGlobalStore
 import com.jongchan.androidarchi.common.presentation.tti.SpreadsheetTTIReporter
 import com.jongchan.androidarchi.tti.DebugTTILogger
 import com.jongchan.androidarchi.tti.RemoteTTILogger
@@ -80,6 +83,11 @@ object CommonPresentationModule {
         scope = ioScope,
         isEnabled = ttiLoggingConfig.isEnabled,
     )
+
+    @Provides
+    @Singleton
+    fun provideGlobalStore(actionStateMapper: ActionStateMapper): GlobalStore =
+        DefaultGlobalStore(actionStateMapper)
 }
 
 /**
