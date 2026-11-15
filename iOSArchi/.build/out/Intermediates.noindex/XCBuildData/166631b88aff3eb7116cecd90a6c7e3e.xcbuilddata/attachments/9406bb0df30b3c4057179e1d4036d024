@@ -1,0 +1,4 @@
+module IntroEntity {
+header "IntroEntity-Swift.h"
+export *
+}

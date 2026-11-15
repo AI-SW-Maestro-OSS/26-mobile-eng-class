@@ -1,0 +1,4 @@
+module FullScreenMediaData {
+header "FullScreenMediaData-Swift.h"
+export *
+}

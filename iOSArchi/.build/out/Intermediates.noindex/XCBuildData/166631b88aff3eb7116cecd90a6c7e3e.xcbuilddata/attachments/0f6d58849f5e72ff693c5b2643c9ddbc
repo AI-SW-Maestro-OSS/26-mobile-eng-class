@@ -1,0 +1,4 @@
+module FavoriteEntity {
+header "FavoriteEntity-Swift.h"
+export *
+}

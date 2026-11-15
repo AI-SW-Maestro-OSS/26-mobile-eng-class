@@ -1,0 +1,4 @@
+module FavoritePresentation {
+header "FavoritePresentation-Swift.h"
+export *
+}

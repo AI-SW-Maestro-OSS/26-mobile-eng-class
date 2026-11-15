@@ -1,0 +1,59 @@
+{
+  "" : {
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteData-primary.dia",
+    "emit-module-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteData-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteData-primary-emit-module.dia",
+    "pch" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteData-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteData-primary.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/favorite/data/Sources/FavoriteDataModule.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataModule.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataModule.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataModule.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataModule.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataModule.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataModule.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataModule.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataModule~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/favorite/data/Sources/FavoriteDataSource.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataSource.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataSource.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataSource.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataSource.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataSource.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataSource.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataSource.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteDataSource~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/favorite/data/Sources/FavoriteRepositoryImpl.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteRepositoryImpl.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteRepositoryImpl.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteRepositoryImpl.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteRepositoryImpl.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteRepositoryImpl.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteRepositoryImpl.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteRepositoryImpl.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteRepositoryImpl~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/favorite/data/Sources/local/FavoriteItemDto.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteItemDto.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteItemDto.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteItemDto.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteItemDto.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteItemDto.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteItemDto.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteItemDto.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteItemDto~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/favorite/data/Sources/local/FavoriteKVStorage.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteKVStorage.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteKVStorage.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteKVStorage.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteKVStorage.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteKVStorage.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteKVStorage.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteKVStorage.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteData-t.build/Objects-normal/arm64/FavoriteKVStorage~partial.swiftmodule"
+  }
+}

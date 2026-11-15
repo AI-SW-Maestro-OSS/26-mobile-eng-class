@@ -1,0 +1,4 @@
+module EtcEntity {
+header "EtcEntity-Swift.h"
+export *
+}

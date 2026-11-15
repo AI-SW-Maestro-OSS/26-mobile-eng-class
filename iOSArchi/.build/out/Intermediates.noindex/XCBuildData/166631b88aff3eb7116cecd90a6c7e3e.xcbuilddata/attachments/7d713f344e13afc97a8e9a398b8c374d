@@ -1,0 +1,59 @@
+{
+  "" : {
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPresentation-primary.dia",
+    "emit-module-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPresentation-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPresentation-primary-emit-module.dia",
+    "pch" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPresentation-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPresentation-primary.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/etc/presentation/Sources/EtcIntent.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcIntent.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcIntent.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcIntent.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcIntent.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcIntent.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcIntent.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcIntent.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcIntent~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/etc/presentation/Sources/EtcPage.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPage.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPage.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPage.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPage.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPage.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPage.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPage.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcPage~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/etc/presentation/Sources/EtcReducerEvent.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcReducerEvent.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcReducerEvent.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcReducerEvent.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcReducerEvent.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcReducerEvent.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcReducerEvent.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcReducerEvent.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcReducerEvent~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/etc/presentation/Sources/EtcUIState.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcUIState.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcUIState.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcUIState.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcUIState.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcUIState.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcUIState.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcUIState.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcUIState~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/etc/presentation/Sources/EtcViewModel.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcViewModel.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcViewModel.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcViewModel.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcViewModel.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcViewModel.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcViewModel.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcViewModel.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/EtcPresentation-t.build/Objects-normal/arm64/EtcViewModel~partial.swiftmodule"
+  }
+}

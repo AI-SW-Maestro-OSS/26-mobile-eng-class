@@ -1,0 +1,4 @@
+module FavoriteDomain {
+header "FavoriteDomain-Swift.h"
+export *
+}

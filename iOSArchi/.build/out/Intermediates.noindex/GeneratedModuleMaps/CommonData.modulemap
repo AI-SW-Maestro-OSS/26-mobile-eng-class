@@ -1,0 +1,4 @@
+module CommonData {
+header "CommonData-Swift.h"
+export *
+}

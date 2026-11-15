@@ -1,0 +1,30 @@
+{
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/analytics/metric/MetricLogging.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLogging.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLogging.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLogging.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLogging.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLogging.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/analytics/metric/MetricLoggingConfig.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingConfig.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingConfig.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingConfig.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingConfig.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingConfig.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/analytics/metric/MetricLoggingParam.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingParam.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingParam.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingParam.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingParam.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingParam.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/analytics/metric/MetricLoggingRepository.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingRepository.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingRepository.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingRepository.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingRepository.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/MetricLoggingRepository.swiftdeps"
+  }
+}

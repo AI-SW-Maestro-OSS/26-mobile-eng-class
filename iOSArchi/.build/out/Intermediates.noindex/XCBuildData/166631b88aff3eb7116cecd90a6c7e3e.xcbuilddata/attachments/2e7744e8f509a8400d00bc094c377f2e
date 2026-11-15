@@ -1,0 +1,59 @@
+{
+  "" : {
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaDomain-primary.dia",
+    "emit-module-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaDomain-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaDomain-primary-emit-module.dia",
+    "pch" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaDomain-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaDomain-primary.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/fullScreenMedia/domain/Sources/FullScreenMediaErrorType.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaErrorType.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaErrorType.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaErrorType.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaErrorType.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaErrorType.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaErrorType.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaErrorType.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaErrorType~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/fullScreenMedia/domain/Sources/FullScreenMediaOrigin.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaOrigin.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaOrigin.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaOrigin.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaOrigin.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaOrigin.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaOrigin.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaOrigin.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaOrigin~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/fullScreenMedia/domain/Sources/FullScreenMediaPage.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaPage.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaPage.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaPage.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaPage.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaPage.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaPage.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaPage.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaPage~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/fullScreenMedia/domain/Sources/GetFullScreenMediaItemsUseCase.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/GetFullScreenMediaItemsUseCase.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/GetFullScreenMediaItemsUseCase.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/GetFullScreenMediaItemsUseCase.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/GetFullScreenMediaItemsUseCase.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/GetFullScreenMediaItemsUseCase.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/GetFullScreenMediaItemsUseCase.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/GetFullScreenMediaItemsUseCase.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/GetFullScreenMediaItemsUseCase~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/fullScreenMedia/domain/Sources/tti/FullScreenMediaTTIPage.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaTTIPage.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaTTIPage.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaTTIPage.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaTTIPage.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaTTIPage.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaTTIPage.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaTTIPage.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FullScreenMediaDomain-t.build/Objects-normal/arm64/FullScreenMediaTTIPage~partial.swiftmodule"
+  }
+}

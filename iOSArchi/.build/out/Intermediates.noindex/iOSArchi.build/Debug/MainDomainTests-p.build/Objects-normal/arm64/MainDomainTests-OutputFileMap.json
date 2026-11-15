@@ -1,0 +1,39 @@
+{
+  "" : {
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/MainDomainTests-primary.dia",
+    "emit-module-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/MainDomainTests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/MainDomainTests-primary-emit-module.dia",
+    "pch" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/MainDomainTests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/MainDomainTests-primary.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/DerivedSources/test_entry_point.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/test_entry_point.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/test_entry_point.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/test_entry_point.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/test_entry_point.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/test_entry_point.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/test_entry_point.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/test_entry_point.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/test_entry_point~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/main/domain/Tests/RouteMatcherTest.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RouteMatcherTest.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RouteMatcherTest.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RouteMatcherTest.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RouteMatcherTest.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RouteMatcherTest.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RouteMatcherTest.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RouteMatcherTest.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RouteMatcherTest~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/main/domain/Tests/RoutePatternTest.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RoutePatternTest.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RoutePatternTest.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RoutePatternTest.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RoutePatternTest.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RoutePatternTest.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RoutePatternTest.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RoutePatternTest.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/MainDomainTests-p.build/Objects-normal/arm64/RoutePatternTest~partial.swiftmodule"
+  }
+}

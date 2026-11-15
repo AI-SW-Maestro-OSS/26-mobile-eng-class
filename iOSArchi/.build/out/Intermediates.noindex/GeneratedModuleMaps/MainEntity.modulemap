@@ -1,0 +1,4 @@
+module MainEntity {
+header "MainEntity-Swift.h"
+export *
+}

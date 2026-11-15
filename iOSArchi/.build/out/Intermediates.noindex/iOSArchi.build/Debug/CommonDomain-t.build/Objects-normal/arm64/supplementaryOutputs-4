@@ -1,0 +1,30 @@
+{
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/favorite/FavoriteErrorType.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteErrorType.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteErrorType.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteErrorType.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteErrorType.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteErrorType.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/favorite/FavoriteRepository.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteRepository.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteRepository.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteRepository.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteRepository.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/FavoriteRepository.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/favorite/GetFavoriteItemsUseCase.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/GetFavoriteItemsUseCase.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/GetFavoriteItemsUseCase.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/GetFavoriteItemsUseCase.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/GetFavoriteItemsUseCase.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/GetFavoriteItemsUseCase.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/favorite/RegisterFavoriteItemUseCase.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RegisterFavoriteItemUseCase.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RegisterFavoriteItemUseCase.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RegisterFavoriteItemUseCase.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RegisterFavoriteItemUseCase.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RegisterFavoriteItemUseCase.swiftdeps"
+  }
+}

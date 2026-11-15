@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/IntroDomainTests-primary.dia",
+    "emit-module-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/IntroDomainTests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/IntroDomainTests-primary-emit-module.dia",
+    "pch" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/IntroDomainTests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/IntroDomainTests-primary.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/DerivedSources/test_entry_point.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/test_entry_point.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/test_entry_point.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/test_entry_point.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/test_entry_point.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/test_entry_point.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/test_entry_point.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/test_entry_point.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/test_entry_point~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/intro/domain/Tests/GetIntroUseCaseTest.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/GetIntroUseCaseTest.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/GetIntroUseCaseTest.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/GetIntroUseCaseTest.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/GetIntroUseCaseTest.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/GetIntroUseCaseTest.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/GetIntroUseCaseTest.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/GetIntroUseCaseTest.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroDomainTests-p.build/Objects-normal/arm64/GetIntroUseCaseTest~partial.swiftmodule"
+  }
+}

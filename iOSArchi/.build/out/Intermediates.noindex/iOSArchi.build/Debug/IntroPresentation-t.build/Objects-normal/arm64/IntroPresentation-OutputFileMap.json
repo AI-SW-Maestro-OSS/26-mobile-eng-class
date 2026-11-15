@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPresentation-primary.dia",
+    "emit-module-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPresentation-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPresentation-primary-emit-module.dia",
+    "pch" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPresentation-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPresentation-primary.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/intro/presentation/Sources/IntroPage.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPage.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPage.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPage.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPage.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPage.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPage.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPage.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroPage~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/intro/presentation/Sources/IntroViewModel.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroViewModel.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroViewModel.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroViewModel.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroViewModel.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroViewModel.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroViewModel.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroViewModel.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/IntroPresentation-t.build/Objects-normal/arm64/IntroViewModel~partial.swiftmodule"
+  }
+}

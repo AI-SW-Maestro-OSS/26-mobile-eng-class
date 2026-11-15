@@ -1,0 +1,23 @@
+{
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/presentation/Sources/searchList/MediaDateTimeFormatter.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaDateTimeFormatter.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaDateTimeFormatter.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaDateTimeFormatter.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaDateTimeFormatter.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaDateTimeFormatter.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/presentation/Sources/searchList/MediaItemUiState.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaItemUiState.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaItemUiState.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaItemUiState.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaItemUiState.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaItemUiState.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/presentation/Sources/searchList/MediaSearchBar.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaSearchBar.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaSearchBar.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaSearchBar.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaSearchBar.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/MediaSearchBar.swiftdeps"
+  }
+}

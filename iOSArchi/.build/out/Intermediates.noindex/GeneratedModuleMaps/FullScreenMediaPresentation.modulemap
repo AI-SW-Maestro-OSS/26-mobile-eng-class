@@ -1,0 +1,4 @@
+module FullScreenMediaPresentation {
+header "FullScreenMediaPresentation-Swift.h"
+export *
+}

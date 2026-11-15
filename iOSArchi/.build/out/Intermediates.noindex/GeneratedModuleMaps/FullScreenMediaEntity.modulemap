@@ -1,0 +1,4 @@
+module FullScreenMediaEntity {
+header "FullScreenMediaEntity-Swift.h"
+export *
+}

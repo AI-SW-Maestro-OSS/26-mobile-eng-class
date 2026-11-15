@@ -1,0 +1,4 @@
+module FavoriteData {
+header "FavoriteData-Swift.h"
+export *
+}

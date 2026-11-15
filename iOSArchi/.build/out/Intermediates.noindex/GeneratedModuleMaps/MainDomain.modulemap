@@ -1,0 +1,4 @@
+module MainDomain {
+header "MainDomain-Swift.h"
+export *
+}

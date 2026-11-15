@@ -1,0 +1,23 @@
+{
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/data/Sources/analytics/tti/TtiLoggingRepositoryImpl.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLoggingRepositoryImpl.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLoggingRepositoryImpl.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLoggingRepositoryImpl.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLoggingRepositoryImpl.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLoggingRepositoryImpl.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/data/Sources/analytics/tti/dto/TtiLogDTO.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLogDTO.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLogDTO.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLogDTO.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLogDTO.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/TtiLogDTO.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/data/Sources/config/ApiEndpointProviderImpl.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/ApiEndpointProviderImpl.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/ApiEndpointProviderImpl.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/ApiEndpointProviderImpl.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/ApiEndpointProviderImpl.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonData-t.build/Objects-normal/arm64/ApiEndpointProviderImpl.swiftdeps"
+  }
+}

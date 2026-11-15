@@ -1,0 +1,23 @@
+{
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/presentation/Sources/tti/SpreadsheetTTIReporter.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/SpreadsheetTTIReporter.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/SpreadsheetTTIReporter.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/SpreadsheetTTIReporter.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/SpreadsheetTTIReporter.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/SpreadsheetTTIReporter.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/presentation/Sources/ui/color/ColorSemantic.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/ColorSemantic.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/ColorSemantic.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/ColorSemantic.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/ColorSemantic.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/ColorSemantic.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/presentation/Sources/ui/theme/DesignSystemTheme.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/DesignSystemTheme.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/DesignSystemTheme.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/DesignSystemTheme.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/DesignSystemTheme.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonPresentation-t.build/Objects-normal/arm64/DesignSystemTheme.swiftdeps"
+  }
+}

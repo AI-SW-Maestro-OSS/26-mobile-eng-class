@@ -1,0 +1,4 @@
+module CommonDomain {
+header "CommonDomain-Swift.h"
+export *
+}

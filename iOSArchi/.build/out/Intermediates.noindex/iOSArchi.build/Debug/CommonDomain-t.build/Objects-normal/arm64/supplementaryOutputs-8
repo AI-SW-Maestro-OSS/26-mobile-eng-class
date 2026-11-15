@@ -1,0 +1,23 @@
+{
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/navigation/NavSignal.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/NavSignal.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/NavSignal.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/NavSignal.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/NavSignal.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/NavSignal.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/remoteConfig/RemoteConfigKey.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigKey.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigKey.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigKey.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigKey.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigKey.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/common/domain/Sources/remoteConfig/RemoteConfigRepository.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigRepository.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigRepository.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigRepository.dia",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigRepository.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/CommonDomain-t.build/Objects-normal/arm64/RemoteConfigRepository.swiftdeps"
+  }
+}

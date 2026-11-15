@@ -1,0 +1,4 @@
+module SearchDomain {
+header "SearchDomain-Swift.h"
+export *
+}

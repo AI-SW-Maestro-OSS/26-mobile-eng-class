@@ -1,0 +1,4 @@
+module EtcData {
+header "EtcData-Swift.h"
+export *
+}

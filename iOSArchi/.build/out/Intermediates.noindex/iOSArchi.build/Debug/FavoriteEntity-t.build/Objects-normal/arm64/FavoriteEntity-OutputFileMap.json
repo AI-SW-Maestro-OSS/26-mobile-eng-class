@@ -1,0 +1,19 @@
+{
+  "" : {
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntity-primary.dia",
+    "emit-module-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntity-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntity-primary-emit-module.dia",
+    "pch" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntity-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntity-primary.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/favorite/entity/Sources/FavoriteEntityPlaceholder.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntityPlaceholder.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntityPlaceholder.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntityPlaceholder.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntityPlaceholder.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntityPlaceholder.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntityPlaceholder.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntityPlaceholder.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/FavoriteEntity-t.build/Objects-normal/arm64/FavoriteEntityPlaceholder~partial.swiftmodule"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "" : {
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchDomain-primary.dia",
+    "emit-module-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchDomain-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchDomain-primary-emit-module.dia",
+    "pch" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchDomain-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchDomain-primary.swiftdeps"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/search/domain/Sources/SearchErrorType.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchErrorType.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchErrorType.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchErrorType.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchErrorType.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchErrorType.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchErrorType.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchErrorType.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchErrorType~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/search/domain/Sources/SearchPage.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPage.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPage.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPage.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPage.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPage.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPage.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPage.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPage~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/search/domain/Sources/SearchPageRepository.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageRepository.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageRepository.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageRepository.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageRepository.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageRepository.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageRepository.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageRepository.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageRepository~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/search/domain/Sources/SearchPageUseCase.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageUseCase.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageUseCase.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageUseCase.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageUseCase.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageUseCase.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageUseCase.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageUseCase.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageUseCase~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/search/domain/Sources/SearchPageVO.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageVO.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageVO.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageVO.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageVO.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageVO.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageVO.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageVO.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchPageVO~partial.swiftmodule"
+  },
+  "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/search/domain/Sources/SearchUseCase.swift" : {
+    "const-values" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchUseCase.swiftconstvalues",
+    "dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchUseCase.d",
+    "diagnostics" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchUseCase.dia",
+    "index-unit-output-path" : "/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchUseCase.o",
+    "llvm-bc" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchUseCase.bc",
+    "object" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchUseCase.o",
+    "swift-dependencies" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchUseCase.swiftdeps",
+    "swiftmodule" : "/Users/jongchan/soma/26-mobile-eng-class/iOSArchi/.build/out/Intermediates.noindex/iOSArchi.build/Debug/SearchDomain-t.build/Objects-normal/arm64/SearchUseCase~partial.swiftmodule"
+  }
+}
