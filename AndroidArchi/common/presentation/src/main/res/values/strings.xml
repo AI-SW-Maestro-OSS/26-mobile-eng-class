@@ -15,4 +15,24 @@
     <string name="search_failed">Failed search.</string>
     <string name="search_prompt">Please input search words.</string>
     <string name="list_end_marker">Last</string>
+    <string name="ai_preference_guide">Rate 👍/👎 so On-Device AI learns your taste</string>
+    <string name="ai_preference_learned">AI Learned · 👍 %1$d  👎 %2$d</string>
+    <string name="ai_preference_reset">Reset</string>
+    <string name="ai_sort_toggle_on">AI Sort ON</string>
+    <string name="ai_sort_toggle_off">AI Sort OFF</string>
+    <string name="ai_match_badge">AI %1$d%%</string>
+    <string name="ai_like_label">👍 Like</string>
+    <string name="ai_dislike_label">👎 Dislike</string>
+    <string name="ai_feedback_need_rating">Rate at least one item with 👍 or 👎 to personalize AI sorting.</string>
+    <string name="ai_feedback_cleared">AI preference history has been reset.</string>
+    <string name="ai_engine_aicore">⚡ Gemini Nano (AICore)</string>
+    <string name="ai_engine_firebase">☁️ Firebase AI Logic</string>
+    <string name="ai_engine_mediapipe">🧠 MediaPipe On-Device</string>
+    <string name="ai_engine_local_fallback">🧠 On-Device Smart Engine</string>
+    <string name="ai_query_suggestion_title">✨ AI Smart Query Expansion</string>
+    <string name="ai_query_suggestion_loading">Analyzing your taste for query suggestions…</string>
+    <string name="ai_favorite_report_title">✨ AI Collection Taste Report</string>
+    <string name="ai_favorite_report_refresh">Refresh</string>
+    <string name="ai_favorite_report_loading">Analyzing your favorite collection with AI…</string>
+    <string name="ai_keyword_chip_format">#%1$s</string>
 </resources>

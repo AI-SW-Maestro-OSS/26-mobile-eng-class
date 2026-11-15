@@ -1,5 +1,6 @@
 package com.jongchan.androidarchi.search.presentation
 
+import com.jongchan.androidarchi.common.entity.ai.MediaFeedbackType
 import com.jongchan.androidarchi.common.presentation.mvi.MviIntent
 
 sealed interface SearchIntent : MviIntent {
@@ -10,4 +11,7 @@ sealed interface SearchIntent : MviIntent {
     data class AddFavorite(val url: String) : SearchIntent
     data class DeleteFavorite(val url: String) : SearchIntent
     data class OpenFullScreen(val url: String) : SearchIntent
+    data class ToggleFeedback(val url: String, val targetType: MediaFeedbackType) : SearchIntent
+    data object ToggleAiSort : SearchIntent
+    data object ClearFeedbacks : SearchIntent
 }

@@ -47,3 +47,6 @@ Thumbs.db
 
 # Claude Code hook marker (build-unverified flag)
 .claude/.kt-dirty
+
+# On-Device AI model assets (downloaded at build time via Gradle task)
+*.tflite
