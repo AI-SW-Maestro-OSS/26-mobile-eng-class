@@ -1,0 +1,12 @@
+// 공용 빌드 설정 (Git 추적 대상)
+// 실제 시크릿 값은 로컬 전용 Secrets.xcconfig(Git 무시)에 작성하세요.
+// 템플릿: app/Config/Secrets.xcconfig.example
+
+API_KEY =
+API_BASE_URL =
+METRIC_LOG_URL =
+METRIC_LOG_TOKEN =
+TTI_LOG_URL =
+TTI_LOG_TOKEN =
+
+#include? "Secrets.xcconfig"

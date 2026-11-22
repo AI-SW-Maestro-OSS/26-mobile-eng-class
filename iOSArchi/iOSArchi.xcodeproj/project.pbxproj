@@ -17,6 +17,8 @@
 		A100000426B0000100000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A100000726B0000100000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A100000826B0000100000001 /* iOSArchi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSArchi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A100001826B0000100000001 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		A100001926B0000100000001 /* Secrets.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.xcconfig.example; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,11 +44,21 @@
 		A100000B26B0000100000001 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				A100001A26B0000100000001 /* Config */,
 				A100000226B0000100000001 /* iOSArchiApp.swift */,
 				A100000426B0000100000001 /* Assets.xcassets */,
 				A100000726B0000100000001 /* Info.plist */,
 			);
 			path = app;
+			sourceTree = "<group>";
+		};
+		A100001A26B0000100000001 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A100001826B0000100000001 /* Base.xcconfig */,
+				A100001926B0000100000001 /* Secrets.xcconfig.example */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		A100000C26B0000100000001 /* Products */ = {
@@ -188,6 +200,7 @@
 		};
 		A100001626B0000100000001 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A100001826B0000100000001 /* Base.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -212,6 +225,7 @@
 		};
 		A100001726B0000100000001 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A100001826B0000100000001 /* Base.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
