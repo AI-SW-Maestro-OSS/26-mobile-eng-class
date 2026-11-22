@@ -15,16 +15,20 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
 
-        // API-CONFIG-INJECTION-POINT: API 키/베이스 URL 은 local.properties 에서 주입한다.
-        //   API_KEY=...        (QA/Prod 빌드는 CI 단계에서 주입)
-        //   API_BASE_URL=...
-        // 기본값은 레퍼런스 feature(search)가 사용하는 카카오 검색 OpenAPI 데모 설정.
+        // API-CONFIG-INJECTION-POINT: API 키/베이스 URL 은 local.properties 또는 환경변수에서 주입한다.
+        //   API_KEY=...        (로컬: local.properties / CI: 환경변수 API_KEY)
+        //   API_BASE_URL=...   (미지정 시 기본값: https://dapi.kakao.com/)
+        // 보안을 위해 API_KEY 기본값은 빈 문자열("")로 둔다. 발급/적용 방법은 README.md 참고.
         val localProps = Properties().apply {
             val f = rootProject.file("local.properties")
             if (f.exists()) f.inputStream().use { load(it) }
         }
-        val apiKey = localProps.getProperty("API_KEY") ?: "177352d0cea0c5e2b07da2d5a930be97"
-        val apiBaseUrl = localProps.getProperty("API_BASE_URL") ?: "https://dapi.kakao.com/"
+        val apiKey = localProps.getProperty("API_KEY")?.trim()?.removeSurrounding("\"")?.takeIf { it.isNotEmpty() }
+            ?: System.getenv("API_KEY")?.trim()?.removeSurrounding("\"")?.takeIf { it.isNotEmpty() }
+            ?: ""
+        val apiBaseUrl = localProps.getProperty("API_BASE_URL")?.trim()?.removeSurrounding("\"")?.takeIf { it.isNotEmpty() }
+            ?: System.getenv("API_BASE_URL")?.trim()?.removeSurrounding("\"")?.takeIf { it.isNotEmpty() }
+            ?: "https://dapi.kakao.com/"
         buildConfigField("String", "API_KEY", "\"$apiKey\"")
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
 
