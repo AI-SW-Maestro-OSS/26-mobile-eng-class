@@ -7,14 +7,14 @@ public final class RegisterFavoriteItemUseCase: BaseUseCase, @unchecked Sendable
 
     public init(
         favoriteRepository: FavoriteRepository,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
         ttiHelper: TTIHelper
     ) {
         self.favoriteRepository = favoriteRepository
         super.init(
-            resourceHelper: resourceHelper,
+            localizationHelper: localizationHelper,
             messageHelper: messageHelper,
             navigationHelper: navigationHelper,
             ttiHelper: ttiHelper
@@ -27,11 +27,11 @@ public final class RegisterFavoriteItemUseCase: BaseUseCase, @unchecked Sendable
             try await favoriteRepository.createFavoriteItem(favoriteItem)
             return .success(())
         } catch {
-            messageHelper.showSnackBar(
-                iconType: .ERROR,
-                messageText: resourceHelper.getString(.FAVORITE_REGISTER_FAILED),
+            messageHelper.showBanner(
+                iconType: .error,
+                messageText: localizationHelper.string(for: .favoriteRegisterFailed),
                 callToActionText: nil,
-                onClickCTA: nil
+                onTapAction: nil
             )
             return .failure(error)
         }

@@ -1,6 +1,6 @@
 import Foundation
 
-/// Hilt 의 `SingletonComponent` / `ViewModelComponent` 및 `@Named` Qualifier 를
+/// 싱글턴 / 화면 스코프 / 일시적 라이프사이클 및 이름 기반 Qualifier를
 /// iOS(Swift)에서 타입 안전하게 구현한 경량 DI 컨테이너.
 public protocol DIModule {
     static func register(in container: DIContainer)
@@ -8,7 +8,7 @@ public protocol DIModule {
 
 public enum DIScope {
     case singleton
-    case viewModelScoped
+    case scoped
     case transient
 }
 
@@ -35,9 +35,9 @@ public final class DIContainer: @unchecked Sendable {
         self.parent = parent
     }
 
-    /// `ViewModelComponent` 에 대응하는 자식 스코프 컨테이너를 생성한다.
-    /// 같은 ViewModel 생성 그래프 안에서 `@ViewModelScoped` 객체(`TTIHelper` 등)를 공유한다.
-    public func makeViewModelScope() -> DIContainer {
+    /// 화면 단위 자식 스코프 컨테이너를 생성한다.
+    /// 같은 화면 생성 그래프 안에서 `.scoped` 객체(`TTIHelper` 등)를 공유한다.
+    public func makeScope() -> DIContainer {
         DIContainer(parent: self)
     }
 
@@ -86,7 +86,7 @@ public final class DIContainer: @unchecked Sendable {
                 let created = registration.factory(self)
                 singletons[key] = created
                 return created as? T
-            case .viewModelScoped:
+            case .scoped:
                 return child.instantiateScoped(key: key, registration: registration)
             case .transient:
                 return registration.factory(child) as? T
@@ -104,7 +104,7 @@ public final class DIContainer: @unchecked Sendable {
             let created = registration.factory(requester)
             singletons[key] = created
             return created as? T
-        case .viewModelScoped:
+        case .scoped:
             return instantiateScoped(key: key, registration: registration)
         case .transient:
             return registration.factory(requester) as? T

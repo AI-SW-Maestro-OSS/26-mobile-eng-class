@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol HttpErrorType: CaseIterable, Sendable {
+public protocol HTTPErrorType: CaseIterable, Sendable {
     var type: String { get }
     var errorMsg: String { get }
     var isHandledOnDomain: Bool { get }
@@ -14,176 +14,174 @@ public struct ErrorCause: Error, Equatable, Sendable {
     }
 }
 
-public struct HttpResponseException: Error, Equatable, Sendable {
-    public let status: HttpResponseStatus
+public struct HTTPResponseError: Error, Equatable, Sendable {
+    public let status: HTTPResponseStatus
     public let rawCode: Int
     public let errorRequestUrl: String
-    public let msg: String?
+    public let message: String?
     public let cause: ErrorCause?
 
     public init(
-        status: HttpResponseStatus,
+        status: HTTPResponseStatus,
         rawCode: Int,
         errorRequestUrl: String,
-        msg: String? = nil,
+        message: String? = nil,
         cause: ErrorCause? = nil
     ) {
         self.status = status
         self.rawCode = rawCode
         self.errorRequestUrl = errorRequestUrl
-        self.msg = msg
+        self.message = message
         self.cause = cause
     }
 
-    public var message: String? { msg }
-
-    public func print(_ errorType: (any HttpErrorType)? = nil) -> String {
+    public func print(_ errorType: (any HTTPErrorType)? = nil) -> String {
         let errorMsg = errorType.map { "\n\($0.type)" } ?? ""
-        return !errorMsg.isEmpty ? "\(rawCode) \(status.msg)\(errorMsg)" : status.description
+        return !errorMsg.isEmpty ? "\(rawCode) \(status.message)\(errorMsg)" : status.description
     }
 }
 
-public enum HttpResponseStatus: Equatable, Sendable, CustomStringConvertible {
-    case Ok
-    case Created
-    case Accepted
-    case NotAuthoritative
-    case NoContent
-    case Reset
-    case Partial
-    case MultChoice
-    case MovedPerm
-    case MovedTemp
-    case SeeOther
-    case NotModified
-    case UseProxy
-    case BadRequest
-    case Unauthorized
-    case PaymentRequired
-    case Forbidden
-    case NotFound
-    case BadMethod
-    case NotAcceptable
-    case ProxyAuth
-    case ClientTimeout
-    case Conflict
-    case Gone
-    case LengthRequired
-    case PreconFailed
-    case EntityTooLarge
-    case ReqTooLong
-    case UnsupportedType
-    case ReqTooMany
-    case InternalError
-    case NotImplemented
-    case BadGateway
-    case Unavailable
-    case GatewayTimeout
-    case Version
-    case UnknownError
-    case Unknown
+public enum HTTPResponseStatus: Equatable, Sendable, CustomStringConvertible {
+    case ok
+    case created
+    case accepted
+    case notAuthoritative
+    case noContent
+    case reset
+    case partial
+    case multChoice
+    case movedPerm
+    case movedTemp
+    case seeOther
+    case notModified
+    case useProxy
+    case badRequest
+    case unauthorized
+    case paymentRequired
+    case forbidden
+    case notFound
+    case badMethod
+    case notAcceptable
+    case proxyAuth
+    case clientTimeout
+    case conflict
+    case gone
+    case lengthRequired
+    case preconFailed
+    case entityTooLarge
+    case reqTooLong
+    case unsupportedType
+    case reqTooMany
+    case internalError
+    case notImplemented
+    case badGateway
+    case unavailable
+    case gatewayTimeout
+    case version
+    case unknownError
+    case unknown
 
     public var code: Int {
         switch self {
-        case .Ok: return 200
-        case .Created: return 201
-        case .Accepted: return 202
-        case .NotAuthoritative: return 203
-        case .NoContent: return 204
-        case .Reset: return 205
-        case .Partial: return 206
-        case .MultChoice: return 300
-        case .MovedPerm: return 301
-        case .MovedTemp: return 302
-        case .SeeOther: return 303
-        case .NotModified: return 304
-        case .UseProxy: return 305
-        case .BadRequest: return 400
-        case .Unauthorized: return 401
-        case .PaymentRequired: return 402
-        case .Forbidden: return 403
-        case .NotFound: return 404
-        case .BadMethod: return 405
-        case .NotAcceptable: return 406
-        case .ProxyAuth: return 407
-        case .ClientTimeout: return 408
-        case .Conflict: return 409
-        case .Gone: return 410
-        case .LengthRequired: return 411
-        case .PreconFailed: return 412
-        case .EntityTooLarge: return 413
-        case .ReqTooLong: return 414
-        case .UnsupportedType: return 415
-        case .ReqTooMany: return 429
-        case .InternalError: return 500
-        case .NotImplemented: return 501
-        case .BadGateway: return 502
-        case .Unavailable: return 503
-        case .GatewayTimeout: return 504
-        case .Version: return 505
-        case .UnknownError: return 520
-        case .Unknown: return -1
+        case .ok: return 200
+        case .created: return 201
+        case .accepted: return 202
+        case .notAuthoritative: return 203
+        case .noContent: return 204
+        case .reset: return 205
+        case .partial: return 206
+        case .multChoice: return 300
+        case .movedPerm: return 301
+        case .movedTemp: return 302
+        case .seeOther: return 303
+        case .notModified: return 304
+        case .useProxy: return 305
+        case .badRequest: return 400
+        case .unauthorized: return 401
+        case .paymentRequired: return 402
+        case .forbidden: return 403
+        case .notFound: return 404
+        case .badMethod: return 405
+        case .notAcceptable: return 406
+        case .proxyAuth: return 407
+        case .clientTimeout: return 408
+        case .conflict: return 409
+        case .gone: return 410
+        case .lengthRequired: return 411
+        case .preconFailed: return 412
+        case .entityTooLarge: return 413
+        case .reqTooLong: return 414
+        case .unsupportedType: return 415
+        case .reqTooMany: return 429
+        case .internalError: return 500
+        case .notImplemented: return 501
+        case .badGateway: return 502
+        case .unavailable: return 503
+        case .gatewayTimeout: return 504
+        case .version: return 505
+        case .unknownError: return 520
+        case .unknown: return -1
         }
     }
 
-    public var msg: String {
+    public var message: String {
         switch self {
-        case .Ok: return "Ok"
-        case .Created: return "Created"
-        case .Accepted: return "Accepted"
-        case .NotAuthoritative: return "Not Authoritative"
-        case .NoContent: return "No Content"
-        case .Reset: return "Reset"
-        case .Partial: return "Partial"
-        case .MultChoice: return "Mult Choice"
-        case .MovedPerm: return "Moved Perm"
-        case .MovedTemp: return "Moved Temp"
-        case .SeeOther: return "See Other"
-        case .NotModified: return "Not Modified"
-        case .UseProxy: return "Use Proxy"
-        case .BadRequest: return "Bad Request"
-        case .Unauthorized: return "Unauthorized"
-        case .PaymentRequired: return "Payment Required"
-        case .Forbidden: return "Forbidden"
-        case .NotFound: return "Not Found"
-        case .BadMethod: return "Bad Method"
-        case .NotAcceptable: return "Not Acceptable"
-        case .ProxyAuth: return "Proxy Auth"
-        case .ClientTimeout: return "Client Timeout"
-        case .Conflict: return "Conflict"
-        case .Gone: return "Gone"
-        case .LengthRequired: return "Length Required"
-        case .PreconFailed: return "Precon Failed"
-        case .EntityTooLarge: return "Entity Too Large"
-        case .ReqTooLong: return "Req Too Long"
-        case .UnsupportedType: return "Unsupported Type"
-        case .ReqTooMany: return "Req Too Many"
-        case .InternalError: return "Internal Error"
-        case .NotImplemented: return "Not Implemented"
-        case .BadGateway: return "Bad Gateway"
-        case .Unavailable: return "Unavailable"
-        case .GatewayTimeout: return "Gateway Timeout"
-        case .Version: return "Version"
-        case .UnknownError: return "Unknown Error"
-        case .Unknown: return "Unknown"
+        case .ok: return "Ok"
+        case .created: return "Created"
+        case .accepted: return "Accepted"
+        case .notAuthoritative: return "Not Authoritative"
+        case .noContent: return "No Content"
+        case .reset: return "Reset"
+        case .partial: return "Partial"
+        case .multChoice: return "Mult Choice"
+        case .movedPerm: return "Moved Perm"
+        case .movedTemp: return "Moved Temp"
+        case .seeOther: return "See Other"
+        case .notModified: return "Not Modified"
+        case .useProxy: return "Use Proxy"
+        case .badRequest: return "Bad Request"
+        case .unauthorized: return "Unauthorized"
+        case .paymentRequired: return "Payment Required"
+        case .forbidden: return "Forbidden"
+        case .notFound: return "Not Found"
+        case .badMethod: return "Bad Method"
+        case .notAcceptable: return "Not Acceptable"
+        case .proxyAuth: return "Proxy Auth"
+        case .clientTimeout: return "Client Timeout"
+        case .conflict: return "Conflict"
+        case .gone: return "Gone"
+        case .lengthRequired: return "Length Required"
+        case .preconFailed: return "Precon Failed"
+        case .entityTooLarge: return "Entity Too Large"
+        case .reqTooLong: return "Req Too Long"
+        case .unsupportedType: return "Unsupported Type"
+        case .reqTooMany: return "Req Too Many"
+        case .internalError: return "Internal Error"
+        case .notImplemented: return "Not Implemented"
+        case .badGateway: return "Bad Gateway"
+        case .unavailable: return "Unavailable"
+        case .gatewayTimeout: return "Gateway Timeout"
+        case .version: return "Version"
+        case .unknownError: return "Unknown Error"
+        case .unknown: return "Unknown"
         }
     }
 
-    public static let allStatuses: [HttpResponseStatus] = [
-        .Ok, .Created, .Accepted, .NotAuthoritative, .NoContent, .Reset, .Partial,
-        .MultChoice, .MovedPerm, .MovedTemp, .SeeOther, .NotModified, .UseProxy,
-        .BadRequest, .Unauthorized, .PaymentRequired, .Forbidden, .NotFound, .BadMethod,
-        .NotAcceptable, .ProxyAuth, .ClientTimeout, .Conflict, .Gone, .LengthRequired,
-        .PreconFailed, .EntityTooLarge, .ReqTooLong, .UnsupportedType, .ReqTooMany,
-        .InternalError, .NotImplemented, .BadGateway, .Unavailable, .GatewayTimeout,
-        .Version, .UnknownError, .Unknown,
+    public static let allStatuses: [HTTPResponseStatus] = [
+        .ok, .created, .accepted, .notAuthoritative, .noContent, .reset, .partial,
+        .multChoice, .movedPerm, .movedTemp, .seeOther, .notModified, .useProxy,
+        .badRequest, .unauthorized, .paymentRequired, .forbidden, .notFound, .badMethod,
+        .notAcceptable, .proxyAuth, .clientTimeout, .conflict, .gone, .lengthRequired,
+        .preconFailed, .entityTooLarge, .reqTooLong, .unsupportedType, .reqTooMany,
+        .internalError, .notImplemented, .badGateway, .unavailable, .gatewayTimeout,
+        .version, .unknownError, .unknown,
     ]
 
-    public static func create(_ code: Int) -> HttpResponseStatus {
-        allStatuses.first { $0.code == code } ?? .Unknown
+    public static func create(_ code: Int) -> HTTPResponseStatus {
+        allStatuses.first { $0.code == code } ?? .unknown
     }
 
     public var description: String {
-        "\(code) \(msg)"
+        "\(code) \(message)"
     }
 }

@@ -12,12 +12,12 @@ public struct MediaItemUiState: Sendable, Equatable, Identifiable {
     public let source: String
     public let dateTime: String
     public let page: Int
-    public let isFavorite: Bool
+    public var isFavorite: Bool
 
     public var mediaType: MediaType { type }
 
     public init(
-        type: MediaType = .IMAGE,
+        type: MediaType = .image,
         title: String,
         urlKey: String,
         thumbnailUrl: String,
@@ -74,20 +74,6 @@ public struct MediaItemUiState: Sendable, Equatable, Identifiable {
             thumbnailUrl: thumbnailUrl,
             contentsImageUrl: mediaUrl,
             dateTime: dateTime
-        )
-    }
-
-    public func copy(isFavorite: Bool? = nil) -> MediaItemUiState {
-        MediaItemUiState(
-            type: type,
-            title: title,
-            urlKey: urlKey,
-            thumbnailUrl: thumbnailUrl,
-            mediaUrl: mediaUrl,
-            source: source,
-            dateTime: dateTime,
-            page: page,
-            isFavorite: isFavorite ?? self.isFavorite
         )
     }
 }

@@ -1,4 +1,0 @@
-module MainData {
-header "MainData-Swift.h"
-export *
-}

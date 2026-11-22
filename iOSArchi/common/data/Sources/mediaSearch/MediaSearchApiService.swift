@@ -17,23 +17,23 @@ public protocol MediaSearchApiService: Sendable {
 }
 
 public extension MediaSearchApiService {
-    static var SORT_RECENCY: String { "recency" }
-    static var PAGE_SIZE: Int { 10 }
+    static var sortRecency: String { "recency" }
+    static var pageSize: Int { 10 }
 
     func searchImages(query: String, page: Int) async throws -> HttpResponse<ImageSearchResponse> {
-        try await searchImages(query: query, page: page, sort: Self.SORT_RECENCY, size: Self.PAGE_SIZE)
+        try await searchImages(query: query, page: page, sort: Self.sortRecency, size: Self.pageSize)
     }
 
     func searchVideos(query: String, page: Int) async throws -> HttpResponse<VideoSearchResponse> {
-        try await searchVideos(query: query, page: page, sort: Self.SORT_RECENCY, size: Self.PAGE_SIZE)
+        try await searchVideos(query: query, page: page, sort: Self.sortRecency, size: Self.pageSize)
     }
 }
 
 public final class MediaSearchApiServiceImpl: MediaSearchApiService {
-    private let retrofit: RetrofitClient
+    private let httpClient: HTTPClient
 
-    public init(retrofit: RetrofitClient) {
-        self.retrofit = retrofit
+    public init(httpClient: HTTPClient) {
+        self.httpClient = httpClient
     }
 
     public func searchImages(
@@ -42,7 +42,7 @@ public final class MediaSearchApiServiceImpl: MediaSearchApiService {
         sort: String,
         size: Int
     ) async throws -> HttpResponse<ImageSearchResponse> {
-        try await retrofit.get(
+        try await httpClient.get(
             path: "v2/search/image",
             query: [
                 "query": query,
@@ -60,7 +60,7 @@ public final class MediaSearchApiServiceImpl: MediaSearchApiService {
         sort: String,
         size: Int
     ) async throws -> HttpResponse<VideoSearchResponse> {
-        try await retrofit.get(
+        try await httpClient.get(
             path: "v2/search/vclip",
             query: [
                 "query": query,

@@ -1,4 +1,0 @@
-module FullScreenMediaDomain {
-header "FullScreenMediaDomain-Swift.h"
-export *
-}

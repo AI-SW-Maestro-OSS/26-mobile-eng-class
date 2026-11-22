@@ -1,8 +1,8 @@
 import Foundation
 
 public enum MetricEventType: String, Sendable {
-    case Track
-    case Exposure
+    case track = "Track"
+    case exposure = "Exposure"
 }
 
 public struct MetricLogging: Equatable, Hashable, Sendable {
@@ -22,7 +22,7 @@ public struct MetricLogging: Equatable, Hashable, Sendable {
 
     public static let ClickFavoriteToggleSearchPage = MetricLogging(
         name: "click_favorite_toggle_search_page",
-        type: .Track,
+        type: .track,
         availableParams: [
             .AllFavoriteItemCount,
             .ItemImgUrl,

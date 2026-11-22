@@ -91,7 +91,7 @@ public extension ImageDocumentDTO {
     // https://developers.kakao.com/docs/ko/daum-search/dev-guide#search-image
     func toVO() -> MediaItemVO {
         MediaItemVO(
-            type: .IMAGE,
+            type: .image,
             title: displaySitename ?? UNKNOWN,
             urlKey: imageUrl ?? "",
             thumbnailImageUrl: thumbnailUrl ?? "",
@@ -107,7 +107,7 @@ public extension VideoDocumentDTO {
     // https://developers.kakao.com/docs/ko/daum-search/dev-guide#search-video
     func toVO() -> MediaItemVO {
         MediaItemVO(
-            type: .VIDEO,
+            type: .video,
             title: title ?? UNKNOWN,
             urlKey: url ?? "",
             thumbnailImageUrl: thumbnail ?? "",

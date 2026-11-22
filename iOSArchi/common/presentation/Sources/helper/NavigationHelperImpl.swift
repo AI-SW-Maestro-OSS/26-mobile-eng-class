@@ -8,7 +8,7 @@ public final class NavigationHelperImpl: NavigationHelper, @unchecked Sendable {
 
     public init() {}
 
-    public var navigationFlow: AsyncStream<NavSignal> {
+    public var navigationStream: AsyncStream<NavSignal> {
         AsyncStream { continuation in
             let id = UUID()
             self.lock.lock()
@@ -33,41 +33,41 @@ public final class NavigationHelperImpl: NavigationHelper, @unchecked Sendable {
     }
 
     public func navigateByRoute(_ route: NavRoute) {
-        emit(.GoToDestPage(route: route))
+        emit(.goToDestPage(route: route))
     }
 
     public func navigateTo(_ page: any Page) {
-        emit(.GoToDestPage(route: page.toRoute()))
+        emit(.goToDestPage(route: page.toRoute()))
     }
 
     public func navigateDeepLink(_ route: NavRoute) {
-        emit(.DeepLink(route: route))
+        emit(.deepLink(route: route))
     }
 
     public func navigateToBack() {
-        emit(.Back)
+        emit(.back)
     }
 
     public func navigateBackTo(_ page: any Page) {
-        emit(.BackTo(route: page.toRoute()))
+        emit(.backTo(route: page.toRoute()))
     }
 
     public func navigateBackToRoute(_ route: NavRoute) {
-        emit(.BackTo(route: route))
+        emit(.backTo(route: route))
     }
 
     public func navigateToInitial() {
-        emit(.BackToInitialPage)
+        emit(.backToInitialPage)
     }
 }
 
-private struct LocalNavigationHelperKey: EnvironmentKey {
+private struct NavigationHelperEnvironmentKey: EnvironmentKey {
     static let defaultValue: NavigationHelper = NavigationHelperImpl()
 }
 
 public extension EnvironmentValues {
-    var localNavigationHelper: NavigationHelper {
-        get { self[LocalNavigationHelperKey.self] }
-        set { self[LocalNavigationHelperKey.self] = newValue }
+    var navigationHelper: NavigationHelper {
+        get { self[NavigationHelperEnvironmentKey.self] }
+        set { self[NavigationHelperEnvironmentKey.self] = newValue }
     }
 }

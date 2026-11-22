@@ -58,8 +58,8 @@ public struct HttpResponse<T: Sendable>: Sendable {
     }
 }
 
-/// URLSession 기반 경량 Retrofit 대응 클라이언트.
-public final class RetrofitClient: @unchecked Sendable {
+/// URLSession 기반 경량 HTTP 클라이언트.
+public final class HTTPClient: @unchecked Sendable {
     public typealias RequestInterceptor = @Sendable (inout URLRequest) -> Void
 
     public let baseUrl: String
@@ -73,7 +73,7 @@ public final class RetrofitClient: @unchecked Sendable {
         session: URLSession = .shared,
         json: ArchiJson = ArchiJson(),
         interceptors: [RequestInterceptor] = [],
-        enableLogging: Bool = BuildConfig.DEBUG
+        enableLogging: Bool = AppConfig.isDebug
     ) {
         self.baseUrl = baseUrl
         self.session = session
@@ -143,7 +143,7 @@ public final class RetrofitClient: @unchecked Sendable {
     ) async throws -> HttpResponse<T> {
         let urlString = request.url?.absoluteString ?? baseUrl
         if enableLogging {
-            print("[RetrofitClient] --> \(request.httpMethod ?? "GET") \(urlString)")
+            print("[HTTPClient] --> \(request.httpMethod ?? "GET") \(urlString)")
         }
         let (data, urlResponse) = try await session.data(for: request)
         let httpResp = urlResponse as? HTTPURLResponse
@@ -151,7 +151,7 @@ public final class RetrofitClient: @unchecked Sendable {
         let statusMessage = HTTPURLResponse.localizedString(forStatusCode: statusCode)
 
         if enableLogging {
-            print("[RetrofitClient] <-- \(statusCode) \(urlString) (\(data.count) bytes)")
+            print("[HTTPClient] <-- \(statusCode) \(urlString) (\(data.count) bytes)")
         }
 
         if (200..<300).contains(statusCode) {
@@ -182,21 +182,21 @@ open class BaseRemoteDataSource: @unchecked Sendable {
     public func checkResponse<T: Sendable>(_ response: HttpResponse<T>) throws -> T {
         if response.isSuccessful {
             guard let body = response.body else {
-                throw HttpResponseException(
-                    status: .Unknown,
+                throw HTTPResponseError(
+                    status: .unknown,
                     rawCode: response.code,
                     errorRequestUrl: response.requestUrl,
-                    msg: "Successful response with null body: \(response.requestUrl)"
+                    message: "Successful response with null body: \(response.requestUrl)"
                 )
             }
             return body
         }
         let errorBody = response.errorBody
-        throw HttpResponseException(
-            status: HttpResponseStatus.create(response.code),
+        throw HTTPResponseError(
+            status: HTTPResponseStatus.create(response.code),
             rawCode: response.code,
             errorRequestUrl: response.requestUrl,
-            msg: "Http Request Failed (\(response.code)) \(response.message), \(errorBody ?? "")",
+            message: "Http Request Failed (\(response.code)) \(response.message), \(errorBody ?? "")",
             cause: errorBody.map { ErrorCause($0) }
         )
     }

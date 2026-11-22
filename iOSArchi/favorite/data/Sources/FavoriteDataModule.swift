@@ -14,28 +14,28 @@ public enum FavoriteDataModule: DIModule {
         container.register(FavoriteRepository.self, scope: .singleton) { resolver in
             FavoriteRepositoryImpl(dataSource: resolver.resolve(FavoriteDataSource.self))
         }
-        container.register(GetFavoriteItemsUseCase.self, scope: .viewModelScoped) { resolver in
+        container.register(GetFavoriteItemsUseCase.self, scope: .scoped) { resolver in
             GetFavoriteItemsUseCase(
                 favoriteRepository: resolver.resolve(FavoriteRepository.self),
-                resourceHelper: resolver.resolve(ResourceHelper.self),
+                localizationHelper: resolver.resolve(LocalizationHelper.self),
                 messageHelper: resolver.resolve(MessageHelper.self),
                 navigationHelper: resolver.resolve(NavigationHelper.self),
                 ttiHelper: resolver.resolve(TTIHelper.self)
             )
         }
-        container.register(RegisterFavoriteItemUseCase.self, scope: .viewModelScoped) { resolver in
+        container.register(RegisterFavoriteItemUseCase.self, scope: .scoped) { resolver in
             RegisterFavoriteItemUseCase(
                 favoriteRepository: resolver.resolve(FavoriteRepository.self),
-                resourceHelper: resolver.resolve(ResourceHelper.self),
+                localizationHelper: resolver.resolve(LocalizationHelper.self),
                 messageHelper: resolver.resolve(MessageHelper.self),
                 navigationHelper: resolver.resolve(NavigationHelper.self),
                 ttiHelper: resolver.resolve(TTIHelper.self)
             )
         }
-        container.register(RemoveFavoriteItemUseCase.self, scope: .viewModelScoped) { resolver in
+        container.register(RemoveFavoriteItemUseCase.self, scope: .scoped) { resolver in
             RemoveFavoriteItemUseCase(
                 favoriteRepository: resolver.resolve(FavoriteRepository.self),
-                resourceHelper: resolver.resolve(ResourceHelper.self),
+                localizationHelper: resolver.resolve(LocalizationHelper.self),
                 messageHelper: resolver.resolve(MessageHelper.self),
                 navigationHelper: resolver.resolve(NavigationHelper.self),
                 ttiHelper: resolver.resolve(TTIHelper.self)

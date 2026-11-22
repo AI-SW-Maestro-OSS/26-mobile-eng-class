@@ -12,6 +12,6 @@
   - 예: `app://example.architecture/fullScreenMedia?origin=FAVORITE&initialIndex=0`으로 진입 시 `[SearchPage, FavoritePage, FullScreenMediaPage]` 스택이 합성된다.
 - **Warm Start**: 현재 백스택 위에 대상 화면을 push한다.
 
-## 3. UIKit `UIViewController` 호스팅 (`FragmentHostContainer`)
+## 3. UIKit `UIViewController` 호스팅 (`ViewControllerHostContainer`)
 
-- `FullScreenMediaFragment`는 UIKit `UIViewController` + 가로 페이징 `UICollectionView`(`FullScreenMediaPagerAdapter`)로 구현되어 있으며, `FragmentHostContainer`(`UIViewControllerRepresentable`)를 통해 SwiftUI 네비게이션 스택 내부에 호스팅된다.
+- `FullScreenMediaViewController`는 UIKit `UIViewController` + 가로 페이징 `UICollectionView`(`FullScreenMediaCollectionDataSource`)로 구현되어 있으며, `ViewControllerHostContainer`(`UIViewControllerRepresentable`)를 통해 SwiftUI 네비게이션 스택 내부에 호스팅된다.

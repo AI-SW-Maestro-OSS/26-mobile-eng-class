@@ -8,7 +8,7 @@ private final class StubMediaSearchRepository: MediaSearchRepository, @unchecked
     var result = MediaSearchResultVO(
         items: [
             MediaItemVO(
-                type: .IMAGE,
+                type: .image,
                 title: "SwiftUI Clean Architecture",
                 urlKey: "https://example.com/1.jpg",
                 thumbnailImageUrl: "https://example.com/1.jpg",
@@ -30,21 +30,21 @@ private final class StubMediaSearchRepository: MediaSearchRepository, @unchecked
 private final class SearchTestMessageHelper: MessageHelper, @unchecked Sendable {
     var effect: AsyncStream<MessageEffect> { AsyncStream { $0.finish() } }
     var toasts: [String] = []
-    var dialogs: [String] = []
+    var alerts: [String] = []
 
     func showToast(_ toastMsg: String) { toasts.append(toastMsg) }
-    func showSnackBar(iconType: IconType, messageText: String, callToActionText: String?, onClickCTA: (@Sendable () -> Void)?) {}
-    func showSnackBar(iconType: IconType, messageRes: StringResource, callToActionText: String?, onClickCTA: (@Sendable () -> Void)?) {}
-    func showOneButtonDialog(titleText: String?, descText: String, cantIgnore: Bool, buttonText: String, onClickButton: (@Sendable () -> Void)?) {
-        dialogs.append(descText)
+    func showBanner(iconType: IconType, messageText: String, callToActionText: String?, onTapAction: (@Sendable () -> Void)?) {}
+    func showBanner(iconType: IconType, messageKey: LocalizedKey, callToActionText: String?, onTapAction: (@Sendable () -> Void)?) {}
+    func showAlert(titleText: String?, descText: String, cantIgnore: Bool, buttonText: String, onTapButton: (@Sendable () -> Void)?) {
+        alerts.append(descText)
     }
-    func showTwoButtonDialog(titleText: String?, descText: String, cantIgnore: Bool, leftButtonText: String, onClickLeftButton: (@Sendable () -> Void)?, rightButtonText: String, onClickRightButton: (@Sendable () -> Void)?) {
-        dialogs.append(descText)
+    func showConfirmAlert(titleText: String?, descText: String, cantIgnore: Bool, leftButtonText: String, onTapLeftButton: (@Sendable () -> Void)?, rightButtonText: String, onTapRightButton: (@Sendable () -> Void)?) {
+        alerts.append(descText)
     }
 }
 
 private final class SearchTestNavigationHelper: NavigationHelper, @unchecked Sendable {
-    var navigationFlow: AsyncStream<NavSignal> { AsyncStream { $0.finish() } }
+    var navigationStream: AsyncStream<NavSignal> { AsyncStream { $0.finish() } }
     func navigateByRoute(_ route: NavRoute) {}
     func navigateTo(_ page: any Page) {}
     func navigateDeepLink(_ route: NavRoute) {}
@@ -54,8 +54,8 @@ private final class SearchTestNavigationHelper: NavigationHelper, @unchecked Sen
     func navigateToInitial() {}
 }
 
-private final class SearchTestResourceHelper: ResourceHelper, @unchecked Sendable {
-    func getString(_ resource: StringResource) -> String { resource.rawValue }
+private final class SearchTestLocalizationHelper: LocalizationHelper, @unchecked Sendable {
+    func string(for key: LocalizedKey) -> String { key.rawValue }
 }
 
 private final class SearchTestTTIHelper: TTIHelper, @unchecked Sendable {
@@ -72,7 +72,7 @@ final class SearchUseCaseTest: XCTestCase {
         let repo = StubMediaSearchRepository()
         let useCase = SearchUseCase(
             mediaSearchRepository: repo,
-            resourceHelper: SearchTestResourceHelper(),
+            localizationHelper: SearchTestLocalizationHelper(),
             messageHelper: SearchTestMessageHelper(),
             navigationHelper: SearchTestNavigationHelper(),
             ttiHelper: SearchTestTTIHelper()
@@ -86,17 +86,17 @@ final class SearchUseCaseTest: XCTestCase {
 
     func testSearchHandlesRateLimitErrorWithToast() async {
         let repo = StubMediaSearchRepository()
-        repo.errorToThrow = HttpResponseException(
-            status: .ReqTooMany,
+        repo.errorToThrow = HTTPResponseError(
+            status: .reqTooMany,
             rawCode: 429,
             errorRequestUrl: "https://dapi.kakao.com/v2/search/image",
-            msg: "Rate limit",
-            cause: ErrorCause(SearchErrorType.RATE_LIMIT_EXCEEDED.type)
+            message: "Rate limit",
+            cause: ErrorCause(SearchErrorType.rateLimitExceeded.type)
         )
         let msgHelper = SearchTestMessageHelper()
         let useCase = SearchUseCase(
             mediaSearchRepository: repo,
-            resourceHelper: SearchTestResourceHelper(),
+            localizationHelper: SearchTestLocalizationHelper(),
             messageHelper: msgHelper,
             navigationHelper: SearchTestNavigationHelper(),
             ttiHelper: SearchTestTTIHelper()

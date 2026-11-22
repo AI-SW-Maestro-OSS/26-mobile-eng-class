@@ -6,14 +6,14 @@ public final class RemoveFavoriteItemUseCase: BaseUseCase, @unchecked Sendable {
 
     public init(
         favoriteRepository: FavoriteRepository,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
         ttiHelper: TTIHelper
     ) {
         self.favoriteRepository = favoriteRepository
         super.init(
-            resourceHelper: resourceHelper,
+            localizationHelper: localizationHelper,
             messageHelper: messageHelper,
             navigationHelper: navigationHelper,
             ttiHelper: ttiHelper
@@ -26,11 +26,11 @@ public final class RemoveFavoriteItemUseCase: BaseUseCase, @unchecked Sendable {
             try await favoriteRepository.deleteFavoriteItem(url)
             return .success(())
         } catch {
-            messageHelper.showSnackBar(
-                iconType: .ERROR,
-                messageText: resourceHelper.getString(.FAVORITE_REMOVE_FAILED),
+            messageHelper.showBanner(
+                iconType: .error,
+                messageText: localizationHelper.string(for: .favoriteRemoveFailed),
                 callToActionText: nil,
-                onClickCTA: nil
+                onTapAction: nil
             )
             return .failure(error)
         }

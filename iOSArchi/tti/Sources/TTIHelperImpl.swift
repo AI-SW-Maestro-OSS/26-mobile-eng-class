@@ -1,7 +1,7 @@
 import Foundation
 
 public final class TTIHelperImpl: TTIHelper, @unchecked Sendable {
-    public static let TTI_TIMEOUT_MILLISECONDS: UInt64 = 20_000
+    public static let ttiTimeoutMilliseconds: UInt64 = 20_000
 
     private static let counterLock = NSLock()
     private static var instanceCounters: [String: Int64] = [:]
@@ -36,7 +36,7 @@ public final class TTIHelperImpl: TTIHelper, @unchecked Sendable {
         stateLock.lock()
         if ttiInfo != nil {
             stateLock.unlock()
-            logger.d(tag: "TTI", msg: "startTTITracking() called twice. Page: \(page.pageName)")
+            logger.debug(category: "TTI", message: "startTTITracking() called twice. Page: \(page.pageName)")
             return
         }
         let info = TTIInfo(page: page, instanceNo: Self.nextInstanceNo(pageName: page.pageName))
@@ -46,10 +46,10 @@ public final class TTIHelperImpl: TTIHelper, @unchecked Sendable {
         queue.async { [weak self] in
             guard let self, !self.isReleased else { return }
             self.reporter.startView(key: info.ttiKey, name: page.pageName, attributes: [:])
-            info.recordStartTime(.TTI_TIME)
-            self.logger.d(
-                tag: "TTI",
-                msg: "Start TTI Tracking : \(info.ttiKey) / \(page.pageName)"
+            info.recordStartTime(.ttiTime)
+            self.logger.debug(
+                category: "TTI",
+                message: "Start TTI Tracking : \(info.ttiKey) / \(page.pageName)"
             )
             self.scheduleTimeout(info)
         }
@@ -63,12 +63,12 @@ public final class TTIHelperImpl: TTIHelper, @unchecked Sendable {
                 info.isSent = true
                 let reportInfo = info.getTTIInfo()
                 self.reporter.stopView(key: info.ttiKey, attributes: reportInfo)
-                self.logger.d(tag: "TTI", msg: "Timeout TTI Tracking \(reportInfo)")
+                self.logger.debug(category: "TTI", message: "Timeout TTI Tracking \(reportInfo)")
                 self.release()
             }
         }
         self.timeoutWorkItem = workItem
-        let delaySeconds = Double(Self.TTI_TIMEOUT_MILLISECONDS) / 1000.0
+        let delaySeconds = Double(Self.ttiTimeoutMilliseconds) / 1000.0
         queue.asyncAfter(deadline: .now() + delaySeconds, execute: workItem)
     }
 
@@ -112,9 +112,9 @@ public final class TTIHelperImpl: TTIHelper, @unchecked Sendable {
             if info.cantEndTTITracking() { return }
             info.timeoutFlag = false
             info.allTTIRecordedFlag = true
-            info.recordEndTime(.TTI_TIME)
+            info.recordEndTime(.ttiTime)
             self.timeoutWorkItem?.cancel()
-            self.logger.d(tag: "TTI", msg: "End TTI Tracking : \(info.ttiKey)")
+            self.logger.debug(category: "TTI", message: "End TTI Tracking : \(info.ttiKey)")
         }
     }
 
@@ -125,7 +125,7 @@ public final class TTIHelperImpl: TTIHelper, @unchecked Sendable {
             info.isSent = true
             let reportInfo = info.getTTIInfo()
             self.reporter.stopView(key: info.ttiKey, attributes: reportInfo)
-            self.logger.d(tag: "TTI", msg: "Shot TTI Logging : \(info.ttiKey) / \(reportInfo)")
+            self.logger.debug(category: "TTI", message: "Shot TTI Logging : \(info.ttiKey) / \(reportInfo)")
             self.release()
         }
     }

@@ -7,6 +7,6 @@ public final class ApiEndpointProviderImpl: ApiEndpointProvider {
     public init() {}
 
     public func getApiEndpoint() -> ApiEndpoint {
-        BuildConfig.DEBUG ? .Dev : .Prod
+        AppConfig.isDebug ? .dev : .prod
     }
 }

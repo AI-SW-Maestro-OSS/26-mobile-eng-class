@@ -4,12 +4,12 @@ import Foundation
 public final class LoggingHelperImpl: LoggingHelper, @unchecked Sendable {
     private let repository: MetricLoggingRepository
     private let config: MetricLoggingConfig
-    private let ioScope: ArchiCoroutineScope
+    private let ioScope: AsyncTaskScope
 
     public init(
         repository: MetricLoggingRepository,
         config: MetricLoggingConfig,
-        ioScope: ArchiCoroutineScope
+        ioScope: AsyncTaskScope
     ) {
         self.repository = repository
         self.config = config
@@ -26,7 +26,7 @@ public final class LoggingHelperImpl: LoggingHelper, @unchecked Sendable {
         #endif
         guard config.isEnabled else { return }
         let sendableBox = SendableParamsBox(params: filteredParams)
-        ioScope.launch { [repository] in
+        ioScope.run { [repository] in
             _ = try? await repository.send(event: event, params: sendableBox.params)
         }
     }

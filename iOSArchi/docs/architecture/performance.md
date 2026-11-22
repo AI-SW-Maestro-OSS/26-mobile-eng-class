@@ -2,8 +2,8 @@
 
 ## 1. TTI (Time-To-Interactive) 측정
 
-- `TTI` 모듈의 `TTIHelperImpl`은 `@ViewModelScoped`로 주입되어 하나의 화면(`ViewModel` + 해당 `UseCase`들)에서 동일한 인스턴스를 공유한다.
-- `FullScreenMediaTTIPage`는 6개 타임라인(`TTI_TIME`, `VIEW_CREATION_TIME`, `API_REQUEST_READY_TIME`, `API_RESPONSE_TIME`, `VIEW_BINDING_TIME`, `IMAGE_LOADED_TIME`)을 측정하며 20초 타임아웃 워치독을 내장한다.
+- `TTI` 모듈의 `TTIHelperImpl`은 `.scoped`로 주입되어 하나의 화면(`ViewModel` + 해당 `UseCase`들)에서 동일한 인스턴스를 공유한다.
+- `FullScreenMediaTTIPage`는 6개 타임라인(`ttiTime`, `viewCreationTime`, `apiRequestReadyTime`, `apiResponseTime`, `viewBindingTime`, `imageLoadedTime`)을 측정하며 20초 타임아웃 워치독을 내장한다.
 
 ## 2. JankStats (`JankReporter`)
 

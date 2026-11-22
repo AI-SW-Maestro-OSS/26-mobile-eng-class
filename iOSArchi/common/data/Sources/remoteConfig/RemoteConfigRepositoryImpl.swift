@@ -13,7 +13,7 @@ public protocol RemoteConfigDataStore: Sendable {
 /// Remote Config 기반 `RemoteConfigRepository` 구현.
 /// 조회는 `key + 환경이름` 으로 합성한 raw key 를 현재 환경 → 하위 환경 순으로 탐색한다.
 public final class RemoteConfigRepositoryImpl: RemoteConfigRepository {
-    private static let TAG = "RemoteConfigV2"
+    private static let logCategory = "RemoteConfigV2"
 
     private let dataStore: RemoteConfigDataStore
     private let apiEndpointProvider: ApiEndpointProvider

@@ -70,12 +70,12 @@ public final class FullScreenMediaViewModel: MviViewModel<FullScreenMediaIntent,
         )
 
         ttiHelper.startTTITracking(FullScreenMediaTTIPage.shared)
-        ttiHelper.startTTITimeline(.VIEW_CREATION_TIME)
+        ttiHelper.startTTITimeline(.viewCreationTime)
         observeFavorites()
     }
 
     public func markViewCreated() {
-        ttiHelper.endTTITimeline(.VIEW_CREATION_TIME)
+        ttiHelper.endTTITimeline(.viewCreationTime)
     }
 
     public override func onIntent(_ intent: FullScreenMediaIntent) {
@@ -96,7 +96,7 @@ public final class FullScreenMediaViewModel: MviViewModel<FullScreenMediaIntent,
         case .onFirstImageLoaded:
             guard !hasRecordedFirstImageTTI else { return }
             hasRecordedFirstImageTTI = true
-            ttiHelper.endTTITimeline(.IMAGE_LOADED_TIME)
+            ttiHelper.endTTITimeline(.imageLoadedTime)
             ttiHelper.endTTITracking()
             ttiHelper.shotTTILogging()
         case .navigateBack:
@@ -108,20 +108,32 @@ public final class FullScreenMediaViewModel: MviViewModel<FullScreenMediaIntent,
         state: FullScreenMediaUIState,
         event: FullScreenMediaReducerEvent
     ) -> FullScreenMediaUIState {
+        var next = state
         switch event {
         case .loadingChanged(let isLoading):
-            return state.copy(isLoading: isLoading)
+            next.isLoading = isLoading
         case .itemsLoaded(let items, let currentIndex):
-            let synced = items.map { $0.copy(isFavorite: state.favoriteIds.contains($0.urlKey)) }
+            let synced = items.map { item -> MediaItemUiState in
+                var updated = item
+                updated.isFavorite = state.favoriteIds.contains(item.urlKey)
+                return updated
+            }
             let clamped = synced.isEmpty ? 0 : min(max(0, currentIndex), synced.count - 1)
-            return state.copy(items: synced, currentIndex: clamped, isLoading: false)
+            next.items = synced
+            next.currentIndex = clamped
+            next.isLoading = false
         case .pageUpdated(let index):
             let clamped = state.items.isEmpty ? 0 : min(max(0, index), state.items.count - 1)
-            return state.copy(currentIndex: clamped)
+            next.currentIndex = clamped
         case .favoritesSynced(let favoriteIds):
-            let updated = state.items.map { $0.copy(isFavorite: favoriteIds.contains($0.urlKey)) }
-            return state.copy(items: updated, favoriteIds: favoriteIds)
+            next.items = state.items.map { item in
+                var updated = item
+                updated.isFavorite = favoriteIds.contains(item.urlKey)
+                return updated
+            }
+            next.favoriteIds = favoriteIds
         }
+        return next
     }
 
     private func observeFavorites() {
@@ -138,7 +150,7 @@ public final class FullScreenMediaViewModel: MviViewModel<FullScreenMediaIntent,
 
     private func loadItems() {
         dispatch(.loadingChanged(true))
-        ttiHelper.startTTITimeline(.API_REQUEST_READY_TIME)
+        ttiHelper.startTTITimeline(.apiRequestReadyTime)
 
         Task { [weak self] in
             guard let self else { return }
@@ -147,13 +159,13 @@ public final class FullScreenMediaViewModel: MviViewModel<FullScreenMediaIntent,
                 query: self.args.query
             )
 
-            self.ttiHelper.startTTITimeline(.VIEW_BINDING_TIME)
+            self.ttiHelper.startTTITimeline(.viewBindingTime)
             let uiItems = vos.map {
                 MediaItemUiState(from: $0, isFavorite: self.currentState.favoriteIds.contains($0.urlKey))
             }
             self.dispatch(.itemsLoaded(items: uiItems, currentIndex: self.args.initialIndex))
-            self.ttiHelper.endTTITimeline(.VIEW_BINDING_TIME)
-            self.ttiHelper.startTTITimeline(.IMAGE_LOADED_TIME)
+            self.ttiHelper.endTTITimeline(.viewBindingTime)
+            self.ttiHelper.startTTITimeline(.imageLoadedTime)
         }
     }
 }

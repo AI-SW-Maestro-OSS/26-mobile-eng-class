@@ -2,10 +2,10 @@ import CommonPresentation
 import Foundation
 
 public struct FullScreenMediaUIState: UiState, Equatable {
-    public let items: [MediaItemUiState]
-    public let currentIndex: Int
-    public let favoriteIds: Set<String>
-    public let isLoading: Bool
+    public var items: [MediaItemUiState]
+    public var currentIndex: Int
+    public var favoriteIds: Set<String>
+    public var isLoading: Bool
 
     public init(
         items: [MediaItemUiState] = [],
@@ -22,19 +22,5 @@ public struct FullScreenMediaUIState: UiState, Equatable {
     public var currentItem: MediaItemUiState? {
         guard currentIndex >= 0 && currentIndex < items.count else { return nil }
         return items[currentIndex]
-    }
-
-    public func copy(
-        items: [MediaItemUiState]? = nil,
-        currentIndex: Int? = nil,
-        favoriteIds: Set<String>? = nil,
-        isLoading: Bool? = nil
-    ) -> FullScreenMediaUIState {
-        FullScreenMediaUIState(
-            items: items ?? self.items,
-            currentIndex: currentIndex ?? self.currentIndex,
-            favoriteIds: favoriteIds ?? self.favoriteIds,
-            isLoading: isLoading ?? self.isLoading
-        )
     }
 }

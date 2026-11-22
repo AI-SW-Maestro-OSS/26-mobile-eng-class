@@ -16,9 +16,9 @@ public enum IntroReducerEvent: ReducerEvent {
 }
 
 public struct IntroUIState: UiState, Equatable {
-    public let isLoading: Bool
-    public let intro: IntroVO?
-    public let isLoadFailed: Bool
+    public var isLoading: Bool
+    public var intro: IntroVO?
+    public var isLoadFailed: Bool
 
     public init(
         isLoading: Bool = false,
@@ -28,18 +28,6 @@ public struct IntroUIState: UiState, Equatable {
         self.isLoading = isLoading
         self.intro = intro
         self.isLoadFailed = isLoadFailed
-    }
-
-    public func copy(
-        isLoading: Bool? = nil,
-        intro: IntroVO?? = nil,
-        isLoadFailed: Bool? = nil
-    ) -> IntroUIState {
-        IntroUIState(
-            isLoading: isLoading ?? self.isLoading,
-            intro: intro ?? self.intro,
-            isLoadFailed: isLoadFailed ?? self.isLoadFailed
-        )
     }
 }
 
@@ -79,14 +67,20 @@ public final class IntroViewModel: MviViewModel<IntroIntent, IntroUIState, Intro
     }
 
     public override func reduce(state: IntroUIState, event: IntroReducerEvent) -> IntroUIState {
+        var next = state
         switch event {
         case .setLoading(let isLoading):
-            return state.copy(isLoading: isLoading, isLoadFailed: false)
+            next.isLoading = isLoading
+            next.isLoadFailed = false
         case .setIntro(let vo):
-            return state.copy(isLoading: false, intro: .some(vo), isLoadFailed: false)
+            next.isLoading = false
+            next.intro = vo
+            next.isLoadFailed = false
         case .setLoadFailed:
-            return state.copy(isLoading: false, isLoadFailed: true)
+            next.isLoading = false
+            next.isLoadFailed = true
         }
+        return next
     }
 
     private func fetchIntro() {

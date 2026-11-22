@@ -1,7 +1,7 @@
 import Foundation
 
-public extension HttpResponseException {
-    func handlingErrorOnUseCase<ErrorType: HttpErrorType>(_ type: ErrorType.Type = ErrorType.self) -> ErrorType? {
+public extension HTTPResponseError {
+    func handlingErrorOnUseCase<ErrorType: HTTPErrorType>(_ type: ErrorType.Type = ErrorType.self) -> ErrorType? {
         ErrorType.allCases.first { ($0.type == self.cause?.message) && $0.isHandledOnDomain }
     }
 

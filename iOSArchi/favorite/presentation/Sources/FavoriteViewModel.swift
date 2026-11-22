@@ -26,7 +26,7 @@ public final class FavoriteViewModel: MviViewModel<FavoriteIntent, FavoriteUISta
     private let removeFavoriteItemUseCase: RemoveFavoriteItemUseCase
     public let messageHelper: MessageHelper
     public let navigationHelper: NavigationHelper
-    public let resourceHelper: ResourceHelper
+    public let localizationHelper: LocalizationHelper
     public let loggingHelper: LoggingHelper
 
     public init(
@@ -36,14 +36,14 @@ public final class FavoriteViewModel: MviViewModel<FavoriteIntent, FavoriteUISta
         globalStore: GlobalStore,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         loggingHelper: LoggingHelper
     ) {
         self.getFavoriteItemsUseCase = getFavoriteItemsUseCase
         self.removeFavoriteItemUseCase = removeFavoriteItemUseCase
         self.messageHelper = messageHelper
         self.navigationHelper = navigationHelper
-        self.resourceHelper = resourceHelper
+        self.localizationHelper = localizationHelper
         self.loggingHelper = loggingHelper
 
         super.init(
@@ -65,7 +65,7 @@ public final class FavoriteViewModel: MviViewModel<FavoriteIntent, FavoriteUISta
                 guard let self else { return }
                 _ = await self.removeFavoriteItemUseCase(item.urlKey)
             }
-        case .clickItem(let index, _):
+        case .tapItem(let index, _):
             navigationHelper.navigateTo(
                 FullScreenMediaFromFavoritePage(
                     origin: "FAVORITE",
@@ -77,10 +77,12 @@ public final class FavoriteViewModel: MviViewModel<FavoriteIntent, FavoriteUISta
     }
 
     public override func reduce(state: FavoriteUIState, event: FavoriteReducerEvent) -> FavoriteUIState {
+        var next = state
         switch event {
         case .favoritesUpdated(let items):
-            return state.copy(items: items)
+            next.items = items
         }
+        return next
     }
 
     public override func observeGlobalState(_ state: GlobalState) {

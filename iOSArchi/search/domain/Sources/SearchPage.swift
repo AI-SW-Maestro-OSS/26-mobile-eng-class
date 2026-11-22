@@ -2,7 +2,7 @@ import CommonDomain
 import Foundation
 
 public struct SearchPage: Page, Equatable {
-    public static let PATH = "/search"
+    public static let path = "/search"
 
     public struct Args: Codable, Sendable, Equatable {
         public let query: String?
@@ -27,6 +27,6 @@ public struct SearchPage: Page, Equatable {
         if let query, !query.isEmpty {
             routeArgs["query"] = query
         }
-        return NavRoute(path: Self.PATH, args: routeArgs)
+        return NavRoute(path: Self.path, args: routeArgs)
     }
 }

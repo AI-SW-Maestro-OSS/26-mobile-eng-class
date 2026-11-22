@@ -1,4 +1,0 @@
-module SearchPresentation {
-header "SearchPresentation-Swift.h"
-export *
-}

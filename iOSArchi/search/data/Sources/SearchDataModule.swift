@@ -18,19 +18,19 @@ public enum SearchDataModule: DIModule {
         container.register(SearchPageRepository.self, scope: .singleton) { resolver in
             SearchPageRepositoryImpl(dataSource: resolver.resolve(SearchPageDataSource.self))
         }
-        container.register(SearchUseCase.self, scope: .viewModelScoped) { resolver in
+        container.register(SearchUseCase.self, scope: .scoped) { resolver in
             SearchUseCase(
                 mediaSearchRepository: resolver.resolve(MediaSearchRepository.self),
-                resourceHelper: resolver.resolve(ResourceHelper.self),
+                localizationHelper: resolver.resolve(LocalizationHelper.self),
                 messageHelper: resolver.resolve(MessageHelper.self),
                 navigationHelper: resolver.resolve(NavigationHelper.self),
                 ttiHelper: resolver.resolve(TTIHelper.self)
             )
         }
-        container.register(SearchPageUseCase.self, scope: .viewModelScoped) { resolver in
+        container.register(SearchPageUseCase.self, scope: .scoped) { resolver in
             SearchPageUseCase(
                 repository: resolver.resolve(SearchPageRepository.self),
-                resourceHelper: resolver.resolve(ResourceHelper.self),
+                localizationHelper: resolver.resolve(LocalizationHelper.self),
                 messageHelper: resolver.resolve(MessageHelper.self),
                 navigationHelper: resolver.resolve(NavigationHelper.self),
                 ttiHelper: resolver.resolve(TTIHelper.self)
