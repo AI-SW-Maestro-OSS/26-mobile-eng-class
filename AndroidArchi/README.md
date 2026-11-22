@@ -18,6 +18,41 @@
 
 ---
 
+## Kakao 검색 API Key 발급 및 적용 방법
+
+`search` / `fullScreenMedia` 레퍼런스 기능은 [Kakao Daum 검색 OpenAPI](https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide) (`v2/search/image`, `v2/search/vclip`)를 사용합니다. 보안을 위해 저장소에는 API Key가 포함되어 있지 않으므로, 로컬에서 실제 검색 기능을 테스트하려면 아래 절차에 따라 키를 발급받아 주입해야 합니다.
+
+### 1. REST API Key 발급
+
+1. [Kakao Developers 콘솔](https://developers.kakao.com/console/app)에 접속하여 로그인합니다.
+2. **애플리케이션 추가하기**를 눌러 새 앱을 생성합니다.
+3. 생성한 앱의 **앱 설정 → 앱 키** 메뉴에서 **REST API 키**를 복사합니다.
+
+### 2. Android 프로젝트에 적용하기
+
+`common/data/build.gradle.kts`는 **`local.properties` → 환경변수(`API_KEY`)** 순서로 값을 조회해 `BuildConfig.API_KEY`로 주입하며, `NetworkModule` (`common/data/.../di/NetworkModule.kt`)이 모든 요청에 `Authorization: KakaoAK ${BuildConfig.API_KEY}` 헤더를 자동으로 첨부합니다.
+
+#### 방법 A. `local.properties`에 추가 (권장)
+
+1. 프로젝트 루트의 `local.properties` 파일을 엽니다. (파일이 없다면 새로 생성합니다.)
+2. 아래 항목을 추가하고 발급받은 **REST API 키**를 입력합니다.
+   ```properties
+   API_KEY=발급받은_REST_API_KEY
+   ```
+3. Android Studio에서 **Gradle Sync**를 실행한 뒤 앱을 빌드·실행하고 `Search` 탭에서 검색어를 입력해 결과가 정상 노출되는지 확인합니다.
+
+> **보안 주의**: `local.properties`는 `.gitignore`에 등록되어 있어 Git에 커밋되지 않습니다. `common/data/build.gradle.kts` 등 Git에 추적되는 파일에는 실제 API Key를 직접 입력하지 마세요.
+
+#### 방법 B. 환경변수(`API_KEY`)로 주입 (CI / 터미널 빌드)
+
+`local.properties`에 `API_KEY`가 없을 경우 시스템 환경변수 `API_KEY`를 자동으로 읽습니다. CI 환경이나 터미널 빌드에서는 아래처럼 주입할 수 있습니다.
+
+```bash
+API_KEY=발급받은_REST_API_KEY ./gradlew :app:assembleDebug
+```
+
+---
+
 ## 기술 스택
 
 | 영역 | 사용 기술 |
