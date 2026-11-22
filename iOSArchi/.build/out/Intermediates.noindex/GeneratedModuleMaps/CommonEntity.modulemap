@@ -1,4 +1,0 @@
-module CommonEntity {
-header "CommonEntity-Swift.h"
-export *
-}

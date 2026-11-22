@@ -1,4 +1,0 @@
-module EtcDomain {
-header "EtcDomain-Swift.h"
-export *
-}

@@ -1,4 +1,0 @@
-module IntroPresentation {
-header "IntroPresentation-Swift.h"
-export *
-}

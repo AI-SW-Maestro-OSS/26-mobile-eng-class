@@ -1,4 +1,0 @@
-module SearchData {
-header "SearchData-Swift.h"
-export *
-}

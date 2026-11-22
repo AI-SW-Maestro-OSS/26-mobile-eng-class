@@ -1,4 +1,0 @@
-module SearchEntity {
-header "SearchEntity-Swift.h"
-export *
-}

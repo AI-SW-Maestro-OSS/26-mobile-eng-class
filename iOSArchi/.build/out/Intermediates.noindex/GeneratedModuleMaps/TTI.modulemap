@@ -1,4 +1,0 @@
-module TTI {
-header "TTI-Swift.h"
-export *
-}
