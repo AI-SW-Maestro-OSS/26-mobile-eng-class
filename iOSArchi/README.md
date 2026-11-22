@@ -47,23 +47,26 @@ Swift Package Manager(`Package.swift`) + 네이티브 Xcode 프로젝트(`iOSArc
 
 `AppConfig` (`common/data/Sources/config/AppConfig.swift`)는 `ProcessInfo` **환경변수 → `Info.plist`** 순서로 `API_KEY`를 조회하며, `NetworkModule`이 모든 요청에 `Authorization: KakaoAK {API_KEY}` 헤더를 자동으로 첨부합니다.
 
-#### 방법 A. Xcode Scheme 환경변수 주입 (권장)
+#### 방법 A. `app/Config/Secrets.xcconfig` 사용 (권장 — Git 무시)
 
-1. Xcode에서 `iOSArchi.xcodeproj`를 엽니다.
-2. 상단 메뉴 **Product → Scheme → Edit Scheme...** (`⌘<`)을 선택합니다.
-3. 좌측 **Run** → 상단 **Arguments** 탭 → **Environment Variables** 섹션에서 `API_KEY` 항목을 체크(활성화)하고 `Value`에 복사한 **REST API 키**를 입력합니다.
-4. 앱을 실행(`⌘R`)하고 `Search` 탭에서 검색어를 입력해 결과가 정상 노출되는지 확인합니다.
+1. 템플릿 파일을 복사하여 로컬 전용 `Secrets.xcconfig` 파일을 생성합니다.
+   ```bash
+   cp app/Config/Secrets.xcconfig.example app/Config/Secrets.xcconfig
+   ```
+2. `app/Config/Secrets.xcconfig`를 열어 발급받은 **REST API 키**를 입력합니다.
+   ```xcconfig
+   API_KEY = 발급받은_REST_API_KEY
+   ```
+3. Xcode에서 앱을 실행(`⌘R`)하고 `Search` 탭에서 검색어를 입력해 결과가 정상 노출되는지 확인합니다.
 
-> **보안 주의**: `iOSArchi.xcodeproj/xcshareddata/xcschemes/iOSArchi.xcscheme`은 Git에 공유되는 스킴 파일입니다. 키를 입력한 뒤 `iOSArchi.xcscheme` 변경사항이 커밋·푸시되지 않도록 주의하세요. (또는 `Edit Scheme` 하단의 `Shared` 체크를 해제하거나 개인 스킴을 복제해 사용하는 것을 권장합니다.)
+> `Secrets.xcconfig`는 `.gitignore`에 등록되어 있어 Git 변경사항에 포함되지 않습니다. `app/Config/Base.xcconfig`가 `#include? "Secrets.xcconfig"`로 선택 포함하므로, 파일이 없는 환경(신규 클론/CI)에서도 빌드 에러 없이 동작합니다.
 
-#### 방법 B. `app/Info.plist`에 직접 추가
+#### 방법 B. Xcode Scheme 환경변수 주입 (로컬 임시 테스트용)
 
-`app/Info.plist`에 아래 키-값을 추가해도 동일하게 동작합니다. (마찬가지로 실제 키가 담긴 `Info.plist`는 커밋하지 마세요.)
+1. Xcode에서 **Product → Scheme → Manage Schemes...** → `iOSArchi` 복제 후 **Shared 체크 해제**(개인 스킴 생성).
+2. 복제한 스킴의 **Edit Scheme (`⌘<`) → Run → Arguments → Environment Variables**에서 `API_KEY`를 활성화하고 **REST API 키**를 입력합니다.
 
-```xml
-<key>API_KEY</key>
-<string>발급받은_REST_API_KEY</string>
-```
+> **보안 주의**: 공용 스킴(`iOSArchi.xcodeproj/xcshareddata/xcschemes/iOSArchi.xcscheme`)은 Git 추적 대상이므로 직접 키를 입력하지 마세요.
 
 ---
 
