@@ -32,7 +32,7 @@ public final class SearchViewModel: MviViewModel<SearchIntent, SearchUIState, Se
     private let globalStore: GlobalStore
     public let messageHelper: MessageHelper
     public let navigationHelper: NavigationHelper
-    public let resourceHelper: ResourceHelper
+    public let localizationHelper: LocalizationHelper
     public let loggingHelper: LoggingHelper
 
     private var searchTask: Task<Void, Never>?
@@ -48,7 +48,7 @@ public final class SearchViewModel: MviViewModel<SearchIntent, SearchUIState, Se
         globalStore: GlobalStore,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         loggingHelper: LoggingHelper
     ) {
         self.searchUseCase = searchUseCase
@@ -60,7 +60,7 @@ public final class SearchViewModel: MviViewModel<SearchIntent, SearchUIState, Se
         self.globalStore = globalStore
         self.messageHelper = messageHelper
         self.navigationHelper = navigationHelper
-        self.resourceHelper = resourceHelper
+        self.localizationHelper = localizationHelper
         self.loggingHelper = loggingHelper
 
         super.init(
@@ -102,7 +102,7 @@ public final class SearchViewModel: MviViewModel<SearchIntent, SearchUIState, Se
             performLoadMore()
         case .toggleFavorite(let item):
             toggleFavorite(item)
-        case .clickItem(let index, _):
+        case .tapItem(let index, _):
             navigationHelper.navigateTo(
                 FullScreenMediaRoutePage(
                     origin: "SEARCH",
@@ -116,9 +116,10 @@ public final class SearchViewModel: MviViewModel<SearchIntent, SearchUIState, Se
     }
 
     public override func reduce(state: SearchUIState, event: SearchReducerEvent) -> SearchUIState {
+        var next = state
         switch event {
         case .queryChanged(let query):
-            return state.copy(query: query)
+            next.query = query
 
         case .cleared:
             return SearchUIState(
@@ -136,60 +137,66 @@ public final class SearchViewModel: MviViewModel<SearchIntent, SearchUIState, Se
             )
 
         case .searchStarted(let query):
-            return state.copy(
-                submittedQuery: query,
-                page: 1,
-                isEnd: false,
-                isLoading: true,
-                isLoadingMore: false,
-                hasSearched: true
-            )
+            next.submittedQuery = query
+            next.page = 1
+            next.isEnd = false
+            next.isLoading = true
+            next.isLoadingMore = false
+            next.hasSearched = true
 
         case .searchSucceeded(let items, let page, let isEnd):
-            let synced = items.map { $0.copy(isFavorite: state.favoriteIds.contains($0.urlKey)) }
-            return state.copy(
-                items: synced,
-                page: page,
-                isEnd: isEnd || synced.isEmpty,
-                isLoading: false,
-                isLoadingMore: false
-            )
+            let synced = items.map { item -> MediaItemUiState in
+                var updated = item
+                updated.isFavorite = state.favoriteIds.contains(item.urlKey)
+                return updated
+            }
+            next.items = synced
+            next.page = page
+            next.isEnd = isEnd || synced.isEmpty
+            next.isLoading = false
+            next.isLoadingMore = false
 
         case .searchFailed:
-            return state.copy(isLoading: false, isLoadingMore: false)
+            next.isLoading = false
+            next.isLoadingMore = false
 
         case .loadMoreStarted:
-            return state.copy(isLoadingMore: true)
+            next.isLoadingMore = true
 
         case .loadMoreSucceeded(let newItems, let page, let isEnd):
-            let syncedNew = newItems.map { $0.copy(isFavorite: state.favoriteIds.contains($0.urlKey)) }
+            let syncedNew = newItems.map { item -> MediaItemUiState in
+                var updated = item
+                updated.isFavorite = state.favoriteIds.contains(item.urlKey)
+                return updated
+            }
             var combined = state.items
             let existingIds = Set(combined.map(\.urlKey))
             for item in syncedNew where !existingIds.contains(item.urlKey) {
                 combined.append(item)
             }
-            return state.copy(
-                items: combined,
-                page: page,
-                isEnd: isEnd || newItems.isEmpty,
-                isLoadingMore: false
-            )
+            next.items = combined
+            next.page = page
+            next.isEnd = isEnd || newItems.isEmpty
+            next.isLoadingMore = false
 
         case .loadMoreFailed:
-            return state.copy(isLoadingMore: false)
+            next.isLoadingMore = false
 
         case .favoritesUpdated(let favoriteIds):
-            let updatedItems = state.items.map { item in
-                item.copy(isFavorite: favoriteIds.contains(item.urlKey))
+            next.items = state.items.map { item in
+                var updated = item
+                updated.isFavorite = favoriteIds.contains(item.urlKey)
+                return updated
             }
-            return state.copy(items: updatedItems, favoriteIds: favoriteIds)
+            next.favoriteIds = favoriteIds
 
         case .sduiLoaded(let components):
-            return state.copy(sduiComponents: components)
+            next.sduiComponents = components
 
         case .deviceTierUpdated(let isLowEndDevice):
-            return state.copy(isLowEndDevice: isLowEndDevice)
+            next.isLowEndDevice = isLowEndDevice
         }
+        return next
     }
 
     private func clearSearch() {

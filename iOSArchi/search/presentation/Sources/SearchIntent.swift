@@ -8,6 +8,6 @@ public enum SearchIntent: MviIntent {
     case clear
     case loadMore
     case toggleFavorite(MediaItemUiState)
-    case clickItem(index: Int, item: MediaItemUiState)
+    case tapItem(index: Int, item: MediaItemUiState)
     case loadSduiPage
 }

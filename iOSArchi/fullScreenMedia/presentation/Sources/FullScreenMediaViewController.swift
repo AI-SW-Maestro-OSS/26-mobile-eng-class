@@ -6,12 +6,12 @@ import SwiftUI
 import UIKit
 
 @MainActor
-public final class FullScreenMediaFragment: UIViewController {
+public final class FullScreenMediaViewController: UIViewController {
     private let viewModel: FullScreenMediaViewModel
     private var cancellables = Set<AnyCancellable>()
     private var hasScrolledToInitialPage = false
 
-    private lazy var pagerAdapter = FullScreenMediaPagerAdapter(
+    private lazy var collectionDataSource = FullScreenMediaCollectionDataSource(
         onPageSettled: { [weak self] page in
             self?.viewModel.onIntent(.pageChanged(page))
         },
@@ -31,10 +31,10 @@ public final class FullScreenMediaFragment: UIViewController {
         cv.backgroundColor = .black
         cv.register(
             FullScreenMediaPageCell.self,
-            forCellWithReuseIdentifier: FullScreenMediaPagerAdapter.cellReuseIdentifier
+            forCellWithReuseIdentifier: FullScreenMediaCollectionDataSource.cellReuseIdentifier
         )
-        cv.dataSource = pagerAdapter
-        cv.delegate = pagerAdapter
+        cv.dataSource = collectionDataSource
+        cv.delegate = collectionDataSource
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
@@ -114,7 +114,7 @@ public final class FullScreenMediaFragment: UIViewController {
     }
 
     private func render(state: FullScreenMediaUIState) {
-        pagerAdapter.submitList(state.items, in: collectionView)
+        collectionDataSource.updateItems(state.items, in: collectionView)
 
         if !state.items.isEmpty {
             pageIndicatorLabel.text = "\(state.currentIndex + 1) / \(state.items.count)"
@@ -225,7 +225,7 @@ public struct FullScreenMediaPageView: View {
             .padding(.horizontal, 12)
             .padding(.top, 8)
         }
-        .jankPageEffect(FullScreenMediaPage.PATH)
+        .jankPageEffect(FullScreenMediaPage.path)
         .onAppear {
             viewModel.markViewCreated()
             viewModel.onIntent(.loadInitialItems)

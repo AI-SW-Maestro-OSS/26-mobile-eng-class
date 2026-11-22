@@ -4,20 +4,20 @@ import TTI
 
 public enum CommonPresentationModule: DIModule {
     public static func register(in container: DIContainer) {
-        container.register(ResourceHelper.self, scope: .singleton) { _ in
-            ResourceHelperImpl()
+        container.register(LocalizationHelper.self, scope: .singleton) { _ in
+            LocalizationHelperImpl()
         }
         container.register(NavigationHelper.self, scope: .singleton) { _ in
             NavigationHelperImpl()
         }
         container.register(MessageHelper.self, scope: .singleton) { resolver in
-            MessageHelperImpl(resourceHelper: resolver.resolve(ResourceHelper.self))
+            MessageHelperImpl(localizationHelper: resolver.resolve(LocalizationHelper.self))
         }
         container.register(LoggingHelper.self, scope: .singleton) { resolver in
             LoggingHelperImpl(
                 repository: resolver.resolve(MetricLoggingRepository.self),
                 config: resolver.resolve(MetricLoggingConfig.self),
-                ioScope: resolver.resolve(ArchiCoroutineScope.self, named: CoroutineQualifiers.IoScope)
+                ioScope: resolver.resolve(AsyncTaskScope.self, named: ConcurrencyQualifiers.ioTaskScope)
             )
         }
         container.register(GlobalStore.self, scope: .singleton) { _ in
@@ -27,7 +27,7 @@ public enum CommonPresentationModule: DIModule {
             SpreadsheetTTIReporter(
                 repository: resolver.resolve(TtiLoggingRepository.self),
                 config: resolver.resolve(TtiLoggingConfig.self),
-                scope: resolver.resolve(ArchiCoroutineScope.self, named: CoroutineQualifiers.IoScope)
+                scope: resolver.resolve(AsyncTaskScope.self, named: ConcurrencyQualifiers.ioTaskScope)
             )
         }
         container.register(TTILogger.self, scope: .singleton) { _ in
@@ -37,11 +37,11 @@ public enum CommonPresentationModule: DIModule {
             return RemoteTTILogger()
             #endif
         }
-        container.register(TTIHelper.self, scope: .viewModelScoped) { resolver in
+        container.register(TTIHelper.self, scope: .scoped) { resolver in
             TTIHelperImpl(
                 reporter: resolver.resolve(TTIReporter.self),
                 logger: resolver.resolve(TTILogger.self),
-                queue: resolver.resolve(DispatchQueue.self, named: CoroutineQualifiers.TtiDispatcher)
+                queue: resolver.resolve(DispatchQueue.self, named: ConcurrencyQualifiers.ttiQueue)
             )
         }
     }

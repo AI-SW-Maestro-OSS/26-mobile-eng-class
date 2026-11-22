@@ -5,10 +5,10 @@ import SwiftUI
 public final class MessageHelperImpl: MessageHelper, @unchecked Sendable {
     private let lock = NSLock()
     private var continuations: [UUID: AsyncStream<MessageEffect>.Continuation] = [:]
-    private let resourceHelper: ResourceHelper
+    private let localizationHelper: LocalizationHelper
 
-    public init(resourceHelper: ResourceHelper = ResourceHelperImpl()) {
-        self.resourceHelper = resourceHelper
+    public init(localizationHelper: LocalizationHelper = LocalizationHelperImpl()) {
+        self.localizationHelper = localizationHelper
     }
 
     public var effect: AsyncStream<MessageEffect> {
@@ -36,77 +36,77 @@ public final class MessageHelperImpl: MessageHelper, @unchecked Sendable {
     }
 
     public func showToast(_ toastMsg: String) {
-        emit(.ShowToastMsg(message: toastMsg))
+        emit(.showToast(message: toastMsg))
     }
 
-    public func showSnackBar(
+    public func showBanner(
         iconType: IconType,
         messageText: String,
         callToActionText: String?,
-        onClickCTA: (@Sendable () -> Void)?
+        onTapAction: (@Sendable () -> Void)?
     ) {
-        emit(.ShowSnackBarError(message: messageText))
+        emit(.showBannerError(message: messageText))
     }
 
-    public func showSnackBar(
+    public func showBanner(
         iconType: IconType,
-        messageRes: StringResource,
+        messageKey: LocalizedKey,
         callToActionText: String?,
-        onClickCTA: (@Sendable () -> Void)?
+        onTapAction: (@Sendable () -> Void)?
     ) {
-        emit(.ShowSnackBarError(message: resourceHelper.getString(messageRes)))
+        emit(.showBannerError(message: localizationHelper.string(for: messageKey)))
     }
 
-    public func showOneButtonDialog(
+    public func showAlert(
         titleText: String?,
         descText: String,
         cantIgnore: Bool,
         buttonText: String,
-        onClickButton: (@Sendable () -> Void)?
+        onTapButton: (@Sendable () -> Void)?
     ) {
         emit(
-            .ShowOneButtonDialog(
-                MessageEffect.OneButtonDialogSpec(
+            .showAlert(
+                MessageEffect.AlertSpec(
                     titleText: titleText,
                     descText: descText,
                     cantIgnore: cantIgnore,
                     buttonText: buttonText,
-                    onClickButton: onClickButton
+                    onTapButton: onTapButton
                 )
             )
         )
     }
 
-    public func showTwoButtonDialog(
+    public func showConfirmAlert(
         titleText: String?,
         descText: String,
         cantIgnore: Bool,
         leftButtonText: String,
-        onClickLeftButton: (@Sendable () -> Void)?,
+        onTapLeftButton: (@Sendable () -> Void)?,
         rightButtonText: String,
-        onClickRightButton: (@Sendable () -> Void)?
+        onTapRightButton: (@Sendable () -> Void)?
     ) {
         emit(
-            .ShowOneButtonDialog(
-                MessageEffect.OneButtonDialogSpec(
+            .showAlert(
+                MessageEffect.AlertSpec(
                     titleText: titleText,
                     descText: descText,
                     cantIgnore: cantIgnore,
                     buttonText: rightButtonText,
-                    onClickButton: onClickRightButton
+                    onTapButton: onTapRightButton
                 )
             )
         )
     }
 }
 
-private struct LocalMessageHelperKey: EnvironmentKey {
+private struct MessageHelperEnvironmentKey: EnvironmentKey {
     static let defaultValue: MessageHelper = MessageHelperImpl()
 }
 
 public extension EnvironmentValues {
-    var localMessageHelper: MessageHelper {
-        get { self[LocalMessageHelperKey.self] }
-        set { self[LocalMessageHelperKey.self] = newValue }
+    var messageHelper: MessageHelper {
+        get { self[MessageHelperEnvironmentKey.self] }
+        set { self[MessageHelperEnvironmentKey.self] = newValue }
     }
 }

@@ -8,16 +8,16 @@ public protocol MetricLoggingApiService: Sendable {
 }
 
 public final class MetricLoggingApiServiceImpl: MetricLoggingApiService {
-    private let retrofit: RetrofitClient
+    private let httpClient: HTTPClient
 
-    public init(retrofit: RetrofitClient) {
-        self.retrofit = retrofit
+    public init(httpClient: HTTPClient) {
+        self.httpClient = httpClient
     }
 
     public func send(
         url: String,
         body: MetricLogRequestDTO
     ) async throws -> HttpResponse<MetricLogResponseDTO> {
-        try await retrofit.post(url: url, body: body, responseType: MetricLogResponseDTO.self)
+        try await httpClient.post(url: url, body: body, responseType: MetricLogResponseDTO.self)
     }
 }

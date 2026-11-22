@@ -7,9 +7,9 @@ import IntroDomain
 import SearchDomain
 import SwiftUI
 
-public struct RootComposable: View {
+public struct RootView: View {
     private let rootContainer: DIContainer
-    private let resourceHelper: ResourceHelper
+    private let localizationHelper: LocalizationHelper
     private let navigationHelper: NavigationHelper
     private let messageHelper: MessageHelper
     private let jankReporter: JankReporter
@@ -17,14 +17,14 @@ public struct RootComposable: View {
     @State private var backStack: [GenericNavKey]
     @State private var hasHandledInitialLaunch = false
     @State private var toastMessage: String?
-    @State private var activeDialog: MessageEffect.OneButtonDialogSpec?
+    @State private var activeAlert: MessageEffect.AlertSpec?
 
     public init(
         rootContainer: DIContainer = .shared,
         initialDeeplink: URL? = nil
     ) {
         self.rootContainer = rootContainer
-        self.resourceHelper = rootContainer.resolve(ResourceHelper.self)
+        self.localizationHelper = rootContainer.resolve(LocalizationHelper.self)
         self.navigationHelper = rootContainer.resolve(NavigationHelper.self)
         self.messageHelper = rootContainer.resolve(MessageHelper.self)
         self.jankReporter = rootContainer.resolve(JankReporter.self)
@@ -38,12 +38,12 @@ public struct RootComposable: View {
             _backStack = State(initialValue: resolved)
             _hasHandledInitialLaunch = State(initialValue: true)
         } else {
-            _backStack = State(initialValue: [GenericNavKey(routePath: IntroPage.PATH)])
+            _backStack = State(initialValue: [GenericNavKey(routePath: IntroPage.path)])
         }
     }
 
     private var currentKey: GenericNavKey {
-        backStack.last ?? GenericNavKey(routePath: SearchPage.PATH)
+        backStack.last ?? GenericNavKey(routePath: SearchPage.path)
     }
 
     private var currentRoute: AppRoute? {
@@ -57,14 +57,14 @@ public struct RootComposable: View {
                     TopTabBar(
                         tabs: AppRouteRegistry.tabRoutes,
                         selectedPath: currentKey.routePath,
-                        resourceHelper: resourceHelper,
+                        localizationHelper: localizationHelper,
                         onSelectTab: { tabRoute in
                             selectTopTab(tabRoute)
                         }
                     )
                 }
 
-                AppNavHost(
+                AppNavigationHost(
                     currentKey: currentKey,
                     rootContainer: rootContainer,
                     onOpenDeeplink: { deeplinkString in
@@ -97,11 +97,11 @@ public struct RootComposable: View {
                 .allowsHitTesting(false)
             }
         }
-        .environment(\.localJankReporter, jankReporter)
+        .environment(\.jankReporter, jankReporter)
         .task {
             await withTaskGroup(of: Void.self) { group in
                 group.addTask { @MainActor in
-                    for await signal in navigationHelper.navigationFlow {
+                    for await signal in navigationHelper.navigationStream {
                         handleNavSignal(signal)
                     }
                 }
@@ -113,16 +113,16 @@ public struct RootComposable: View {
             }
         }
         .onOpenURL { url in
-            let isCold = !hasHandledInitialLaunch && backStack.count == 1 && backStack.first?.routePath == IntroPage.PATH
+            let isCold = !hasHandledInitialLaunch && backStack.count == 1 && backStack.first?.routePath == IntroPage.path
             hasHandledInitialLaunch = true
             handleDeeplink(url: url, isColdStart: isCold)
         }
-        .alert(item: $activeDialog) { spec in
+        .alert(item: $activeAlert) { spec in
             Alert(
-                title: Text(spec.titleText ?? resourceHelper.getString(.APP_NAME)),
+                title: Text(spec.titleText ?? localizationHelper.string(for: .appName)),
                 message: Text(spec.descText),
                 dismissButton: .default(Text(spec.buttonText), action: {
-                    spec.onClickButton?()
+                    spec.onTapButton?()
                 })
             )
         }
@@ -130,27 +130,27 @@ public struct RootComposable: View {
 
     private func selectTopTab(_ tabRoute: AppRoute) {
         guard currentKey.routePath != tabRoute.path else { return }
-        if tabRoute.path == SearchPage.PATH {
-            if let searchIndex = backStack.firstIndex(where: { $0.routePath == SearchPage.PATH }) {
+        if tabRoute.path == SearchPage.path {
+            if let searchIndex = backStack.firstIndex(where: { $0.routePath == SearchPage.path }) {
                 backStack = Array(backStack.prefix(through: searchIndex))
             } else {
-                backStack = [GenericNavKey(routePath: SearchPage.PATH)]
+                backStack = [GenericNavKey(routePath: SearchPage.path)]
             }
         } else {
-            let searchRoot = backStack.first(where: { $0.routePath == SearchPage.PATH })
-                ?? GenericNavKey(routePath: SearchPage.PATH)
+            let searchRoot = backStack.first(where: { $0.routePath == SearchPage.path })
+                ?? GenericNavKey(routePath: SearchPage.path)
             let existingTab = backStack.first(where: { $0.routePath == tabRoute.path })
                 ?? GenericNavKey(routePath: tabRoute.path)
             backStack = [searchRoot, existingTab]
         }
-        ViewModelStoreCache.shared.prune(keeping: Set(backStack.map(\.id)))
+        ViewModelCache.shared.prune(keeping: Set(backStack.map(\.id)))
     }
 
     private func handleNavSignal(_ signal: NavSignal) {
         switch signal {
-        case .GoToDestPage(let route), .DeepLink(let route):
+        case .goToDestPage(let route), .deepLink(let route):
             let newKey = AppRouteRegistry.toNavKey(route)
-            if currentKey.routePath == IntroPage.PATH && route.path == SearchPage.PATH {
+            if currentKey.routePath == IntroPage.path && route.path == SearchPage.path {
                 hasHandledInitialLaunch = true
                 backStack = [newKey]
             } else if AppRouteRegistry.route(for: route.path)?.isBottomTab == true,
@@ -159,22 +159,22 @@ public struct RootComposable: View {
             } else {
                 backStack.append(newKey)
             }
-            ViewModelStoreCache.shared.prune(keeping: Set(backStack.map(\.id)))
+            ViewModelCache.shared.prune(keeping: Set(backStack.map(\.id)))
 
-        case .Back:
+        case .back:
             guard backStack.count > 1 else { return }
             _ = backStack.popLast()
-            ViewModelStoreCache.shared.prune(keeping: Set(backStack.map(\.id)))
+            ViewModelCache.shared.prune(keeping: Set(backStack.map(\.id)))
 
-        case .BackTo(let route):
+        case .backTo(let route):
             if let targetIndex = backStack.lastIndex(where: { $0.routePath == route.path }) {
                 backStack = Array(backStack.prefix(through: targetIndex))
-                ViewModelStoreCache.shared.prune(keeping: Set(backStack.map(\.id)))
+                ViewModelCache.shared.prune(keeping: Set(backStack.map(\.id)))
             }
 
-        case .BackToInitialPage:
-            backStack = [GenericNavKey(routePath: IntroPage.PATH)]
-            ViewModelStoreCache.shared.prune(keeping: Set(backStack.map(\.id)))
+        case .backToInitialPage:
+            backStack = [GenericNavKey(routePath: IntroPage.path)]
+            ViewModelCache.shared.prune(keeping: Set(backStack.map(\.id)))
         }
     }
 
@@ -185,13 +185,13 @@ public struct RootComposable: View {
             currentStack: backStack
         ) {
             backStack = newStack
-            ViewModelStoreCache.shared.prune(keeping: Set(backStack.map(\.id)))
+            ViewModelCache.shared.prune(keeping: Set(backStack.map(\.id)))
         }
     }
 
     private func handleMessageEffect(_ effect: MessageEffect) {
         switch effect {
-        case .ShowToastMsg(let message), .ShowSnackBarError(let message):
+        case .showToast(let message), .showBannerError(let message):
             withAnimation {
                 toastMessage = message
             }
@@ -202,8 +202,8 @@ public struct RootComposable: View {
                     }
                 }
             }
-        case .ShowOneButtonDialog(let spec):
-            activeDialog = spec
+        case .showAlert(let spec):
+            activeAlert = spec
         }
     }
 }
@@ -211,14 +211,14 @@ public struct RootComposable: View {
 private struct TopTabBar: View {
     let tabs: [AppRoute]
     let selectedPath: String
-    let resourceHelper: ResourceHelper
+    let localizationHelper: LocalizationHelper
     let onSelectTab: (AppRoute) -> Void
 
     var body: some View {
         HStack(spacing: 0) {
             ForEach(tabs, id: \.path) { tab in
                 let isSelected = tab.path == selectedPath
-                let title = tab.tabTitleKey.map { resourceHelper.getString($0) } ?? tab.path
+                let title = tab.tabTitleKey.map { localizationHelper.string(for: $0) } ?? tab.path
 
                 Button(action: { onSelectTab(tab) }) {
                     VStack(spacing: 8) {

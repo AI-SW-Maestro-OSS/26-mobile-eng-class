@@ -8,13 +8,13 @@ final class RegisterFavoriteItemUseCaseTest: XCTestCase {
         let messageHelper = FakeMessageHelper()
         let useCase = RegisterFavoriteItemUseCase(
             favoriteRepository: repo,
-            resourceHelper: FakeResourceHelper(),
+            localizationHelper: FakeLocalizationHelper(),
             messageHelper: messageHelper,
             navigationHelper: FakeNavigationHelper(),
             ttiHelper: FakeTTIHelper()
         )
 
-        let item = FavoriteItemVO(type: .IMAGE, title: "Architecture", urlKey: "id-100")
+        let item = FavoriteItemVO(type: .image, title: "Architecture", urlKey: "id-100")
         let result = await useCase(item)
 
         switch result {
@@ -24,31 +24,31 @@ final class RegisterFavoriteItemUseCaseTest: XCTestCase {
             XCTFail("Expected success, got \(error)")
         }
         XCTAssertEqual(repo.items, [item])
-        XCTAssertTrue(messageHelper.snackBars.isEmpty)
+        XCTAssertTrue(messageHelper.banners.isEmpty)
     }
 
-    func testRegisterFailureShowsErrorSnackBar() async {
+    func testRegisterFailureShowsErrorBanner() async {
         let repo = FakeFavoriteRepository()
-        repo.errorToThrow = HttpResponseException(
-            status: .BadRequest,
+        repo.errorToThrow = HTTPResponseError(
+            status: .badRequest,
             rawCode: 400,
             errorRequestUrl: "local://favorite",
-            msg: "Storage full"
+            message: "Storage full"
         )
         let messageHelper = FakeMessageHelper()
         let useCase = RegisterFavoriteItemUseCase(
             favoriteRepository: repo,
-            resourceHelper: FakeResourceHelper(),
+            localizationHelper: FakeLocalizationHelper(),
             messageHelper: messageHelper,
             navigationHelper: FakeNavigationHelper(),
             ttiHelper: FakeTTIHelper()
         )
 
-        let result = await useCase(FavoriteItemVO(type: .IMAGE, title: "Fail", urlKey: "id-101"))
+        let result = await useCase(FavoriteItemVO(type: .image, title: "Fail", urlKey: "id-101"))
 
         if case .success = result {
             XCTFail("Expected failure")
         }
-        XCTAssertEqual(messageHelper.snackBars.count, 1)
+        XCTAssertEqual(messageHelper.banners.count, 1)
     }
 }

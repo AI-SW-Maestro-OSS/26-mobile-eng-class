@@ -5,14 +5,14 @@ import SwiftUI
 public struct AppRoute: @unchecked Sendable {
     public let path: String
     public let isBottomTab: Bool
-    public let tabTitleKey: StringResource?
+    public let tabTitleKey: LocalizedKey?
     public let syntheticStack: @Sendable (GenericNavKey) -> [GenericNavKey]
     public let contentBuilder: @MainActor (GenericNavKey, DIContainer, @escaping (String) -> Void) -> AnyView
 
     public init(
         path: String,
         isBottomTab: Bool = false,
-        tabTitleKey: StringResource? = nil,
+        tabTitleKey: LocalizedKey? = nil,
         syntheticStack: @escaping @Sendable (GenericNavKey) -> [GenericNavKey] = { _ in [] },
         contentBuilder: @escaping @MainActor (GenericNavKey, DIContainer, @escaping (String) -> Void) -> AnyView
     ) {

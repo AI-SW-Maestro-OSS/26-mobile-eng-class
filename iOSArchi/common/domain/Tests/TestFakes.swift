@@ -9,56 +9,56 @@ final class FakeMessageHelper: MessageHelper, @unchecked Sendable {
     }
 
     private(set) var toasts: [String] = []
-    private(set) var snackBars: [String] = []
-    private(set) var dialogs: [String] = []
+    private(set) var banners: [String] = []
+    private(set) var alerts: [String] = []
 
     func showToast(_ toastMsg: String) {
         toasts.append(toastMsg)
     }
 
-    func showSnackBar(
+    func showBanner(
         iconType: IconType,
         messageText: String,
         callToActionText: String?,
-        onClickCTA: (@Sendable () -> Void)?
+        onTapAction: (@Sendable () -> Void)?
     ) {
-        snackBars.append(messageText)
+        banners.append(messageText)
     }
 
-    func showSnackBar(
+    func showBanner(
         iconType: IconType,
-        messageRes: StringResource,
+        messageKey: LocalizedKey,
         callToActionText: String?,
-        onClickCTA: (@Sendable () -> Void)?
+        onTapAction: (@Sendable () -> Void)?
     ) {
-        snackBars.append(messageRes.rawValue)
+        banners.append(messageKey.rawValue)
     }
 
-    func showOneButtonDialog(
+    func showAlert(
         titleText: String?,
         descText: String,
         cantIgnore: Bool,
         buttonText: String,
-        onClickButton: (@Sendable () -> Void)?
+        onTapButton: (@Sendable () -> Void)?
     ) {
-        dialogs.append(descText)
+        alerts.append(descText)
     }
 
-    func showTwoButtonDialog(
+    func showConfirmAlert(
         titleText: String?,
         descText: String,
         cantIgnore: Bool,
         leftButtonText: String,
-        onClickLeftButton: (@Sendable () -> Void)?,
+        onTapLeftButton: (@Sendable () -> Void)?,
         rightButtonText: String,
-        onClickRightButton: (@Sendable () -> Void)?
+        onTapRightButton: (@Sendable () -> Void)?
     ) {
-        dialogs.append(descText)
+        alerts.append(descText)
     }
 }
 
 final class FakeNavigationHelper: NavigationHelper, @unchecked Sendable {
-    var navigationFlow: AsyncStream<NavSignal> {
+    var navigationStream: AsyncStream<NavSignal> {
         AsyncStream { $0.finish() }
     }
 
@@ -86,9 +86,9 @@ final class FakeNavigationHelper: NavigationHelper, @unchecked Sendable {
     func navigateToInitial() {}
 }
 
-final class FakeResourceHelper: ResourceHelper, @unchecked Sendable {
-    func getString(_ resource: StringResource) -> String {
-        resource.rawValue
+final class FakeLocalizationHelper: LocalizationHelper, @unchecked Sendable {
+    func string(for key: LocalizedKey) -> String {
+        key.rawValue
     }
 }
 

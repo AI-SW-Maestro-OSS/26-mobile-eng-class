@@ -8,14 +8,14 @@ public final class GetIntroUseCase: BaseUseCase, @unchecked Sendable {
 
     public init(
         introRepository: IntroRepository,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
         ttiHelper: TTIHelper
     ) {
         self.introRepository = introRepository
         super.init(
-            resourceHelper: resourceHelper,
+            localizationHelper: localizationHelper,
             messageHelper: messageHelper,
             navigationHelper: navigationHelper,
             ttiHelper: ttiHelper
@@ -25,24 +25,24 @@ public final class GetIntroUseCase: BaseUseCase, @unchecked Sendable {
     public func invoke() async -> IntroVO? {
         do {
             return try await introRepository.fetchIntro()
-        } catch let e as HttpResponseException {
+        } catch let e as HTTPResponseError {
             if let introError = e.handlingErrorOnUseCase(IntroErrorType.self) {
                 switch introError {
-                case .INVALID_TOKEN:
+                case .invalidToken:
                     messageHelper.showToast(introError.errorMsg)
-                case .MAINTENANCE, .FORCE_UPDATE_REQUIRED:
-                    messageHelper.showOneButtonDialog(
+                case .maintenance, .forceUpdateRequired:
+                    messageHelper.showAlert(
                         titleText: nil,
                         descText: introError.errorMsg,
                         cantIgnore: true,
                         buttonText: "Ok",
-                        onClickButton: nil
+                        onTapButton: nil
                     )
                 }
             } else if e.isCommonErrorHandling() {
                 executeCommonErrorHanding(e)
             } else {
-                messageHelper.showToast(e.msg ?? "Failed to load intro.")
+                messageHelper.showToast(e.message ?? "Failed to load intro.")
             }
             return nil
         } catch {

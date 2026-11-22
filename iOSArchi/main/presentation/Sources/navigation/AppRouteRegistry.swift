@@ -18,11 +18,11 @@ import TTI
 public enum AppRouteRegistry {
     public static let routes: [AppRoute] = [
         AppRoute(
-            path: IntroPage.PATH,
+            path: IntroPage.path,
             isBottomTab: false,
             syntheticStack: { _ in [] },
             contentBuilder: { key, scopeContainer, _ in
-                let vm = ViewModelStoreCache.shared.resolve(for: key.id) {
+                let vm = ViewModelCache.shared.resolve(for: key.id) {
                     IntroViewModel(
                         getIntroUseCase: scopeContainer.resolve(GetIntroUseCase.self),
                         messageHelper: scopeContainer.resolve(MessageHelper.self),
@@ -34,13 +34,13 @@ public enum AppRouteRegistry {
             }
         ),
         AppRoute(
-            path: SearchPage.PATH,
+            path: SearchPage.path,
             isBottomTab: true,
-            tabTitleKey: .NAV_TAB_SEARCH,
+            tabTitleKey: .navTabSearch,
             syntheticStack: { _ in [] },
             contentBuilder: { key, scopeContainer, onDeeplink in
                 let args = key.decodeArgs(SearchPage.Args.self)
-                let vm = ViewModelStoreCache.shared.resolve(for: key.id) {
+                let vm = ViewModelCache.shared.resolve(for: key.id) {
                     SearchViewModel(
                         initialQuery: args?.query,
                         searchUseCase: scopeContainer.resolve(SearchUseCase.self),
@@ -52,7 +52,7 @@ public enum AppRouteRegistry {
                         globalStore: scopeContainer.resolve(GlobalStore.self),
                         messageHelper: scopeContainer.resolve(MessageHelper.self),
                         navigationHelper: scopeContainer.resolve(NavigationHelper.self),
-                        resourceHelper: scopeContainer.resolve(ResourceHelper.self),
+                        localizationHelper: scopeContainer.resolve(LocalizationHelper.self),
                         loggingHelper: scopeContainer.resolve(LoggingHelper.self)
                     )
                 }
@@ -60,14 +60,14 @@ public enum AppRouteRegistry {
             }
         ),
         AppRoute(
-            path: FavoritePage.PATH,
+            path: FavoritePage.path,
             isBottomTab: true,
-            tabTitleKey: .NAV_TAB_FAVORITE,
+            tabTitleKey: .navTabFavorite,
             syntheticStack: { _ in
-                [GenericNavKey(routePath: SearchPage.PATH)]
+                [GenericNavKey(routePath: SearchPage.path)]
             },
             contentBuilder: { key, scopeContainer, _ in
-                let vm = ViewModelStoreCache.shared.resolve(for: key.id) {
+                let vm = ViewModelCache.shared.resolve(for: key.id) {
                     FavoriteViewModel(
                         getFavoriteItemsUseCase: scopeContainer.resolve(GetFavoriteItemsUseCase.self),
                         removeFavoriteItemUseCase: scopeContainer.resolve(RemoveFavoriteItemUseCase.self),
@@ -75,7 +75,7 @@ public enum AppRouteRegistry {
                         globalStore: scopeContainer.resolve(GlobalStore.self),
                         messageHelper: scopeContainer.resolve(MessageHelper.self),
                         navigationHelper: scopeContainer.resolve(NavigationHelper.self),
-                        resourceHelper: scopeContainer.resolve(ResourceHelper.self),
+                        localizationHelper: scopeContainer.resolve(LocalizationHelper.self),
                         loggingHelper: scopeContainer.resolve(LoggingHelper.self)
                     )
                 }
@@ -83,19 +83,19 @@ public enum AppRouteRegistry {
             }
         ),
         AppRoute(
-            path: EtcPage.PATH,
+            path: EtcPage.path,
             isBottomTab: true,
-            tabTitleKey: .NAV_TAB_ETC,
+            tabTitleKey: .navTabEtc,
             syntheticStack: { _ in
-                [GenericNavKey(routePath: SearchPage.PATH)]
+                [GenericNavKey(routePath: SearchPage.path)]
             },
             contentBuilder: { key, scopeContainer, onDeeplink in
-                let vm = ViewModelStoreCache.shared.resolve(for: key.id) {
+                let vm = ViewModelCache.shared.resolve(for: key.id) {
                     EtcViewModel(
                         remoteConfigRepository: scopeContainer.resolve(RemoteConfigRepository.self),
                         messageHelper: scopeContainer.resolve(MessageHelper.self),
                         navigationHelper: scopeContainer.resolve(NavigationHelper.self),
-                        resourceHelper: scopeContainer.resolve(ResourceHelper.self),
+                        localizationHelper: scopeContainer.resolve(LocalizationHelper.self),
                         loggingHelper: scopeContainer.resolve(LoggingHelper.self)
                     )
                 }
@@ -103,33 +103,33 @@ public enum AppRouteRegistry {
             }
         ),
         AppRoute(
-            path: FullScreenMediaPage.PATH,
+            path: FullScreenMediaPage.path,
             isBottomTab: false,
             syntheticStack: { key in
                 let args = key.decodeArgs(FullScreenMediaPage.Args.self) ?? FullScreenMediaPage.Args()
                 switch args.origin {
-                case .FAVORITE:
+                case .favorite:
                     return [
-                        GenericNavKey(routePath: SearchPage.PATH),
-                        GenericNavKey(routePath: FavoritePage.PATH)
+                        GenericNavKey(routePath: SearchPage.path),
+                        GenericNavKey(routePath: FavoritePage.path)
                     ]
-                case .SEARCH:
-                    let searchArgsJson = NavRouteUriParser.buildArgsJson(
+                case .search:
+                    let searchArgsJson = NavRouteURLParser.buildArgsJson(
                         pathParams: [:],
                         queryParams: ["query": args.query]
                     )
                     return [
-                        GenericNavKey(routePath: SearchPage.PATH, argsJson: searchArgsJson)
+                        GenericNavKey(routePath: SearchPage.path, argsJson: searchArgsJson)
                     ]
                 }
             },
             contentBuilder: { key, scopeContainer, _ in
                 let args = key.decodeArgs(FullScreenMediaPage.Args.self) ?? FullScreenMediaPage.Args()
-                let vm = ViewModelStoreCache.shared.resolve(for: key.id) {
+                let vm = ViewModelCache.shared.resolve(for: key.id) {
                     FullScreenMediaViewModel.Factory(resolver: scopeContainer).create(args: args)
                 }
                 return AnyView(
-                    FragmentHostContainer(viewModel: vm)
+                    ViewControllerHostContainer(viewModel: vm)
                         .ignoresSafeArea()
                 )
             }
@@ -145,7 +145,7 @@ public enum AppRouteRegistry {
     }
 
     public static func toNavKey(_ route: NavRoute) -> GenericNavKey {
-        let json = NavRouteUriParser.buildArgsJson(pathParams: [:], queryParams: route.args)
+        let json = NavRouteURLParser.buildArgsJson(pathParams: [:], queryParams: route.args)
         return GenericNavKey(routePath: route.path, argsJson: json)
     }
 
@@ -158,7 +158,7 @@ public enum AppRouteRegistry {
         isColdStart: Bool,
         currentStack: [GenericNavKey]
     ) -> [GenericNavKey]? {
-        guard let parsed = NavRouteUriParser.parse(url),
+        guard let parsed = NavRouteURLParser.parse(url),
               let match = RouteMatcher.match(
                   actualPath: parsed.path,
                   candidates: routes,
@@ -167,7 +167,7 @@ public enum AppRouteRegistry {
             return nil
         }
 
-        let argsJson = NavRouteUriParser.buildArgsJson(
+        let argsJson = NavRouteURLParser.buildArgsJson(
             pathParams: match.pathParams,
             queryParams: parsed.queryParams
         )
@@ -176,7 +176,7 @@ public enum AppRouteRegistry {
         if isColdStart
             || match.route.isBottomTab
             || currentStack.isEmpty
-            || (currentStack.count == 1 && currentStack.first?.routePath == IntroPage.PATH) {
+            || (currentStack.count == 1 && currentStack.first?.routePath == IntroPage.path) {
             var newStack = match.route.syntheticStack(targetKey)
             newStack.append(targetKey)
             return newStack
@@ -189,8 +189,8 @@ public enum AppRouteRegistry {
 }
 
 @MainActor
-public final class ViewModelStoreCache {
-    public static let shared = ViewModelStoreCache()
+public final class ViewModelCache {
+    public static let shared = ViewModelCache()
 
     private var stores: [UUID: AnyObject] = [:]
     private var scopes: [UUID: DIContainer] = [:]
@@ -201,7 +201,7 @@ public final class ViewModelStoreCache {
         if let existing = scopes[id] {
             return existing
         }
-        let created = parent.makeViewModelScope()
+        let created = parent.makeScope()
         scopes[id] = created
         return created
     }

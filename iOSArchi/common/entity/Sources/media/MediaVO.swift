@@ -44,23 +44,9 @@ public struct MediaItemVO: Codable, Equatable, Hashable, Sendable {
         self.page = page
     }
 
-    public static let empty = MediaItemVO(type: .UNKNOWN, title: "", urlKey: "")
+    public static let empty = MediaItemVO(type: .unknown, title: "", urlKey: "")
 
     public var isEmpty: Bool { self == Self.empty }
-
-    public func copy(page: Int? = nil) -> MediaItemVO {
-        MediaItemVO(
-            type: type,
-            title: title,
-            urlKey: urlKey,
-            thumbnailImageUrl: thumbnailImageUrl,
-            contentsImageUrl: contentsImageUrl,
-            pageLinkUrl: pageLinkUrl,
-            collection: collection,
-            dateTime: dateTime,
-            page: page ?? self.page
-        )
-    }
 }
 
 /// 검색 결과 한 페이지.
@@ -77,23 +63,23 @@ public struct MediaSearchResultVO: Equatable, Sendable {
 }
 
 public enum MediaType: String, Codable, CaseIterable, Sendable {
-    case UNKNOWN
-    case IMAGE
-    case VIDEO
+    case unknown = "UNKNOWN"
+    case image = "IMAGE"
+    case video = "VIDEO"
 
     public var rawValueInt: Int {
         switch self {
-        case .UNKNOWN: return 0
-        case .IMAGE: return 1
-        case .VIDEO: return 3
+        case .unknown: return 0
+        case .image: return 1
+        case .video: return 3
         }
     }
 
     public var name: String { rawValue }
 
     public static func fromRawValue(_ value: Int?) -> MediaType {
-        guard let value else { return .UNKNOWN }
-        return Self.allCases.first { $0.rawValueInt == value } ?? .UNKNOWN
+        guard let value else { return .unknown }
+        return Self.allCases.first { $0.rawValueInt == value } ?? .unknown
     }
 
     public static func valueOf(_ name: String) -> MediaType? {

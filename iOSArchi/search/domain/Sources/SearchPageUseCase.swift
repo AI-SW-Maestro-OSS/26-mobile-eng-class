@@ -7,14 +7,14 @@ public final class SearchPageUseCase: BaseUseCase, @unchecked Sendable {
 
     public init(
         repository: SearchPageRepository,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
         ttiHelper: TTIHelper
     ) {
         self.repository = repository
         super.init(
-            resourceHelper: resourceHelper,
+            localizationHelper: localizationHelper,
             messageHelper: messageHelper,
             navigationHelper: navigationHelper,
             ttiHelper: ttiHelper
@@ -24,7 +24,7 @@ public final class SearchPageUseCase: BaseUseCase, @unchecked Sendable {
     public func invoke() async -> SearchPageVO? {
         do {
             return try await repository.fetchSearchPage()
-        } catch let e as HttpResponseException {
+        } catch let e as HTTPResponseError {
             if e.isCommonErrorHandling() {
                 executeCommonErrorHanding(e)
             }

@@ -17,7 +17,7 @@ public struct IntroPageView: View {
     }
 
     public var body: some View {
-        IntroScreenContent(
+        IntroPageContent(
             uiState: viewModel.uiState,
             onRetry: { viewModel.onIntent(.loadIntro) },
             onEnterMain: {
@@ -28,7 +28,7 @@ public struct IntroPageView: View {
                 }
             }
         )
-        .jankPageEffect(IntroPage.PATH)
+        .jankPageEffect(IntroPage.path)
         .onAppear {
             if viewModel.uiState.intro == nil && !viewModel.uiState.isLoadFailed {
                 viewModel.onIntent(.loadIntro)
@@ -37,7 +37,7 @@ public struct IntroPageView: View {
     }
 }
 
-public struct IntroScreenContent: View {
+public struct IntroPageContent: View {
     private let uiState: IntroUIState
     private let onRetry: () -> Void
     private let onEnterMain: () -> Void

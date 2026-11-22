@@ -59,27 +59,27 @@ public final class TTIInfo: @unchecked Sendable {
     }
 
     private func initTTIData(_ ttiInfo: inout [String: Any]) {
-        ttiInfo[TTI_PREFIX + TTIMetaData.PAGE_NAME.metadataName] = page.pageName
-        ttiInfo[TTI_PREFIX + TTIMetaData.INSTANCE_NO.metadataName] = instanceNo
-        ttiInfo[TTI_PREFIX + TTIMetaData.IS_BOUNCED.metadataName] = false
-        ttiInfo[TTI_PREFIX + TTIMetaData.TTI_LOG_VERSION.metadataName] = TTI_LOG_VERSION
-        ttiInfo[TTI_PREFIX + TimelineCategory.TTI_TIME.categoryName] = -1
-        ttiInfo[TTI_PREFIX + TimelineCategory.VIEW_CREATION_TIME.categoryName] = -1
-        ttiInfo[TTI_PREFIX + TimelineCategory.API_REQUEST_READY_TIME.categoryName] = -1
-        ttiInfo[TTI_PREFIX + TimelineCategory.API_RESPONSE_TIME.categoryName] = -1
-        ttiInfo[TTI_PREFIX + TimelineCategory.VIEW_BINDING_TIME.categoryName] = -1
-        ttiInfo[TTI_PREFIX + TimelineCategory.IMAGE_LOADED_TIME.categoryName] = -1
+        ttiInfo[TTI_PREFIX + TTIMetaData.pageName.metadataName] = page.pageName
+        ttiInfo[TTI_PREFIX + TTIMetaData.instanceNo.metadataName] = instanceNo
+        ttiInfo[TTI_PREFIX + TTIMetaData.isBounced.metadataName] = false
+        ttiInfo[TTI_PREFIX + TTIMetaData.ttiLogVersion.metadataName] = TTI_LOG_VERSION
+        ttiInfo[TTI_PREFIX + TimelineCategory.ttiTime.categoryName] = -1
+        ttiInfo[TTI_PREFIX + TimelineCategory.viewCreationTime.categoryName] = -1
+        ttiInfo[TTI_PREFIX + TimelineCategory.apiRequestReadyTime.categoryName] = -1
+        ttiInfo[TTI_PREFIX + TimelineCategory.apiResponseTime.categoryName] = -1
+        ttiInfo[TTI_PREFIX + TimelineCategory.viewBindingTime.categoryName] = -1
+        ttiInfo[TTI_PREFIX + TimelineCategory.imageLoadedTime.categoryName] = -1
     }
 
     private func updateTTITimeline(_ ttiInfo: inout [String: Any]) {
         let expectedTimelineCount = page.timelines.count
-        ttiInfo[TTI_PREFIX + TTIMetaData.IS_BOUNCED.metadataName] =
+        ttiInfo[TTI_PREFIX + TTIMetaData.isBounced.metadataName] =
             ttiTimelineMap.count < expectedTimelineCount
 
         for (timelineKey, timeline) in ttiTimelineMap {
             let duration = timeline.endTime - timeline.startTime
             if duration < 0 {
-                ttiInfo[TTI_PREFIX + TTIMetaData.IS_BOUNCED.metadataName] = true
+                ttiInfo[TTI_PREFIX + TTIMetaData.isBounced.metadataName] = true
                 ttiInfo[TTI_PREFIX + timelineKey] = -1
             } else {
                 ttiInfo[TTI_PREFIX + timelineKey] = duration

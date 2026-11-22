@@ -3,7 +3,7 @@ import CommonPresentation
 import Foundation
 import SwiftUI
 
-public struct MainActivityView: View {
+public struct MainView: View {
     private let rootContainer: DIContainer
     private let initialDeeplink: URL?
 
@@ -17,7 +17,7 @@ public struct MainActivityView: View {
 
     public var body: some View {
         DesignSystemTheme {
-            RootComposable(
+            RootView(
                 rootContainer: rootContainer,
                 initialDeeplink: initialDeeplink
             )

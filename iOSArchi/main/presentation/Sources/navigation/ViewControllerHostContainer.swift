@@ -5,21 +5,21 @@ import SwiftUI
 #if canImport(UIKit)
 import UIKit
 
-public struct FragmentHostContainer: UIViewControllerRepresentable {
+public struct ViewControllerHostContainer: UIViewControllerRepresentable {
     private let viewModel: FullScreenMediaViewModel
 
     public init(viewModel: FullScreenMediaViewModel) {
         self.viewModel = viewModel
     }
 
-    public func makeUIViewController(context: Context) -> FullScreenMediaFragment {
-        FullScreenMediaFragment(viewModel: viewModel)
+    public func makeUIViewController(context: Context) -> FullScreenMediaViewController {
+        FullScreenMediaViewController(viewModel: viewModel)
     }
 
-    public func updateUIViewController(_ uiViewController: FullScreenMediaFragment, context: Context) {}
+    public func updateUIViewController(_ uiViewController: FullScreenMediaViewController, context: Context) {}
 }
 #else
-public struct FragmentHostContainer: View {
+public struct ViewControllerHostContainer: View {
     private let viewModel: FullScreenMediaViewModel
 
     public init(viewModel: FullScreenMediaViewModel) {

@@ -5,81 +5,81 @@ public protocol MessageHelper: AnyObject, Sendable {
 
     func showToast(_ toastMsg: String)
 
-    func showSnackBar(
+    func showBanner(
         iconType: IconType,
         messageText: String,
         callToActionText: String?,
-        onClickCTA: (@Sendable () -> Void)?
+        onTapAction: (@Sendable () -> Void)?
     )
 
-    func showSnackBar(
+    func showBanner(
         iconType: IconType,
-        messageRes: StringResource,
+        messageKey: LocalizedKey,
         callToActionText: String?,
-        onClickCTA: (@Sendable () -> Void)?
+        onTapAction: (@Sendable () -> Void)?
     )
 
-    func showOneButtonDialog(
+    func showAlert(
         titleText: String?,
         descText: String,
         cantIgnore: Bool,
         buttonText: String,
-        onClickButton: (@Sendable () -> Void)?
+        onTapButton: (@Sendable () -> Void)?
     )
 
-    func showTwoButtonDialog(
+    func showConfirmAlert(
         titleText: String?,
         descText: String,
         cantIgnore: Bool,
         leftButtonText: String,
-        onClickLeftButton: (@Sendable () -> Void)?,
+        onTapLeftButton: (@Sendable () -> Void)?,
         rightButtonText: String,
-        onClickRightButton: (@Sendable () -> Void)?
+        onTapRightButton: (@Sendable () -> Void)?
     )
 }
 
 public extension MessageHelper {
-    func showSnackBar(
-        iconType: IconType = .SUCCESS,
+    func showBanner(
+        iconType: IconType = .success,
         messageText: String,
         callToActionText: String? = nil,
-        onClickCTA: (@Sendable () -> Void)? = nil
+        onTapAction: (@Sendable () -> Void)? = nil
     ) {
-        showSnackBar(
+        showBanner(
             iconType: iconType,
             messageText: messageText,
             callToActionText: callToActionText,
-            onClickCTA: onClickCTA
+            onTapAction: onTapAction
         )
     }
 
-    func showSnackBar(
-        iconType: IconType = .SUCCESS,
-        messageRes: StringResource,
+    func showBanner(
+        iconType: IconType = .success,
+        messageKey: LocalizedKey,
         callToActionText: String? = nil,
-        onClickCTA: (@Sendable () -> Void)? = nil
+        onTapAction: (@Sendable () -> Void)? = nil
     ) {
-        showSnackBar(
+        showBanner(
             iconType: iconType,
-            messageRes: messageRes,
+            messageKey: messageKey,
             callToActionText: callToActionText,
-            onClickCTA: onClickCTA
+            onTapAction: onTapAction
         )
     }
 
-    func showOneButtonDialog(
+    func showAlert(
         titleText: String? = nil,
         descText: String,
         cantIgnore: Bool = false,
         buttonText: String = "Ok",
-        onClickButton: (@Sendable () -> Void)? = nil
+        onTapButton: (@Sendable () -> Void)? = nil
     ) {
-        showOneButtonDialog(
+        showAlert(
             titleText: titleText,
             descText: descText,
             cantIgnore: cantIgnore,
             buttonText: buttonText,
-            onClickButton: onClickButton
+            onTapButton: onTapButton
         )
     }
 }

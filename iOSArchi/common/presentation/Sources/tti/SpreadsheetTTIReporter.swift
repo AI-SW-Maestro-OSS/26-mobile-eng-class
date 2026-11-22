@@ -5,12 +5,12 @@ import TTI
 public final class SpreadsheetTTIReporter: TTIReporter, @unchecked Sendable {
     private let repository: TtiLoggingRepository
     private let config: TtiLoggingConfig
-    private let scope: ArchiCoroutineScope
+    private let scope: AsyncTaskScope
 
     public init(
         repository: TtiLoggingRepository,
         config: TtiLoggingConfig,
-        scope: ArchiCoroutineScope
+        scope: AsyncTaskScope
     ) {
         self.repository = repository
         self.config = config
@@ -26,7 +26,7 @@ public final class SpreadsheetTTIReporter: TTIReporter, @unchecked Sendable {
             payload[k] = v
         }
         let box = SendableReportBox(report: payload)
-        scope.launch { [repository] in
+        scope.run { [repository] in
             _ = try? await repository.send(report: box.report)
         }
     }

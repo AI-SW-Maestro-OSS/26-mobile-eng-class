@@ -38,7 +38,7 @@ public struct FavoriteItemDto: Codable, Sendable, Equatable {
 
     public func toVO() -> FavoriteItemVO {
         FavoriteItemVO(
-            type: MediaType.valueOf(type ?? "IMAGE") ?? .IMAGE,
+            type: MediaType.valueOf(type ?? "IMAGE") ?? .image,
             title: title ?? UNKNOWN,
             urlKey: urlKey ?? UNKNOWN,
             thumbnailUrl: thumbnailUrl ?? "",

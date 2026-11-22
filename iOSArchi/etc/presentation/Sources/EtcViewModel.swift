@@ -9,20 +9,20 @@ public final class EtcViewModel: MviViewModel<EtcIntent, EtcUIState, EtcReducerE
     private let remoteConfigRepository: RemoteConfigRepository
     public let messageHelper: MessageHelper
     public let navigationHelper: NavigationHelper
-    public let resourceHelper: ResourceHelper
+    public let localizationHelper: LocalizationHelper
     public let loggingHelper: LoggingHelper
 
     public init(
         remoteConfigRepository: RemoteConfigRepository,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         loggingHelper: LoggingHelper
     ) {
         self.remoteConfigRepository = remoteConfigRepository
         self.messageHelper = messageHelper
         self.navigationHelper = navigationHelper
-        self.resourceHelper = resourceHelper
+        self.localizationHelper = localizationHelper
         self.loggingHelper = loggingHelper
 
         super.init(initialState: EtcUIState())
@@ -39,7 +39,7 @@ public final class EtcViewModel: MviViewModel<EtcIntent, EtcUIState, EtcReducerE
             let accounts = remoteConfigRepository.get(.BuiltInTestAccounts)
             let sduiItems: [SDUIViewTypeVO] = [
                 SDUIViewTypeVO(
-                    viewType: .TitleDescriptionEndImageViewType,
+                    viewType: .titleDescriptionEndImage,
                     content: TitleDescEndImageViewTypeVO(
                         titleText: "Clean Architecture + MVI + SDUI",
                         descriptionText: "Server-Driven UI banner rendered in EtcPage",
@@ -51,7 +51,7 @@ public final class EtcViewModel: MviViewModel<EtcIntent, EtcUIState, EtcReducerE
                     )
                 ),
                 SDUIViewTypeVO(
-                    viewType: .StartImageTitleDescriptionActionIconType,
+                    viewType: .startImageTitleDescriptionActionIcon,
                     content: StartImageTitleDescActionIconViewTypeVO(
                         titleText: "Try searching 'Architecture'",
                         descriptionText: "Tap to run quick deep-link search",
@@ -84,12 +84,12 @@ public final class EtcViewModel: MviViewModel<EtcIntent, EtcUIState, EtcReducerE
         case .triggerSampleToast:
             messageHelper.showToast("Sample toast from EtcViewModel")
         case .triggerSampleAlert:
-            messageHelper.showOneButtonDialog(
+            messageHelper.showAlert(
                 titleText: "Remote Config",
                 descText: "Promotion URL: \(currentState.maintenanceMessage)",
                 cantIgnore: false,
                 buttonText: "Ok",
-                onClickButton: nil
+                onTapButton: nil
             )
         }
     }

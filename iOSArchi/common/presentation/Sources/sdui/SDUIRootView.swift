@@ -15,15 +15,15 @@ public struct SDUIRootView: View {
 
     public var body: some View {
         switch item.viewType {
-        case .TitleDescriptionViewType:
+        case .titleDescription:
             if let vo = item.content as? TitleDescViewTypeVO {
                 TitleDescView(vo: vo)
             }
-        case .TitleDescriptionEndImageViewType:
+        case .titleDescriptionEndImage:
             if let vo = item.content as? TitleDescEndImageViewTypeVO {
                 TitleDescEndImageView(vo: vo)
             }
-        case .StartImageTitleDescriptionActionIconType:
+        case .startImageTitleDescriptionActionIcon:
             if let vo = item.content as? StartImageTitleDescActionIconViewTypeVO {
                 StartImageTitleDescActionIconView(vo: vo, onActionClick: onActionClick)
             }

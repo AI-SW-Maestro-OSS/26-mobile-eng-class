@@ -8,68 +8,68 @@ public enum MetricLoggingDataModule: DIModule {
 
     public static func register(in container: DIContainer) {
         container.register(MetricLoggingConfig.self, scope: .singleton) { _ in
-            provideMetricLoggingConfig()
+            makeMetricLoggingConfig()
         }
         container.register(URLSession.self, named: NAMED_METRIC_LOGGING, scope: .singleton) { _ in
-            provideMetricLoggingURLSession()
+            makeMetricLoggingURLSession()
         }
-        container.register(RetrofitClient.self, named: NAMED_METRIC_LOGGING, scope: .singleton) { c in
-            provideMetricLoggingRetrofit(
+        container.register(HTTPClient.self, named: NAMED_METRIC_LOGGING, scope: .singleton) { c in
+            makeMetricLoggingHTTPClient(
                 session: c.resolve(URLSession.self, named: NAMED_METRIC_LOGGING),
                 json: c.resolve(ArchiJson.self)
             )
         }
         container.register(MetricLoggingApiService.self, scope: .singleton) { c in
-            provideMetricLoggingApiService(
-                retrofit: c.resolve(RetrofitClient.self, named: NAMED_METRIC_LOGGING)
+            makeMetricLoggingApiService(
+                httpClient: c.resolve(HTTPClient.self, named: NAMED_METRIC_LOGGING)
             )
         }
         container.register(MetricLoggingDataSource.self, scope: .singleton) { c in
-            provideMetricLoggingDataSource(apiService: c.resolve(MetricLoggingApiService.self))
+            makeMetricLoggingDataSource(apiService: c.resolve(MetricLoggingApiService.self))
         }
         container.register(MetricLoggingRepository.self, scope: .singleton) { c in
-            provideMetricLoggingRepository(dataSource: c.resolve(MetricLoggingDataSource.self))
+            makeMetricLoggingRepository(dataSource: c.resolve(MetricLoggingDataSource.self))
         }
     }
 
-    public static func provideMetricLoggingConfig() -> MetricLoggingConfig {
+    public static func makeMetricLoggingConfig() -> MetricLoggingConfig {
         MetricLoggingConfig(
-            isEnabled: !BuildConfig.METRIC_LOG_URL.isEmpty && !BuildConfig.METRIC_LOG_TOKEN.isEmpty
+            isEnabled: !AppConfig.metricLogURL.isEmpty && !AppConfig.metricLogToken.isEmpty
         )
     }
 
-    public static func provideMetricLoggingRepository(dataSource: MetricLoggingDataSource) -> MetricLoggingRepository {
+    public static func makeMetricLoggingRepository(dataSource: MetricLoggingDataSource) -> MetricLoggingRepository {
         MetricLoggingRepositoryImpl(
             dataSource: dataSource,
-            token: BuildConfig.METRIC_LOG_TOKEN
+            token: AppConfig.metricLogToken
         )
     }
 
-    public static func provideMetricLoggingDataSource(apiService: MetricLoggingApiService) -> MetricLoggingDataSource {
+    public static func makeMetricLoggingDataSource(apiService: MetricLoggingApiService) -> MetricLoggingDataSource {
         MetricLoggingDataSource(
             apiService: apiService,
-            endpointUrl: BuildConfig.METRIC_LOG_URL
+            endpointUrl: AppConfig.metricLogURL
         )
     }
 
-    public static func provideMetricLoggingApiService(retrofit: RetrofitClient) -> MetricLoggingApiService {
-        MetricLoggingApiServiceImpl(retrofit: retrofit)
+    public static func makeMetricLoggingApiService(httpClient: HTTPClient) -> MetricLoggingApiService {
+        MetricLoggingApiServiceImpl(httpClient: httpClient)
     }
 
-    public static func provideMetricLoggingURLSession() -> URLSession {
+    public static func makeMetricLoggingURLSession() -> URLSession {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 15
         config.timeoutIntervalForResource = 15
         return URLSession(configuration: config)
     }
 
-    public static func provideMetricLoggingRetrofit(session: URLSession, json: ArchiJson) -> RetrofitClient {
-        RetrofitClient(
+    public static func makeMetricLoggingHTTPClient(session: URLSession, json: ArchiJson) -> HTTPClient {
+        HTTPClient(
             baseUrl: PLACEHOLDER_BASE_URL,
             session: session,
             json: json,
             interceptors: [],
-            enableLogging: BuildConfig.DEBUG
+            enableLogging: AppConfig.isDebug
         )
     }
 }

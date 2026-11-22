@@ -6,17 +6,17 @@ import Foundation
 /// (`spotEnableStage`, `spotEnablePublic` ...) 현재 환경 → 하위 환경 순으로 값을 탐색하므로,
 /// 상위 환경에서만 값을 덮어쓰고 나머지는 Public 값을 공유할 수 있다.
 public enum ApiEndpoint: String, CaseIterable, Sendable {
-    case Dev
-    case QA
-    case Prod
+    case dev = "Dev"
+    case qa = "QA"
+    case prod = "Prod"
 
     public var name: String { rawValue }
 
     public var environmentLevel: Int {
         switch self {
-        case .Dev: return 3
-        case .QA: return 2
-        case .Prod: return 1
+        case .dev: return 3
+        case .qa: return 2
+        case .prod: return 1
         }
     }
 

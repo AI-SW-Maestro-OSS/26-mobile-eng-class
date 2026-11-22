@@ -7,14 +7,14 @@ public final class GetFavoriteItemsUseCase: BaseUseCase, @unchecked Sendable {
 
     public init(
         favoriteRepository: FavoriteRepository,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
         ttiHelper: TTIHelper
     ) {
         self.favoriteRepository = favoriteRepository
         super.init(
-            resourceHelper: resourceHelper,
+            localizationHelper: localizationHelper,
             messageHelper: messageHelper,
             navigationHelper: navigationHelper,
             ttiHelper: ttiHelper

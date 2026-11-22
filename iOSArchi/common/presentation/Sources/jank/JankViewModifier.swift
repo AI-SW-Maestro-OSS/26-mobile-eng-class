@@ -1,19 +1,19 @@
 import SwiftUI
 
-private struct LocalJankReporterKey: EnvironmentKey {
+private struct JankReporterEnvironmentKey: EnvironmentKey {
     static let defaultValue: JankReporter? = nil
 }
 
 public extension EnvironmentValues {
-    var localJankReporter: JankReporter? {
-        get { self[LocalJankReporterKey.self] }
-        set { self[LocalJankReporterKey.self] = newValue }
+    var jankReporter: JankReporter? {
+        get { self[JankReporterEnvironmentKey.self] }
+        set { self[JankReporterEnvironmentKey.self] = newValue }
     }
 }
 
 public struct JankPageEffect: ViewModifier {
     private let pageName: String
-    @Environment(\.localJankReporter) private var jankReporter
+    @Environment(\.jankReporter) private var jankReporter
 
     public init(pageName: String) {
         self.pageName = pageName

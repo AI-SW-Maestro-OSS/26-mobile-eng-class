@@ -1,7 +1,7 @@
 import Foundation
 
 public enum IconType: Sendable {
-    case SUCCESS
-    case WARNING
-    case ERROR
+    case success
+    case warning
+    case error
 }

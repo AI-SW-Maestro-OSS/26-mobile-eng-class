@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A100000126B0000100000001 /* iOSArchiApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000226B0000100000001 /* iOSArchiApplication.swift */; };
+		A100000126B0000100000001 /* iOSArchiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000226B0000100000001 /* iOSArchiApp.swift */; };
 		A100000326B0000100000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A100000426B0000100000001 /* Assets.xcassets */; };
 		A100000526B0000100000001 /* iOSArchiAllModules in Frameworks */ = {isa = PBXBuildFile; productRef = A100000626B0000100000001 /* iOSArchiAllModules */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A100000226B0000100000001 /* iOSArchiApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSArchiApplication.swift; sourceTree = "<group>"; };
+		A100000226B0000100000001 /* iOSArchiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSArchiApp.swift; sourceTree = "<group>"; };
 		A100000426B0000100000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A100000726B0000100000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A100000826B0000100000001 /* iOSArchi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSArchi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,7 +42,7 @@
 		A100000B26B0000100000001 /* app */ = {
 			isa = PBXGroup;
 			children = (
-				A100000226B0000100000001 /* iOSArchiApplication.swift */,
+				A100000226B0000100000001 /* iOSArchiApp.swift */,
 				A100000426B0000100000001 /* Assets.xcassets */,
 				A100000726B0000100000001 /* Info.plist */,
 			);
@@ -133,7 +133,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A100000126B0000100000001 /* iOSArchiApplication.swift in Sources */,
+				A100000126B0000100000001 /* iOSArchiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

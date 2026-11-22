@@ -10,7 +10,7 @@ import SwiftUI
 
 public enum AppDIAssembler {
     public static func registerAllModules(in container: DIContainer = .shared) {
-        CoroutineModule.register(in: container)
+        ConcurrencyModule.register(in: container)
         NetworkModule.register(in: container)
         MediaSearchDataModule.register(in: container)
         MetricLoggingDataModule.register(in: container)
@@ -26,14 +26,14 @@ public enum AppDIAssembler {
 }
 
 @main
-public struct iOSArchiApplication: App {
+public struct iOSArchiApp: App {
     public init() {
         AppDIAssembler.registerAllModules(in: .shared)
     }
 
     public var body: some Scene {
         WindowGroup {
-            MainActivityView(rootContainer: .shared)
+            MainView(rootContainer: .shared)
         }
     }
 }

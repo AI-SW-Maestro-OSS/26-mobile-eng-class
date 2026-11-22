@@ -3,7 +3,7 @@ import CommonPresentation
 import Foundation
 import SwiftUI
 
-public struct AppNavHost: View {
+public struct AppNavigationHost: View {
     private let currentKey: GenericNavKey
     private let rootContainer: DIContainer
     private let onOpenDeeplink: (String) -> Void
@@ -19,7 +19,7 @@ public struct AppNavHost: View {
     }
 
     public var body: some View {
-        let scopeContainer = ViewModelStoreCache.shared.scope(for: currentKey.id, parent: rootContainer)
+        let scopeContainer = ViewModelCache.shared.scope(for: currentKey.id, parent: rootContainer)
         let navHelper = scopeContainer.resolve(NavigationHelper.self)
         let msgHelper = scopeContainer.resolve(MessageHelper.self)
 
@@ -35,7 +35,7 @@ public struct AppNavHost: View {
             }
         }
         .id(currentKey.id)
-        .environment(\.localNavigationHelper, navHelper)
-        .environment(\.localMessageHelper, msgHelper)
+        .environment(\.navigationHelper, navHelper)
+        .environment(\.messageHelper, msgHelper)
     }
 }

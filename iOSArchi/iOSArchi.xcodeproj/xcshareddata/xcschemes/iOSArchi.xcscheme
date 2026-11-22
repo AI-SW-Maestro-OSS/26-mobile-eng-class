@@ -86,15 +86,14 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A100000D26B0000100000001"
             BuildableName = "iOSArchi.app"
-            BlueprintName = "iOSArchi"
             ReferencedContainer = "container:iOSArchi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "API_KEY"
-            value = "177352d0cea0c5e2b07da2d5a930be97"
-            isEnabled = "YES">
+            value = ""
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>

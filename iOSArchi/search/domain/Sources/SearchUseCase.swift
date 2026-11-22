@@ -8,14 +8,14 @@ public final class SearchUseCase: BaseUseCase, @unchecked Sendable {
 
     public init(
         mediaSearchRepository: MediaSearchRepository,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
         ttiHelper: TTIHelper
     ) {
         self.mediaSearchRepository = mediaSearchRepository
         super.init(
-            resourceHelper: resourceHelper,
+            localizationHelper: localizationHelper,
             messageHelper: messageHelper,
             navigationHelper: navigationHelper,
             ttiHelper: ttiHelper
@@ -25,17 +25,17 @@ public final class SearchUseCase: BaseUseCase, @unchecked Sendable {
     public func invoke(query: String, page: Int) async -> MediaSearchResultVO? {
         do {
             return try await mediaSearchRepository.search(query: query, page: page)
-        } catch let e as HttpResponseException {
+        } catch let e as HTTPResponseError {
             if let searchError = e.handlingErrorOnUseCase(SearchErrorType.self) {
                 messageHelper.showToast(searchError.errorMsg)
             } else if e.isCommonErrorHandling() {
                 executeCommonErrorHanding(e)
             } else {
-                messageHelper.showToast(resourceHelper.getString(.SEARCH_FAILED))
+                messageHelper.showToast(localizationHelper.string(for: .searchFailed))
             }
             return nil
         } catch {
-            messageHelper.showToast(resourceHelper.getString(.SEARCH_FAILED))
+            messageHelper.showToast(localizationHelper.string(for: .searchFailed))
             return nil
         }
     }

@@ -6,10 +6,10 @@ public protocol IntroApiService: Sendable {
 }
 
 public final class DefaultIntroApiService: IntroApiService, @unchecked Sendable {
-    private let client: RetrofitClient
+    private let httpClient: HTTPClient
 
-    public init(client: RetrofitClient) {
-        self.client = client
+    public init(httpClient: HTTPClient) {
+        self.httpClient = httpClient
     }
 
     public func getIntro() async throws -> HttpResponse<IntroResponseDTO> {

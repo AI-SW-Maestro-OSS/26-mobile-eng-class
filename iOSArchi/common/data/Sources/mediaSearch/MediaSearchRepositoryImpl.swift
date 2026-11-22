@@ -34,7 +34,11 @@ public final class MediaSearchRepositoryImpl: MediaSearchRepository {
             .sorted { lhs, rhs in
                 String(lhs.dateTime.prefix(Self.SORT_KEY_LENGTH)) > String(rhs.dateTime.prefix(Self.SORT_KEY_LENGTH))
             }
-            .map { $0.copy(page: page) }
+            .map { item in
+                var updated = item
+                updated.page = page
+                return updated
+            }
 
         return MediaSearchResultVO(
             items: merged,

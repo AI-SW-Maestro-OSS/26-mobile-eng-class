@@ -1,18 +1,18 @@
 import CommonDomain
 import Foundation
 
-public enum FullScreenMediaErrorType: CaseIterable, HttpErrorType {
-    case MEDIA_NOT_AVAILABLE
+public enum FullScreenMediaErrorType: CaseIterable, HTTPErrorType {
+    case mediaNotAvailable
 
     public var type: String {
         switch self {
-        case .MEDIA_NOT_AVAILABLE: return "api.fullscreen.media_not_available"
+        case .mediaNotAvailable: return "api.fullscreen.media_not_available"
         }
     }
 
     public var errorMsg: String {
         switch self {
-        case .MEDIA_NOT_AVAILABLE: return "Media is not available."
+        case .mediaNotAvailable: return "Media is not available."
         }
     }
 

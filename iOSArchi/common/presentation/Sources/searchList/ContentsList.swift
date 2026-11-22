@@ -136,7 +136,7 @@ private struct MediaGridCell: View {
                 .clipped()
                 .clipShape(RoundedRectangle(cornerRadius: 10))
 
-                if item.type == .VIDEO {
+                if item.type == .video {
                     VStack {
                         Spacer()
                         HStack {

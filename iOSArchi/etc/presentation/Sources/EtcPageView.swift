@@ -16,9 +16,9 @@ public struct EtcPageView: View {
     }
 
     public var body: some View {
-        EtcScreenContent(
+        EtcPageContent(
             uiState: viewModel.uiState,
-            titleText: viewModel.resourceHelper.getString(.NAV_TAB_ETC),
+            titleText: viewModel.localizationHelper.string(for: .navTabEtc),
             devicePerformanceTitle: "Device & Feature Flag",
             devicePerformanceValue: viewModel.uiState.isLowEndDevice
                 ? "Low-End / Reduced Mode"
@@ -30,11 +30,11 @@ public struct EtcPageView: View {
                 onOpenDeeplink?(deeplink)
             }
         )
-        .jankPageEffect(EtcPage.PATH)
+        .jankPageEffect(EtcPage.path)
     }
 }
 
-public struct EtcScreenContent: View {
+public struct EtcPageContent: View {
     private let uiState: EtcUIState
     private let titleText: String
     private let devicePerformanceTitle: String

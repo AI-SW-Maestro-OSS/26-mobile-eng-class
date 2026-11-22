@@ -10,21 +10,21 @@ public struct FavoritePageView: View {
     }
 
     public var body: some View {
-        FavoriteScreenContent(
+        FavoritePageContent(
             uiState: viewModel.uiState,
-            emptyText: viewModel.resourceHelper.getString(.FAVORITE_EMPTY),
+            emptyText: viewModel.localizationHelper.string(for: .favoriteEmpty),
             onItemClick: { idx, item in
-                viewModel.onIntent(.clickItem(index: idx, item: item))
+                viewModel.onIntent(.tapItem(index: idx, item: item))
             },
             onFavoriteClick: { item in
                 viewModel.onIntent(.removeFavorite(item))
             }
         )
-        .jankPageEffect(FavoritePage.PATH)
+        .jankPageEffect(FavoritePage.path)
     }
 }
 
-public struct FavoriteScreenContent: View {
+public struct FavoritePageContent: View {
     private let uiState: FavoriteUIState
     private let emptyText: String
     private let onItemClick: (Int, MediaItemUiState) -> Void

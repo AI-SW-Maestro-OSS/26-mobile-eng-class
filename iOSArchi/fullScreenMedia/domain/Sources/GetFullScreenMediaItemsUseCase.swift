@@ -10,7 +10,7 @@ public final class GetFullScreenMediaItemsUseCase: BaseUseCase, @unchecked Senda
     public init(
         mediaSearchRepository: MediaSearchRepository,
         favoriteRepository: FavoriteRepository,
-        resourceHelper: ResourceHelper,
+        localizationHelper: LocalizationHelper,
         messageHelper: MessageHelper,
         navigationHelper: NavigationHelper,
         ttiHelper: TTIHelper
@@ -18,7 +18,7 @@ public final class GetFullScreenMediaItemsUseCase: BaseUseCase, @unchecked Senda
         self.mediaSearchRepository = mediaSearchRepository
         self.favoriteRepository = favoriteRepository
         super.init(
-            resourceHelper: resourceHelper,
+            localizationHelper: localizationHelper,
             messageHelper: messageHelper,
             navigationHelper: navigationHelper,
             ttiHelper: ttiHelper
@@ -30,18 +30,18 @@ public final class GetFullScreenMediaItemsUseCase: BaseUseCase, @unchecked Senda
         query: String,
         page: Int = 1
     ) async -> [MediaItemVO] {
-        ttiHelper.endTTITimeline(.API_REQUEST_READY_TIME)
-        ttiHelper.startTTITimeline(.API_RESPONSE_TIME)
+        ttiHelper.endTTITimeline(.apiRequestReadyTime)
+        ttiHelper.startTTITimeline(.apiResponseTime)
         do {
             let items: [MediaItemVO]
             switch origin {
-            case .SEARCH:
+            case .search:
                 let effectiveQuery = query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
                     ? "Architecture"
                     : query
                 let result = try await mediaSearchRepository.search(query: effectiveQuery, page: page)
                 items = result.items
-            case .FAVORITE:
+            case .favorite:
                 let favorites = await readFavoriteSnapshot()
                 items = favorites.map { fav in
                     MediaItemVO(
@@ -54,21 +54,21 @@ public final class GetFullScreenMediaItemsUseCase: BaseUseCase, @unchecked Senda
                     )
                 }
             }
-            ttiHelper.endTTITimeline(.API_RESPONSE_TIME)
+            ttiHelper.endTTITimeline(.apiResponseTime)
             return items
-        } catch let e as HttpResponseException {
-            ttiHelper.endTTITimeline(.API_RESPONSE_TIME)
+        } catch let e as HTTPResponseError {
+            ttiHelper.endTTITimeline(.apiResponseTime)
             if let mediaError = e.handlingErrorOnUseCase(FullScreenMediaErrorType.self) {
                 messageHelper.showToast(mediaError.errorMsg)
             } else if e.isCommonErrorHandling() {
                 executeCommonErrorHanding(e)
             } else {
-                messageHelper.showToast(resourceHelper.getString(.SEARCH_FAILED))
+                messageHelper.showToast(localizationHelper.string(for: .searchFailed))
             }
             return []
         } catch {
-            ttiHelper.endTTITimeline(.API_RESPONSE_TIME)
-            messageHelper.showToast(resourceHelper.getString(.SEARCH_FAILED))
+            ttiHelper.endTTITimeline(.apiResponseTime)
+            messageHelper.showToast(localizationHelper.string(for: .searchFailed))
             return []
         }
     }

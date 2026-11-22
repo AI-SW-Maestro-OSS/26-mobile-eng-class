@@ -17,17 +17,17 @@ public struct SearchPageView: View {
     }
 
     public var body: some View {
-        SearchScreenContent(
+        SearchPageContent(
             uiState: viewModel.uiState,
-            placeholder: viewModel.resourceHelper.getString(.SEARCH_HINT),
-            buttonTitle: viewModel.resourceHelper.getString(.NAV_TAB_SEARCH),
-            emptyResultText: viewModel.resourceHelper.getString(.MEDIA_EMPTY),
-            initialGuideText: viewModel.resourceHelper.getString(.SEARCH_PROMPT),
+            placeholder: viewModel.localizationHelper.string(for: .searchHint),
+            buttonTitle: viewModel.localizationHelper.string(for: .navTabSearch),
+            emptyResultText: viewModel.localizationHelper.string(for: .mediaEmpty),
+            initialGuideText: viewModel.localizationHelper.string(for: .searchPrompt),
             onQueryChange: { viewModel.onIntent(.updateQuery($0)) },
             onSearch: { viewModel.onIntent(.submitSearch) },
             onClear: { viewModel.onIntent(.clear) },
             onLoadMore: { viewModel.onIntent(.loadMore) },
-            onItemClick: { idx, item in viewModel.onIntent(.clickItem(index: idx, item: item)) },
+            onItemClick: { idx, item in viewModel.onIntent(.tapItem(index: idx, item: item)) },
             onFavoriteClick: { item in viewModel.onIntent(.toggleFavorite(item)) },
             onSduiDeeplinkClick: { deeplink in
                 if let onOpenDeeplink {
@@ -39,11 +39,11 @@ public struct SearchPageView: View {
                 }
             }
         )
-        .jankPageEffect(SearchPage.PATH)
+        .jankPageEffect(SearchPage.path)
     }
 }
 
-public struct SearchScreenContent: View {
+public struct SearchPageContent: View {
     private let uiState: SearchUIState
     private let placeholder: String
     private let buttonTitle: String

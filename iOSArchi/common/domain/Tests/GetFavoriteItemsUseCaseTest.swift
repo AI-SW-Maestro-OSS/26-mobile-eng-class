@@ -6,7 +6,7 @@ final class GetFavoriteItemsUseCaseTest: XCTestCase {
     func testObserveFavoriteItemsEmitsRepositoryStream() async {
         let repo = FakeFavoriteRepository()
         let sample = FavoriteItemVO(
-            type: .IMAGE,
+            type: .image,
             title: "Sample",
             urlKey: "https://example.com/media.jpg",
             thumbnailUrl: "https://example.com/thumb.jpg",
@@ -17,7 +17,7 @@ final class GetFavoriteItemsUseCaseTest: XCTestCase {
 
         let useCase = GetFavoriteItemsUseCase(
             favoriteRepository: repo,
-            resourceHelper: FakeResourceHelper(),
+            localizationHelper: FakeLocalizationHelper(),
             messageHelper: FakeMessageHelper(),
             navigationHelper: FakeNavigationHelper(),
             ttiHelper: FakeTTIHelper()

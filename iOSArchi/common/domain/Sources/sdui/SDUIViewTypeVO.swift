@@ -5,9 +5,9 @@ public protocol SDUIContentVO: Codable, Equatable, Hashable, Sendable {}
 
 /// 클라이언트가 파싱 가능한 SDUI viewType 화이트리스트이자 content 매핑의 단일 소스.
 public enum SDUIViewType: String, CaseIterable, Sendable {
-    case TitleDescriptionViewType
-    case TitleDescriptionEndImageViewType
-    case StartImageTitleDescriptionActionIconType
+    case titleDescription = "TitleDescriptionViewType"
+    case titleDescriptionEndImage = "TitleDescriptionEndImageViewType"
+    case startImageTitleDescriptionActionIcon = "StartImageTitleDescriptionActionIconType"
 
     public var name: String { rawValue }
 
@@ -18,11 +18,11 @@ public enum SDUIViewType: String, CaseIterable, Sendable {
 
     public func decodeContent(from data: Data, using decoder: JSONDecoder = JSONDecoder()) throws -> any SDUIContentVO {
         switch self {
-        case .TitleDescriptionViewType:
+        case .titleDescription:
             return try decoder.decode(TitleDescViewTypeVO.self, from: data)
-        case .TitleDescriptionEndImageViewType:
+        case .titleDescriptionEndImage:
             return try decoder.decode(TitleDescEndImageViewTypeVO.self, from: data)
-        case .StartImageTitleDescriptionActionIconType:
+        case .startImageTitleDescriptionActionIcon:
             return try decoder.decode(StartImageTitleDescActionIconViewTypeVO.self, from: data)
         }
     }

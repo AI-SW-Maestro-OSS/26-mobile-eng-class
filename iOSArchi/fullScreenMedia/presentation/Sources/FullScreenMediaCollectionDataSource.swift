@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 @MainActor
-public final class FullScreenMediaPagerAdapter: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public final class FullScreenMediaCollectionDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     public static let cellReuseIdentifier = "FullScreenMediaPageCell"
 
     private var items: [MediaItemUiState] = []
@@ -20,7 +20,7 @@ public final class FullScreenMediaPagerAdapter: NSObject, UICollectionViewDataSo
         super.init()
     }
 
-    public func submitList(_ newItems: [MediaItemUiState], in collectionView: UICollectionView) {
+    public func updateItems(_ newItems: [MediaItemUiState], in collectionView: UICollectionView) {
         self.items = newItems
         collectionView.reloadData()
     }

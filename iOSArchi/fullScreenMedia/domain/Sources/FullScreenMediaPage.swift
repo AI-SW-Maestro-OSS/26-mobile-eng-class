@@ -2,7 +2,7 @@ import CommonDomain
 import Foundation
 
 public struct FullScreenMediaPage: Page, Equatable {
-    public static let PATH = "/fullScreenMedia"
+    public static let path = "/fullScreenMedia"
 
     public struct Args: Codable, Sendable, Equatable {
         public let origin: FullScreenMediaOrigin
@@ -10,7 +10,7 @@ public struct FullScreenMediaPage: Page, Equatable {
         public let query: String
 
         public init(
-            origin: FullScreenMediaOrigin = .SEARCH,
+            origin: FullScreenMediaOrigin = .search,
             initialIndex: Int = 0,
             query: String = ""
         ) {
@@ -25,7 +25,7 @@ public struct FullScreenMediaPage: Page, Equatable {
     public let query: String
 
     public init(
-        origin: FullScreenMediaOrigin = .SEARCH,
+        origin: FullScreenMediaOrigin = .search,
         initialIndex: Int = 0,
         query: String = ""
     ) {
@@ -46,7 +46,7 @@ public struct FullScreenMediaPage: Page, Equatable {
 
     public func toRoute() -> NavRoute {
         NavRoute(
-            path: Self.PATH,
+            path: Self.path,
             args: [
                 "origin": origin.rawValue,
                 "initialIndex": String(initialIndex),

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct ParsedDeeplinkUri: Sendable, Equatable {
+public struct ParsedDeeplinkURL: Sendable, Equatable {
     public let path: String
     public let queryParams: [String: String]
 
@@ -10,8 +10,8 @@ public struct ParsedDeeplinkUri: Sendable, Equatable {
     }
 }
 
-public enum NavRouteUriParser {
-    public static func parse(_ url: URL) -> ParsedDeeplinkUri? {
+public enum NavRouteURLParser {
+    public static func parse(_ url: URL) -> ParsedDeeplinkURL? {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return nil
         }
@@ -30,7 +30,7 @@ public enum NavRouteUriParser {
             }
         }
 
-        return ParsedDeeplinkUri(path: rawPath, queryParams: queryParams)
+        return ParsedDeeplinkURL(path: rawPath, queryParams: queryParams)
     }
 
     public static func buildArgsJson(
