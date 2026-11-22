@@ -33,6 +33,40 @@ Swift Package Manager(`Package.swift`) + 네이티브 Xcode 프로젝트(`iOSArc
 
 ---
 
+## Kakao 검색 API Key 발급 및 적용 방법
+
+`search` / `fullScreenMedia` 레퍼런스 기능은 [Kakao Daum 검색 OpenAPI](https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide) (`v2/search/image`, `v2/search/vclip`)를 사용합니다. 보안을 위해 저장소에는 API Key가 포함되어 있지 않으므로, 로컬에서 실제 검색 기능을 테스트하려면 아래 절차에 따라 키를 발급받아 주입해야 합니다.
+
+### 1. REST API Key 발급
+
+1. [Kakao Developers 콘솔](https://developers.kakao.com/console/app)에 접속하여 로그인합니다.
+2. **애플리케이션 추가하기**를 눌러 새 앱을 생성합니다.
+3. 생성한 앱의 **앱 설정 → 앱 키** 메뉴에서 **REST API 키**를 복사합니다.
+
+### 2. iOS 프로젝트에 적용하기
+
+`AppConfig` (`common/data/Sources/config/AppConfig.swift`)는 `ProcessInfo` **환경변수 → `Info.plist`** 순서로 `API_KEY`를 조회하며, `NetworkModule`이 모든 요청에 `Authorization: KakaoAK {API_KEY}` 헤더를 자동으로 첨부합니다.
+
+#### 방법 A. Xcode Scheme 환경변수 주입 (권장)
+
+1. Xcode에서 `iOSArchi.xcodeproj`를 엽니다.
+2. 상단 메뉴 **Product → Scheme → Edit Scheme...** (`⌘<`)을 선택합니다.
+3. 좌측 **Run** → 상단 **Arguments** 탭 → **Environment Variables** 섹션에서 `API_KEY` 항목을 체크(활성화)하고 `Value`에 복사한 **REST API 키**를 입력합니다.
+4. 앱을 실행(`⌘R`)하고 `Search` 탭에서 검색어를 입력해 결과가 정상 노출되는지 확인합니다.
+
+> **보안 주의**: `iOSArchi.xcodeproj/xcshareddata/xcschemes/iOSArchi.xcscheme`은 Git에 공유되는 스킴 파일입니다. 키를 입력한 뒤 `iOSArchi.xcscheme` 변경사항이 커밋·푸시되지 않도록 주의하세요. (또는 `Edit Scheme` 하단의 `Shared` 체크를 해제하거나 개인 스킴을 복제해 사용하는 것을 권장합니다.)
+
+#### 방법 B. `app/Info.plist`에 직접 추가
+
+`app/Info.plist`에 아래 키-값을 추가해도 동일하게 동작합니다. (마찬가지로 실제 키가 담긴 `Info.plist`는 커밋하지 마세요.)
+
+```xml
+<key>API_KEY</key>
+<string>발급받은_REST_API_KEY</string>
+```
+
+---
+
 ## 빌드 및 테스트 명령어
 
 ```bash
